@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/main', function(){ return view('dashboard/mainpage'); });
+Route::get('/pegawai', function(){ return view('pegawai/index'); });
+Route::get('/asset', function(){ return view('asset/index'); });
+Route::get('/lembur', function(){ return view('lembur/index'); });
+Route::get('/sppd', function(){ return view('sppd/index'); });
+Route::get('/absen', function(){ return view('absen/index'); });
