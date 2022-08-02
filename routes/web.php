@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AssetController;
+use App\Http\Controllers\LemburController;
+use App\Http\Controllers\SppdController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +23,11 @@ Route::get('/', function () {
 });
 
 
+Route::get('/pegawai', [UserController::class, 'index']);
+Route::get('/asset', [AssetController::class, 'index']);
+Route::get('/lembur', [LemburController::class, 'index']);
+Route::get('/sppd', [SppdController::class, 'index']);
+Route::get('/absen', [AbsensiController::class, 'index']);
+
+
 Route::get('/main', function(){ return view('dashboard/mainpage'); });
-Route::get('/pegawai', function(){ return view('pegawai/index'); });
-Route::get('/asset', function(){ return view('asset/index'); });
-Route::get('/lembur', function(){ return view('lembur/index'); });
-Route::get('/sppd', function(){ return view('sppd/index'); });
-Route::get('/absen', function(){ return view('absen/index'); });
