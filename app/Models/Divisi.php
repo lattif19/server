@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Divisi extends Model
 {
     use HasFactory;
-    protected $tabel = 'pegawai_divisi';
+    protected $table = 'pegawai_divisi';
     protected $guarded = ['id'];
 }

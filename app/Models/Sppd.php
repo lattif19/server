@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Sppd extends Model
 {
     use HasFactory;
-    protected $tabel = 'sppd';
+    protected $table = 'sppd';
     protected $guarded = ['id'];
 }

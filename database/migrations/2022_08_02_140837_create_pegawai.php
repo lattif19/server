@@ -17,8 +17,8 @@ class CreatePegawai extends Migration
             $table->id();
             $table->string('nama');
             $table->string('nik');
-            $table->string('id_pegawai_divisi')->nullable();
-            $table->string('id_pegawai_jabatan')->nullable();
+            $table->foreignId('pegawai_divisi_id')->nullable();
+            $table->foreignId('pegawai_jabatan_id')->nullable();
             $table->timestamps();
         });
     }

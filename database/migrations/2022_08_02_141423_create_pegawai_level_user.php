@@ -24,7 +24,7 @@ class CreatePegawaiLevelUser extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return voidle
      */
     public function down()
     {

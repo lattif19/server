@@ -15,8 +15,9 @@ class CreatePegawaiLampiran extends Migration
     {
         Schema::create('pegawai_lampiran', function (Blueprint $table) {
             $table->id();
-            $table->string('id_pegawai')->nullable();
+            $table->foreignId('pegawai_id')->nullable();
             $table->string('nama')->nullable();
+            $table->string('slug')->nullable();
             $table->string('path')->nullable();
             $table->timestamps();
         });

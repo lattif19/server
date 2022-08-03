@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PegawaiLevelUser extends Model
 {
     use HasFactory;
-    protected $tabel = 'pegawai_level_user';
+    protected $table = 'pegawai_level_user';
     protected $guarded = ['id'];
 }
