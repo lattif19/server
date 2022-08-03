@@ -9,4 +9,5 @@ class PegawaiLampiran extends Model
 {
     use HasFactory;
     protected $tabel = 'pegawai_lampiran';
+    protected $guarded = ['id'];
 }

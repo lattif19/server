@@ -9,4 +9,5 @@ class HakAkses extends Model
 {
     use HasFactory;
     protected $tabel = 'pegawai_hak_akses';
+    protected $guarded = ['id'];
 }

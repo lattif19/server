@@ -9,4 +9,5 @@ class Divisi extends Model
 {
     use HasFactory;
     protected $tabel = 'pegawai_divisi';
+    protected $guarded = ['id'];
 }

@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LevelUser extends Model
+class PegawaiLevelUser extends Model
 {
     use HasFactory;
     protected $tabel = 'pegawai_level_user';
+    protected $guarded = ['id'];
 }

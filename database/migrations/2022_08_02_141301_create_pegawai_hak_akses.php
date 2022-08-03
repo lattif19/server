@@ -15,9 +15,9 @@ class CreatePegawaiHakAkses extends Migration
     {
         Schema::create('pegawai_hak_akses', function (Blueprint $table) {
             $table->id();
-            $table->string('id_user')->nullable();
-            $table->string('id_modul')->nullable();
-            $table->string('id_level_user')->nullable();
+            $table->foreignId('id_user');
+            $table->foreignId('id_modul');
+            $table->foreignId('id_pegawai_level_user');
             $table->timestamps();
         });
     }

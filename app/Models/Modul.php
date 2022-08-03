@@ -9,4 +9,5 @@ class Modul extends Model
 {
     use HasFactory;
     protected $tabel = 'modul';
+    protected $guarded = ['id'];
 }
