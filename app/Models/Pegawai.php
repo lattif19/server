@@ -12,7 +12,17 @@ class Pegawai extends Model
     protected $table = 'pegawai';
     protected $guarded = ['id'];
 
-    public function user(){ }
+    public function divisi_validasi($data){
+        $valid =  DB::table('pegawai_divisi')
+                    ->where("pegawai_divisi.nama","=", $data['nama'])
+                    ->count();
+
+        if($valid >= 1){
+            return false;
+        }else{
+            return $data;
+        }
+    }
 
     public function get_modul(){
         return DB::table('modul')->get();

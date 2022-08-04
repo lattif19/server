@@ -8,7 +8,7 @@
 
             <div class="sb-sidenav-menu-heading">Menu</div>
 
-            <a class="nav-link" href="/pegawai">
+            <a class="nav-link {{ Request::is('pegawai*') ? 'active' : ''}}" href="/pegawai">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Pegawai
             </a>
@@ -21,15 +21,19 @@
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
 
-            <div class="collapse" id="organisasi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+            <div class="collapse
+            {{ Request::is('jabatan*') ? 'show' : ''}}
+            {{ Request::is('divisi*') ? 'show' : ''}}
+            " id="organisasi" aria-labelledby="headingOne" 
+                data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="/divisi">Devisi</a>
-                    <a class="nav-link" href="/jabatan">Jabatan</a>
+                    <a class="nav-link {{ Request::is('divisi*') ? 'active' : ''}}" href="/divisi">Devisi</a>
+                    <a class="nav-link {{ Request::is('jabatan*') ? 'active' : ''}}" href="/jabatan">Jabatan</a>
                 </nav>
             </div>
 
 
-            <a class="nav-link" href="/hak_akses">
+            <a class="nav-link {{ Request::is('hak_akses*') ? 'active' : ''}}" href="/hak_akses">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Hak Akses
             </a>

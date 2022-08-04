@@ -49,26 +49,28 @@
                                             </div>
                                             <div class="modal-body">
                                                 
-                                                <form>
+                                                <form method="post" action="/divisi">
+                                                  @csrf
+                                                  @method('put')
                                                     <div class="form-group mb-3">
                                                         <label for="nik" class='mb-2'>Nama</label>
-                                                        <input type="text" class="form-control" id="nama" 
+                                                        <input type="text" class="form-control" name="nama" 
                                                             value="{{ $p->nama }}">
                                                     </div>
                                     
                                                     <div class="form-group mb-3">
                                                       <label for="nama" class='mb-2'>Keterangan</label>
                                                       <textarea name="keterangan" id=""rows="10" 
-                                                       class="form-control"
-                                                       value="{{ $p->keterangan }}"></textarea>
+                                                       class="form-control">{{ $p->keterangan }}</textarea>
                                                     </div>
+                                                    
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <input type="hidden" value="{{ $p->id }}" name="id">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Rubah</button>
+                                                  </div>
                                                 </form>
-                                    
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                              <button type="button" class="btn btn-primary">Rubah</button>
-                                            </div>
                                           </div>
                                         </div>
                                       </div>
@@ -95,25 +97,39 @@
         </div>
         <div class="modal-body">
             
-            <form>
-                <div class="form-group mb-3">
-                    <label for="nik" class='mb-2'>Nama</label>
-                    <input type="text" class="form-control" id="nik" placeholder="contoh : 'Engginering' ">
-                </div>
-
-                <div class="form-group mb-3">
-                  <label for="nama" class='mb-2'>Keterangan</label>
-                  <textarea name="keterangan" id=""rows="10" class="form-control" placeholder="contoh : 'Menangani pekerjaan berkaitan dengan Engginering' "></textarea>
-                </div>
-            </form>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary">Tambah</button>
-        </div>
+          <form method="post" action="/divisi">
+              @csrf
+              <div class="form-group mb-3">
+                  <label for="nik" class='mb-2'>Nama</label>
+                  <input type="text" name="nama" required class="form-control" 
+                        id="nama" placeholder="contoh : 'Engginering' "
+                        value={{ old('nama') }}>
+              </div>
+              <div class="form-group mb-3">
+                <label for="nama" class='mb-2'>Keterangan</label>
+                <textarea name="keterangan" id=""rows="10" 
+                class="form-control" placeholder="contoh : 'Menangani pekerjaan berkaitan dengan Engginering' ">{{ old('keterangan') }}</textarea>
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+          </form>
       </div>
     </div>
   </div>
+
+  @if(session()->has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+  @endif
+  @if(session()->has('error'))
+    <div class="alert alert-danger" role="alert">
+      {{ session('error') }}
+    </div>
+  @endif
 @endsection
 
