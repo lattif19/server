@@ -14,28 +14,29 @@
                     <div class="card mb-2">
                         <div class="card-header">
                             <i class="fas fa-chart-area me-1"></i>
-                            <a href="#">Tambah Data Pegawai</a>
+                            <a href="#">Tambah Data Jabatan</a>
                         </div>
                         <table class="table">
                             <thead>
                               <tr>
-                                <th scope="col">NIK</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Divisi</th>
-                                <th scope="col">Jabatan</th>
+                                <th scope="col">Keterangan</th>
+                                <th scope="col">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
 
                             
-                            @foreach ($pegawai as $p)    
+                            @foreach ($jabatan as $p)    
                                 <tr>
-                                    <th scope="row">{{ $p->nik }}</th>
+                                    <th scope="row">{{ $p->id }}</th>
                                     <th scope="col">{{ $p->nama }}</th>
-                                    <th scope="col">{{ $p->email }}</th>
-                                    <th scope="col">{{ $p->divisi }}</th>
-                                    <th scope="col">{{ $p->jabatan }}</th>
+                                    <th scope="col">{{ $p->keterangan }}</th>
+                                    <th scope="col" width="150px">
+                                        <a href="#">Rubah</a>&nbsp;|
+                                        <a href="#">Hapus</a>
+                                    </th>
                                 </tr>
                             @endforeach
 

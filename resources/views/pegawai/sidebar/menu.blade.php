@@ -8,7 +8,7 @@
 
             <div class="sb-sidenav-menu-heading">Menu</div>
 
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/pegawai">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Pegawai
             </a>
@@ -23,13 +23,13 @@
 
             <div class="collapse" id="organisasi" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="#">Devisi</a>
-                    <a class="nav-link" href="#">Jabatan</a>
+                    <a class="nav-link" href="/divisi">Devisi</a>
+                    <a class="nav-link" href="/jabatan">Jabatan</a>
                 </nav>
             </div>
 
 
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/hak_akses">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Hak Akses
             </a>
