@@ -22,8 +22,8 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Modul</th>
-                                <th scope="col">Level</th>
-                                <th scope="col">Akse</th>
+                                <th scope="col">Level Sistem</th>
+                                <th scope="col">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
