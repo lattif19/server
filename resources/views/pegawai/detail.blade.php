@@ -34,33 +34,34 @@
                           </div>
                         </div>
                         <div class="card-body">
-                          <form>
-
+                          <form method="post" action="/pegawai">
+                            @csrf
+                            @method('put')
                             <div class="form-group row mb-3">
                               <label for="nik" class="col-sm-2 col-form-label">NIK</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nik" value="{{ $pegawai[0]->nik }}">
+                                <input type="text" class="form-control" name="nik" value="{{ $pegawai[0]->nik }}">
                               </div>
                             </div>
 
                             <div class="form-group row mb-3">
                               <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                               <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" value="{{ $pegawai[0]->email }}">
+                                <input type="email" class="form-control" name="email" value="{{ $pegawai[0]->email }}">
                               </div>
                             </div>
 
                             <div class="form-group row mb-3">
                               <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                               <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nama" value="{{ $pegawai[0]->nama }}">
+                                <input type="text" class="form-control" name="nama" value="{{ $pegawai[0]->nama }}">
                               </div>
                             </div>
 
                             <div class="form-group row mb-3">
                               <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
                               <div class="col-sm-10">
-                                <select class="form-control custom-select" name="jabatan">
+                                <select class="form-control custom-select" name="pegawai_jabatan_id">
                                   @foreach ($jabatan as $p)
                                       <option value="{{ $p->id }}" @if($p->nama == $pegawai[0]->jabatan) selected @endif>
                                         {{ $p->nama }}
@@ -73,7 +74,7 @@
                             <div class="form-group row mb-3">
                               <label for="divisi" class="col-sm-2 col-form-label">Divisi</label>
                               <div class="col-sm-10">
-                                <select class="form-control custom-select" name="jabatan">
+                                <select class="form-control custom-select" name="pegawai_divisi_id">
                                   @foreach ($divisi as $p)
                                       <option value="{{ $p->id }}" @if($p->nama == $pegawai[0]->divisi) selected @endif>
                                         {{ $p->nama }}
@@ -91,7 +92,9 @@
                             </div>
 
                             <hr class="mt-5 mb-3">
-                            <button class="btn btn-lg btn-primary">Simpan</button>
+                            <input type="hidden" name="id" value="{{ $pegawai[0]->id }}">
+                            <input type="hidden" name="user_id" value="{{ $pegawai[0]->user_id }}">
+                            <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
                             
     
                           </form>
@@ -110,4 +113,14 @@
             </div>
         </div>
 
+        @if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+      @endif
+      @if(session()->has('error'))
+        <div class="alert alert-danger" role="alert">
+          {{ session('error') }}
+        </div>
+      @endif
 @endsection

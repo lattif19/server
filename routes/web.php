@@ -24,8 +24,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/pegawai', [UserController::class, 'index']);
 Route::get('/pegawai/{nik}', [UserController::class, 'detail']);
+
+Route::get('/pegawai', [UserController::class, 'index']);
+Route::post('/pegawai', [UserController::class, 'pegawai_store']);
+Route::put('/pegawai', [UserController::class, 'pegawai_put']);
 
 Route::get('/divisi', [UserController::class, 'divisi']);
 Route::post('/divisi', [UserController::class, 'divisi_store']);

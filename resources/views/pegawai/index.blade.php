@@ -99,26 +99,30 @@
         </div>
         <div class="modal-body">
             
-            <form>
+            <form action="/pegawai" method="post">
+              @csrf
                 <div class="form-group mb-3">
                     <label for="nik" class='mb-2'>NIK</label>
-                    <input type="text" class="form-control" id="nik" placeholder="contoh : '23324J' ">
+                    <input type="text" class="form-control" 
+                           name="nik" placeholder="contoh : '23324J' " 
+                           value="{{ old('nik') }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                   <label for="nama" class='mb-2'>Nama</label>
-                  <input type="text" class="form-control" id="nama" placeholder="contoh : 'Nur Ardhiansyah' ">
+                  <input type="text" class="form-control" 
+                          name="nama" placeholder="contoh : 'Nur Ardhiansyah' " value="{{ old('nama') }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email" class='mb-2'>Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="contoh : 'nur_a@ssprimadaya.co.id' ">
+                    <input type="text" class="form-control" name="email" placeholder="contoh : 'nur_a@ssprimadaya.co.id' " value="{{ old('email') }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="nama" class='mb-2'>Jabatan</label>
-                    <select class="form-control custom-select" name="jabatan">
-                        <option selected>Pilih Jabatan</option>
+                    <select class="form-control custom-select" name="jabatan" required>
+                        <option value="" selected>Pilih Jabatan</option>
                         @foreach ($jabatan as $p)
                             <option value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
@@ -127,8 +131,8 @@
 
                 <div class="form-group mb-3">
                     <label for="nama" class='mb-2'>Divisi</label>
-                    <select class="form-control custom-select" name="divisi">
-                        <option selected>Pilih Divisi</option>
+                    <select class="form-control custom-select" name="divisi" required>
+                        <option value="" selected>Pilih Divisi</option>
                         @foreach ($divisi as $p)
                             <option value="{{ $p->id }}">{{ $p->nama }}</option>
                         @endforeach
@@ -137,20 +141,27 @@
 
                 <div class="form-group mb-3">
                     <label for="password" class='mb-2'>Password</label>
-                    <input type="password" class="form-control" id="password">
+                    <input type="password" class="form-control" name="password" required>
                 </div>
 
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+              </div>
             </form>
-
-
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary">Tambah</button>
-        </div>
       </div>
     </div>
   </div>
+
+ @if(session()->has('success'))
+  <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+  </div>
+@endif
+@if(session()->has('error'))
+  <div class="alert alert-danger" role="alert">
+    {{ session('error') }}
+  </div>
+@endif
 @endsection

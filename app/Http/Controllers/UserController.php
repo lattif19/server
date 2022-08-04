@@ -10,6 +10,65 @@ use App\Models\Pegawai;
 class UserController extends Controller
 {
 
+    public function pegawai_put(Request $request){
+        
+        $data['nik'] = $request->nik;
+        $data['nama'] = $request->nama;
+        $data['pegawai_jabatan_id'] = $request->pegawai_jabatan_id;
+        $data['pegawai_divisi_id'] = $request->pegawai_divisi_id;
+
+        $user['email'] = $request->email;
+        $user['id'] = $request->user_id;
+
+        //$validate = $user['email'] == Pegawai::get_detail($request->nik)[0]->email;
+
+    
+        
+            if(DB::table('pegawai')->where("id", $request->id)->update($data)){
+               DB::table('users')->where("id", $request->user_id)->update($user);
+                return redirect('/pegawai')->with('success', "Data berhasil dirubah");
+            }else{
+                return redirect('/pegawai')->with('error', "Data gagal dirubah");
+            }
+        
+       
+    
+    }
+
+    public function pegawai_store(Request $request){
+
+        $data['nik'] = $request->nik;
+        $data['nama'] = $request->nama;
+        $data['pegawai_jabatan_id'] = $request->jabatan;
+        $data['pegawai_divisi_id'] = $request->divisi;
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
+        
+
+        $user['password'] = bcrypt($request->password);
+        $user['email'] = $request->email;
+        $user['username'] = strtolower(str_replace(" ","_", $request->nama));
+
+
+        if(Pegawai::pegawai_validasi($data)){
+            
+            $data['user_id'] = DB::table('users')->insertGetId($user);
+
+            if(DB::table('pegawai')->insert($data)){
+                return redirect('/pegawai')->with('success', "Data berhasil di input");
+            }else{
+                DB::table('users')->where("id", "=", $data['user_id'])->delete();
+                return redirect('/pegawai')->with('error', "Data ".$data['nik']." Sudah tersedia");
+            }
+        }else{
+            return redirect('/pegawai')->with('error', "Data ".$data['nik']." Sudah tersedia");
+        }
+    }
+
+
+
+
+
 
     public function jabatan_put(Request $request){
         $id['id'] = $request->id;
