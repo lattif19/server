@@ -56,9 +56,9 @@ class DatabaseSeeder extends Seeder
          Divisi::create(['nama' => 'Pengadaan']);
          Divisi::create(['nama' => 'HR & GA']);
 
-         Pegawai::create(['pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'1', 'nama' => 'Administrator', 'user_id' => '1' ]);
-         Pegawai::create(['pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'2', 'nama' => 'Approver', 'user_id' => '2' ]);
-         Pegawai::create(['pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'5', 'nama' => 'User', 'user_id' => '3' ]);
+         Pegawai::create(['nik' => '202201J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'1', 'nama' => 'Administrator', 'user_id' => '1' ]);
+         Pegawai::create(['nik' => '202202J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'2', 'nama' => 'Approver', 'user_id' => '2' ]);
+         Pegawai::create(['nik' => '202203J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'5', 'nama' => 'User', 'user_id' => '3' ]);
 
 
          PegawaiLevelUser::create(['nama' => 'Administrator']);

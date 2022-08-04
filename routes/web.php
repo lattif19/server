@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 
 Route::get('/pegawai', [UserController::class, 'index']);
+Route::get('/pegawai/{nik}', [UserController::class, 'detail']);
 Route::get('/divisi', [UserController::class, 'divisi']);
 Route::get('/jabatan', [UserController::class, 'jabatan']);
 Route::get('/hak_akses', [UserController::class, 'hak_akses']);

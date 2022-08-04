@@ -16,7 +16,7 @@ class CreatePegawai extends Migration
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nik')->nullable();
+            $table->string('nik')->uniqid()->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('pegawai_divisi_id')->nullable();
             $table->foreignId('pegawai_jabatan_id')->nullable();
