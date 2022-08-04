@@ -26,11 +26,15 @@ Route::get('/', function () {
 
 Route::get('/pegawai', [UserController::class, 'index']);
 Route::get('/pegawai/{nik}', [UserController::class, 'detail']);
+
 Route::get('/divisi', [UserController::class, 'divisi']);
 Route::post('/divisi', [UserController::class, 'divisi_store']);
 Route::put('/divisi', [UserController::class, 'divisi_put']);
 
 Route::get('/jabatan', [UserController::class, 'jabatan']);
+Route::post('/jabatan', [UserController::class, 'jabatan_store']);
+Route::put('/jabatan', [UserController::class, 'jabatan_put']);
+
 Route::get('/hak_akses', [UserController::class, 'hak_akses']);
 
 

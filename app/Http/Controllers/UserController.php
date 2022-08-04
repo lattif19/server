@@ -10,6 +10,42 @@ use App\Models\Pegawai;
 class UserController extends Controller
 {
 
+
+    public function jabatan_put(Request $request){
+        $id['id'] = $request->id;
+        $data['nama'] = $request->nama;
+        $data['keterangan'] = $request->keterangan;
+        $data['updated_at'] = now();
+        
+       
+        if(DB::table('pegawai_jabatan')->where("id", $request->id)->update($data)){
+            return redirect('/jabatan')->with('success', "Data berhasil dirubah");
+        }else{
+            return redirect('/jabatan')->with('error', "Data gagal dirubah");
+        }
+    }
+
+    public function jabatan_store(Request $request){
+
+        $save['nama'] = $request->nama;
+        $save['keterangan'] = $request->keterangan;
+        $save['created_at'] = now();
+        $save['updated_at'] = now();
+
+        if(Pegawai::jabatan_validasi($save)){
+            DB::table('pegawai_jabatan')->insert($save);
+            return redirect('/jabatan')->with('success', "Data berhasil di input");
+        }else{
+            return redirect('/jabatan')->with('error', "Data ".$save['nama']." Sudah tersedia");
+        }
+    }
+
+
+
+
+
+
+
     public function divisi_put(Request $request){
         $id['id'] = $request->id;
         $data['nama'] = $request->nama;
@@ -39,8 +75,6 @@ class UserController extends Controller
         }else{
             return redirect('/divisi')->with('error', "Data ".$save['nama']." Sudah tersedia");
         }
-        
-         
     }
 
     public function detail($nik){

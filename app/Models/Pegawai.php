@@ -12,6 +12,18 @@ class Pegawai extends Model
     protected $table = 'pegawai';
     protected $guarded = ['id'];
 
+    public function jabatan_validasi($data){
+        $valid =  DB::table('pegawai_jabatan')
+                    ->where("pegawai_jabatan.nama","=", $data['nama'])
+                    ->count();
+
+        if($valid >= 1){
+            return false;
+        }else{
+            return $data;
+        }
+    }
+
     public function divisi_validasi($data){
         $valid =  DB::table('pegawai_divisi')
                     ->where("pegawai_divisi.nama","=", $data['nama'])
