@@ -18,21 +18,41 @@
   </head>
 
   <body>
-    <form class="form-signin">
+    <form class="form-signin" action="/login" method="post">
+      @csrf
       <div class="text-center mb-4">
         <img class="mb-4" src="/img/logo-S2P.jpg" alt="" width="85" height="72">
         <h1 class="h4 mb-3 font-weight-normal">PT SUMBER SEGARA PRIMADAYA</h1>
       </div>
 
       <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" 
+          class="form-control" 
+          placeholder="Email address" 
+          value="{{ old('email') }}"
+          name="email"
+          {{-- required  --}}
+          autofocus>
         <label for="inputEmail">Email address</label>
       </div>
 
+      
       <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" 
+        class="form-control"
+        name="password" 
+        placeholder="Password" 
+        {{-- required --}}
+        >
         <label for="inputPassword">Password</label>
       </div>
+      
+      @if(session()->has('LoginError'))
+        <div class="alert alert-danger" role="alert">
+          {{ session('LoginError') }}
+        </div>
+      @endif
+
 
       <div class="checkbox mb-3">
         <label>
@@ -44,5 +64,7 @@
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2022</p>
       </a>
     </form>
+
+
   </body>
 </html>
