@@ -11,26 +11,29 @@ class UserController extends Controller
 {
 
     public function reset_password(Request $request){
-        
-        if($request->password1 == $request->password2){
-            DB:table('users')
-            ->where("id", $request->id)
-            ->update(["password", $request->password1]);
-        }
+        $id["id"] = $request->id;
+        $data["password"] = bcrypt($request->password1);
+
+        //dd(bcrypt($request->password1));
+        if($request->password1 != $request->password2){
+            return redirect('/pegawai')->with('error', "Password yang anda masukan tidak sama");
+        } 
+        DB::table('users')->where($id)->update($data);
+        return redirect('/pegawai')->with('success', "Data berhasil dirubah");
     }
 
     public function pegawai_put(Request $request){
-        
+        $pegawai['id'] = $request->id;
         $data['nik'] = $request->nik;
         $data['nama'] = $request->nama;
         $data['pegawai_jabatan_id'] = $request->pegawai_jabatan_id;
         $data['pegawai_divisi_id'] = $request->pegawai_divisi_id;
 
         $user['email'] = $request->email;
-        $user['id'] = $request->user_id;
+        $id['id'] = $request->user_id;
 
-            if(DB::table('pegawai')->where("id", $request->id)->update($data)){
-               DB::table('users')->where("id", $request->user_id)->update($user);
+            if(DB::table('pegawai')->where($pegawai)->update($data)){
+               DB::table('users')->where($id)->update($user);
                 return redirect('/pegawai')->with('success', "Data berhasil dirubah");
             }else{
                 return redirect('/pegawai')->with('error', "Data gagal dirubah");
