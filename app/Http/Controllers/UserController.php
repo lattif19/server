@@ -10,6 +10,15 @@ use App\Models\Pegawai;
 class UserController extends Controller
 {
 
+    public function reset_password(Request $request){
+        
+        if($request->password1 == $request->password2){
+            DB:table('users')
+            ->where("id", $request->id)
+            ->update(["password", $request->password1]);
+        }
+    }
+
     public function pegawai_put(Request $request){
         
         $data['nik'] = $request->nik;
@@ -20,19 +29,12 @@ class UserController extends Controller
         $user['email'] = $request->email;
         $user['id'] = $request->user_id;
 
-        //$validate = $user['email'] == Pegawai::get_detail($request->nik)[0]->email;
-
-    
-        
             if(DB::table('pegawai')->where("id", $request->id)->update($data)){
                DB::table('users')->where("id", $request->user_id)->update($user);
                 return redirect('/pegawai')->with('success', "Data berhasil dirubah");
             }else{
                 return redirect('/pegawai')->with('error', "Data gagal dirubah");
             }
-        
-       
-    
     }
 
     public function pegawai_store(Request $request){

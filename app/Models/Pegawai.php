@@ -93,7 +93,7 @@ class Pegawai extends Model
                 ->join("users", "users.id", "=", "pegawai.user_id")
                 ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
                 ->join("pegawai_jabatan", "pegawai_jabatan.id", "=", "pegawai.pegawai_jabatan_id")
-                ->select("pegawai.id", "pegawai.nik", "pegawai.nama", "users.email", "pegawai_jabatan.nama as jabatan", "pegawai_divisi.nama as divisi")
+                ->select("pegawai.id", "pegawai.nik","pegawai.user_id", "pegawai.nama", "users.email", "pegawai_jabatan.nama as jabatan", "pegawai_divisi.nama as divisi")
                 ->get();
     }
 

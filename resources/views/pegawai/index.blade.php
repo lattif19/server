@@ -56,22 +56,24 @@
                                               </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="">
+                                                <form action="/pegawai/reset" method="post">
+                                                  @method("put")
+                                                  @csrf
                                                     <div class="form-group mb-3">
                                                         <label for="password" class='mb-2'>New Password</label>
-                                                        <input type="password" class="form-control" id="password">
+                                                        <input type="password" class="form-control" name="password1">
                                                     </div>
-
                                                     <div class="form-group mb-3">
                                                         <label for="password" class='mb-2'>Re-Type Password</label>
-                                                        <input type="password" class="form-control" id="password">
+                                                        <input type="password" class="form-control" name="password2">
                                                     </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <input type="hidden" name="id" value="{{ $p->user_id }}">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Reset</button>
+                                                  </div>
                                                 </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                              <button type="button" class="btn btn-primary">Reset</button>
-                                            </div>
                                           </div>
                                         </div>
                                       </div>
