@@ -7,6 +7,7 @@ use App\Http\Controllers\LemburController;
 use App\Http\Controllers\SppdController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Models\Absensi;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -45,11 +46,15 @@ Route::put('/jabatan', [UserController::class, 'jabatan_put']);
 
 
 
+
 Route::group(['middleware' => ["auth"]], function(){
     Route::get('/lembur', [LemburController::class, 'index']);
     Route::get('/asset', [AssetController::class, 'index']);
     Route::get('/sppd', [SppdController::class, 'index']);
     Route::get('/absen', [AbsensiController::class, 'index']);
+    route::post('/absen', [AbsensiController::class, 'import_absensi']);
+    Route::get('/absen_statistik', [AbsensiController::class, 'statistik']);
+    Route::get('/absen_pengaturan', [AbsensiController::class, 'pengaturan']);
     Route::get('/main', [DashboardController::class, 'index'])->name('home');
     Route::get('/pegawai/{nik}', [UserController::class, 'detail']);
     Route::get('/hak_akses', [UserController::class, 'hak_akses']);
