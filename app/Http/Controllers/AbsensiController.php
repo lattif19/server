@@ -12,14 +12,15 @@ class AbsensiController extends Controller
 {
 
     public function import_absensi(Request $request){
-        Excel::import(new AbsensiImport, $request->file('absensi'));
-        
-        return redirect("/absen");
+        Excel::import(new AbsensiImport, $request->file("absensi"));
+        return redirect("/absen_data")->with("success", "Import Data berhasil");
     }
 
     public function index()
     {
+        
         return view('absen.index', [
+            "absensi" => Absensi::simplePaginate(10)->withQueryString(),
             "title" => "Data Absensi",
         ]);
     }
@@ -30,11 +31,15 @@ class AbsensiController extends Controller
 
 
     public function pengaturan(){
-        return view("absen.pengaturan");
+        return view("absen.pengaturan", [
+            "title" => "Data Absensi",
+        ]);
     }
 
     public function statistik(){
-        return view("absen.statistik");
+        return view("absen.statistik", [
+            "title" => "Data Absensi",
+        ]);
     }
 
 

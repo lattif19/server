@@ -16,12 +16,13 @@ class LemburAbsensi extends Migration
         Schema::create('lembur_absensi', function (Blueprint $table) {
             $table->id();
             $table->integer("absen_id")->nullable();
+            $table->text("nama")->nullable();
             $table->date("tanggal")->nullable();
-            $table->timestamp("jam_masuk")->nullable();
-            $table->timestamp("jam_pulang")->nullable();
+            $table->time("jam_masuk")->nullable();
+            $table->time("jam_pulang")->nullable();
             $table->boolean("hari_libur")->default(false);
-            $table->timestamp("jam_pulang_kerja")->nullable();
-            $table->timestamp("jam_pulang_sebenarnya")->nullable();
+            $table->time("jam_pulang_kerja")->nullable();
+            $table->time("jam_pulang_sebenarnya")->nullable();
             $table->timestamps();
         });
     }

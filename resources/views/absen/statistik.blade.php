@@ -1,4 +1,3 @@
-
 @extends('layout.main')
 @include('absen.sidebar.menu')
 
@@ -68,4 +67,3 @@
             </div>
         </div>
 @endsection
-

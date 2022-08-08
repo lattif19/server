@@ -4,21 +4,20 @@ namespace App\Imports;
 
 use App\Models\Absensi;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class AbsensiImport implements ToModel
+class AbsensiImport implements ToModel, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+    
     public function model(array $row)
     {
         return new Absensi([
-            'absen_id' => $row[0],
-            'tanggal' => $row[1],
-            'jam_masuk' => $row[2],
-            'jam_keluar' => $row[3],
+            'absen_id' => $row['person_id'],
+            'nama' => $row["name"],
+            'tanggal' => date("Y-m-d", (($row["date"]-25569)*86400)),
+            'jam_masuk' => date("H:i:s", (($row["chek_in"]-25569)*86400)),
+            'jam_pulang' => date("H:i:s", (($row["chek_out"]-25569)*86400)),
         ]);
     }
 }
