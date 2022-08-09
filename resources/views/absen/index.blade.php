@@ -45,7 +45,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $absensi->links() }}
+                            {!! $absensi->links() !!}
                             
                         </div>
                     </div>

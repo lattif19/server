@@ -63,4 +63,5 @@ Route::group(['middleware' => ["auth"]], function(){
     route::post('/absen', [AbsensiController::class, 'import_absensi']);
     Route::get('/absen_data', [AbsensiController::class, 'index']);
     Route::get('/absen_pengaturan', [AbsensiController::class, 'pengaturan']);
+    Route::put('/absen_pengaturan', [AbsensiController::class, 'pengaturan_tambah_mapping']);
 });
