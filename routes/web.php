@@ -49,6 +49,10 @@ Route::put('/jabatan', [UserController::class, 'jabatan_put']);
 
 Route::group(['middleware' => ["auth"]], function(){
     Route::get('/lembur', [LemburController::class, 'index']);
+
+
+
+    
     Route::get('/asset', [AssetController::class, 'index']);
     Route::get('/sppd', [SppdController::class, 'index']);
     Route::get('/main', [DashboardController::class, 'index'])->name('home');

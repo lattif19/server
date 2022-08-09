@@ -15,7 +15,7 @@ class AbsensiController extends Controller
     public function pengaturan_tambah_mapping(Request $request){
         $data['user_id'] = $request->user_id;
         $rubah['lembur_absen_id'] = $request->absen_id;
-        
+
 
         $validate = DB::table('pegawai')->where($data)->update($rubah);
         
@@ -55,7 +55,7 @@ class AbsensiController extends Controller
 
     public function statistik(){
         return view("absen.statistik", [
-            "title" => "Data Absensi",
+            "title" => "Statistik Absensi",
         ]);
     }
 
