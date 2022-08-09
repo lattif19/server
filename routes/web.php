@@ -53,6 +53,7 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::post('/lembur/pengajuan_harian', [LemburController::class, 'lembur_pengajuan_harian']);
     Route::put('/lembur/rubah_pengjuan_lembur', [LemburController::class, 'rubah_pengajuan_lembur']);
     Route::post('/lembur/hapus_pengjuan_lembur', [LemburController::class, 'hapus_pengajuan_lembur']);
+    Route::get('/lembur_settings', [LemburController::class, 'lembur_pengaturan']);
 
 
 

@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lembur;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class LemburController extends Controller
 {
+    public function lembur_pengaturan(){
+
+
+
+        return view("lembur.lembur_pengaturan", [
+            "user" => Pegawai::get(),
+            "title" => "Pengaturan Approver Lembur"
+        ]);
+    }
+
     public function hapus_pengajuan_lembur(Request $request){
         $id['id'] = $request->lembur_catatan;
 
