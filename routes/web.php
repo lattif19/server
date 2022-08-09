@@ -49,10 +49,14 @@ Route::put('/jabatan', [UserController::class, 'jabatan_put']);
 
 Route::group(['middleware' => ["auth"]], function(){
     Route::get('/lembur', [LemburController::class, 'index']);
+    Route::get('/lembur/{detail}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_detail']);
+    Route::post('/lembur/pengajuan_harian', [LemburController::class, 'lembur_pengajuan_harian']);
+    Route::put('/lembur/rubah_pengjuan_lembur', [LemburController::class, 'rubah_pengajuan_lembur']);
+    Route::post('/lembur/hapus_pengjuan_lembur', [LemburController::class, 'hapus_pengajuan_lembur']);
 
 
 
-    
+
     Route::get('/asset', [AssetController::class, 'index']);
     Route::get('/sppd', [SppdController::class, 'index']);
     Route::get('/main', [DashboardController::class, 'index'])->name('home');

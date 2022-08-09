@@ -25,13 +25,13 @@
       </h5> --}}
       <nav class="my-2 my-md-0 mr-md-3">
         
-        
+        {{ Auth::user()->email }}
       </nav>
       
     </div>
 
    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    &nbsp; 
+    
     </div> 
 
     <div class="container">

@@ -4,16 +4,66 @@ namespace App\Http\Controllers;
 
 use App\Models\Lembur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class LemburController extends Controller
 {
+    public function hapus_pengajuan_lembur(Request $request){
+        $id['id'] = $request->lembur_catatan;
+
+        if(DB::table("lembur_catatan")->delete($id)){
+            return back()->with("success", "Penambahan Data Berhasil");
+        }
+        return back()->with("error", "Penambahan Data Gagal");
+    }
+
+    public function rubah_pengajuan_lembur(Request $request){
+        $id['id'] = $request->lembur_catatan;
+        $data['tanggal'] = $request->tanggal;
+        $data['keterangan'] = $request->keterangan;
+        $data['hari_libur'] = $request->hari_libur;
+        
+        if(DB::table("lembur_catatan")->where($id)->update($data)){
+            return back()->with("success", "Penambahan Data Berhasil");
+        }
+        return back()->with("error", "Penambahan Data Gagal");
+    }
+
+    public function lembur_pengajuan_harian(Request $request){
+        $data['user_id'] = Auth::user()->id;
+        $data['tanggal'] = $request->tanggal;
+        $data['keterangan'] = $request->keterangan;
+        $data['hari_libur'] = $request->hari_libur;
+        $data['lembur_pengajuan_id'] = $request->lembur_pengajuan_id;
+
+        if(DB::table("lembur_catatan")->insert($data)){
+            return back()->with("success", "Penambahan Data Berhasil");
+        }
+        return back()->with("error", "Penambahan Data Gagal");
+    }
+
+
+    public function lembur_detail(Request $request){
+        $periode = ucfirst(str_replace("-", " ", $request->detail));
+        $user_id = Auth::user()->id;
+        
+        $biasa = Lembur::get_catatan_biasa($periode, $user_id);
+        $libur = Lembur::get_catatan_libur($periode, $user_id);
+       
+
+        return view("lembur.lembur_detail", [
+            "title" => "Periode ".$periode,
+            "lembur_pengajuan_id" => $request->lembur_pengajuan_id,
+            "biasa" => $biasa,
+            "libur" => $libur,
+            "pengajuanLembur" => false,
+        ]);
+    }
     
     public function index()
     {
-        // Cek -> Sudah dibuat Pengajuan Belum ?
-        //      Belum -> Buat Pengajuan dengan Total Kosong, Tampilkan Data
-        //      Sudah -> Tampilkan Data
+
         $is_created = Lembur::cek_pengajuan($this->generate_periode());
         if($is_created <= 0 ){
             $this->pengajuan_kosong();

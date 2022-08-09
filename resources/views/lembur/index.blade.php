@@ -34,7 +34,9 @@
                                                 <td>{{ $i->total_biasa }} </td>
                                                 <td>{{ $i->total_libur }} </td>
                                                 <td>{{ $i->status }} </td>
-                                                <td>Ajukan | Edit</td>
+                                                <td>Ajukan | 
+                                                    <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a>
+                                                </td>
                                             </tr>
                                         @endforeach                                       
                                     @else
@@ -56,5 +58,16 @@
                 </div>
             </div>
         </div>
+
+@if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+@endif
+@if(session()->has('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+@endif
 @endsection
 

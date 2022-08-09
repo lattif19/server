@@ -16,6 +16,8 @@ class LemburCatatan extends Migration
         Schema::create('lembur_catatan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('lembur_pengajuan_id');
+            $table->foreignId('lembur_absensi_id'); //foreignId untuk menampilkan perhitungan Jam 
             $table->date('tanggal');
             $table->boolean('hari_libur')->default(false);
             $table->text('keterangan');
