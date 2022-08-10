@@ -10,12 +10,20 @@ use Illuminate\Support\Facades\Auth;
 
 class LemburController extends Controller
 {
+    public function lembur_pengaturan_put(Request $request){
+        $id['user_id'] = $request->user_id; 
+        $data['lembur_approve_id'] = $request->lembur_approve_id;
+
+         if(DB::table("pegawai")->where($id)->update($data)){
+            return back()->with("success", "Penambahan Data Berhasil");
+        }
+        return back()->with("error", "Penambahan Data Gagal");
+    }
+
     public function lembur_pengaturan(){
-
-
-
         return view("lembur.lembur_pengaturan", [
             "user" => Pegawai::get(),
+            "users" => Pegawai::get(),
             "title" => "Pengaturan Approver Lembur"
         ]);
     }

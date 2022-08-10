@@ -30,9 +30,57 @@
                                         <tr>
                                             <td>{{ $loop->index+1 }}</td>
                                             <td>{{ $i->nama }}</td>
-                                            <td>{{ $i->lembur_approve_id }}</td>
-                                            <td>Rubah</td>
+                                            <td>
+                                                @foreach ($users as $p)
+                                                    @if($i->lembur_approve_id == $p->user_id) {{ $p->nama }} @endif
+                                                @endforeach
+                                            </td>
+                                            <td width="100px">
+                                                <a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">
+                                                    Rubah
+                                                </a>
+                                            </td>
                                         </tr>
+
+
+                                        <div class="modal fade" id="rubahData{{ $i->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="rubahData{{ $i->id }}"
+                                            aria-hidden="true">
+
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="rubahData{{ $i->id }}">Rubah Data Approver</h5>
+                                                            <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="/lembur_settings" method="post">
+                                                            @csrf
+                                                            @method("put")
+                                                            
+                                                                <div class="form-group mt-3">
+                                                                    <select name="lembur_approve_id" class="form-control" required>
+                                                                        <option value="">--Pilih Satu---</option>
+                                                                        @foreach ($users as $p)
+                                                                            <option value="{{ $p->user_id }}" 
+                                                                                @if($i->lembur_approve_id == $p->user_id) selected @endif> {{ $p->nama }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                            <div class="form-group mt-5">
+                                                                <input type="hidden" name="user_id" value="{{ $i->user_id }}">
+                                                                <button class="btn col-lg-2 btn-success" type="submit"> Rubah </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     @endforeach
                                 </tbody>
                            </table>
