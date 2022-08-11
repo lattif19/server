@@ -10,6 +10,36 @@ use Illuminate\Support\Facades\Auth;
 
 class LemburController extends Controller
 {
+    public function lembur_hitung_total(Request $request){
+        $data["user_id"] = Auth::user()->id;
+        $data["periode"] = ucfirst(str_replace("-", " ", $request->periode));
+        $data["lembur_pengajuan_id"] = $request->lembur_pengajuan_id;
+        $jam = DB::table("lembur_settings")->get();
+
+
+        return view("lembur.lembur_kalkulasi", [
+            "title" => $data["periode"],
+            "pengaturan_jam" => $jam[0],
+            "jam_lembur" => Lembur::perhitungan_total_jam($data),
+            
+        ]);
+    }
+
+    public function lembur_pengaturan_jam(Request $request){
+        $data['jam_kerja'] = $request->jam_kerja;
+        $data['jam_masuk'] = $request->jam_masuk;
+        
+        
+        $id = DB::table("lembur_settings")->get("id")->count();
+    
+        if($id == 0){
+            DB::table("lembur_settings")->insert($data);
+            return back()->with("success", "Penambahan Data Berhasil");
+        }
+        DB::table("lembur_settings")->where("id", $id)->update($data);
+        return back()->with("success", "Penambahan Data Berhasil");
+    }
+
     public function lembur_pengaturan_put(Request $request){
         $id['user_id'] = $request->user_id; 
         $data['lembur_approve_id'] = $request->lembur_approve_id;
@@ -21,10 +51,13 @@ class LemburController extends Controller
     }
 
     public function lembur_pengaturan(){
+        $data = DB::table("lembur_settings")->get();
+        
         return view("lembur.lembur_pengaturan", [
             "user" => Pegawai::get(),
             "users" => Pegawai::get(),
-            "title" => "Pengaturan Approver Lembur"
+            "jam_kerja" => $data[0],
+            "title" => "Pengaturan Lembur"
         ]);
     }
 
@@ -50,16 +83,18 @@ class LemburController extends Controller
     }
 
     public function lembur_pengajuan_harian(Request $request){
+
+        
         $data['user_id'] = Auth::user()->id;
         $data['tanggal'] = $request->tanggal;
         $data['keterangan'] = $request->keterangan;
         $data['hari_libur'] = $request->hari_libur;
         $data['lembur_pengajuan_id'] = $request->lembur_pengajuan_id;
 
-        if(DB::table("lembur_catatan")->insert($data)){
-            return back()->with("success", "Penambahan Data Berhasil");
-        }
-        return back()->with("error", "Penambahan Data Gagal");
+            if(DB::table("lembur_catatan")->insert($data)){
+                return back()->with("success", "Penambahan Data Berhasil");
+            }
+            return back()->with("error", "Penambahan Data Gagal");
     }
 
 
@@ -93,6 +128,13 @@ class LemburController extends Controller
             "title" => "Pengajuan Lembur",
         ]);
     }
+
+
+
+
+    ##
+    ##
+    ##
 
     public function pengajuan_kosong(){
         $data['user_id'] = Auth::user()->id;
@@ -148,47 +190,53 @@ class LemburController extends Controller
     {
         //
     }
+
+    public function bulan_ini(){   return $bulan = date("m");}
+    public function tanggal_ini(){ return $tanggal = date("d");}
+
     public function generate_periode(){
-        $bulan = date("m");
         $tanggal = date("d");
+        $bulan = date("m");
+        // $bulan = substr($date, "5","2");
+        // $tanggal = substr($date, "8","2");
 
-        if($bulan == 12 and $tanggal >=15){ $periode = "Januari"; }
-        if($bulan == 1 and $tanggal <=15){ $periode = "Januari"; }
+        if($bulan == 12 and $tanggal >=16){ $periode = "Januari"; }
+        if($bulan == 1 and $tanggal <=16){ $periode = "Januari"; }
 
-        if($bulan == 1 and $tanggal >=15){ $periode = "Februari"; }
-        if($bulan == 2 and $tanggal <=15){ $periode = "Februari"; }
+        if($bulan == 1 and $tanggal >=16){ $periode = "Februari"; }
+        if($bulan == 2 and $tanggal <=16){ $periode = "Februari"; }
 
-        if($bulan == 2 and $tanggal >=15){ $periode = "Maret"; }
-        if($bulan == 3 and $tanggal <=15){ $periode = "Maret"; }
+        if($bulan == 2 and $tanggal >=16){ $periode = "Maret"; }
+        if($bulan == 3 and $tanggal <=16){ $periode = "Maret"; }
         
-        if($bulan == 3 and $tanggal >=15){ $periode = "April"; }
-        if($bulan == 4 and $tanggal <=15){ $periode = "April"; }
+        if($bulan == 3 and $tanggal >=16){ $periode = "April"; }
+        if($bulan == 4 and $tanggal <=16){ $periode = "April"; }
         
-        if($bulan == 4 and $tanggal >=15){ $periode = "Mei"; }
-        if($bulan == 5 and $tanggal <=15){ $periode = "Mei"; }
+        if($bulan == 4 and $tanggal >=16){ $periode = "Mei"; }
+        if($bulan == 5 and $tanggal <=16){ $periode = "Mei"; }
         
-        if($bulan == 5 and $tanggal >=15){ $periode = "Juni"; }
-        if($bulan == 6 and $tanggal <=15){ $periode = "Juni"; }
+        if($bulan == 5 and $tanggal >=16){ $periode = "Juni"; }
+        if($bulan == 6 and $tanggal <=16){ $periode = "Juni"; }
         
-        if($bulan == 6 and $tanggal >=15){ $periode = "Juli"; }
-        if($bulan == 7 and $tanggal <=15){ $periode = "Juli"; }
+        if($bulan == 6 and $tanggal >=16){ $periode = "Juli"; }
+        if($bulan == 7 and $tanggal <=16){ $periode = "Juli"; }
         
-        if($bulan == 7 and $tanggal >=15){ $periode = "Agustus"; }
-        if($bulan == 8 and $tanggal <=15){ $periode = "Agustus"; }
+        if($bulan == 7 and $tanggal >=16){ $periode = "Agustus"; }
+        if($bulan == 8 and $tanggal <=16){ $periode = "Agustus"; }
         
-        if($bulan == 8 and $tanggal >=15){ $periode = "September"; }
-        if($bulan == 9 and $tanggal <=15){ $periode = "September"; }
+        if($bulan == 8 and $tanggal >=16){ $periode = "September"; }
+        if($bulan == 9 and $tanggal <=16){ $periode = "September"; }
         
-        if($bulan == 9 and $tanggal >=15 ){ $periode = "Oktober"; }
-        if($bulan == 10 and $tanggal <=15 ){ $periode = "Oktober"; }
+        if($bulan == 9 and $tanggal >=16 ){ $periode = "Oktober"; }
+        if($bulan == 10 and $tanggal <=16 ){ $periode = "Oktober"; }
         
-        if($bulan == 10 and $tanggal >=15 ){ $periode = "November"; }
-        if($bulan == 11 and $tanggal <=15 ){ $periode = "November"; }
+        if($bulan == 10 and $tanggal >=16 ){ $periode = "November"; }
+        if($bulan == 11 and $tanggal <=16 ){ $periode = "November"; }
 
-        if($bulan == 11 and $tanggal >=15 ){ $periode = "Desember"; }
-        if($bulan == 12 and $tanggal <=15){ $periode = "Desember"; }
+        if($bulan == 11 and $tanggal >=16 ){ $periode = "Desember"; }
+        if($bulan == 12 and $tanggal <=16){ $periode = "Desember"; }
 
-       return $periode." ".date("Y") ;
+        return $periode." ".date("Y") ;
    }
 
 }

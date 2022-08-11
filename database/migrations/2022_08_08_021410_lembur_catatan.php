@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class LemburCatatan extends Migration
 {
@@ -17,7 +18,7 @@ class LemburCatatan extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('lembur_pengajuan_id');
-            $table->foreignId('lembur_absensi_id'); //foreignId untuk menampilkan perhitungan Jam 
+            $table->foreignId('lembur_absensi_id')->nullable(); //foreignId untuk menampilkan perhitungan Jam 
             $table->date('tanggal');
             $table->boolean('hari_libur')->default(false);
             $table->text('keterangan');

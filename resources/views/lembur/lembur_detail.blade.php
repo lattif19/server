@@ -198,7 +198,7 @@
                         </div>
                     </div>
 
-
+                    @if($libur->count()>0)
                     <div class="card mb-4">
                         <div class="card-header">
                             <h5> Pengajuan Lembur Hari Libur </h5>
@@ -319,6 +319,10 @@
                             </table>
                         </div>
                     </div>
+                    @endif
+
+
+
                 </div>
             </div>
         </div>

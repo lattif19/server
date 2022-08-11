@@ -10,7 +10,7 @@
             </ol>
 
             <div class="row">
-                <div class="col-xl-12">
+                <div class="col-xl-6">
                     <div class="card mb-4">
                         <div class="card-header">
                             <h5> Pengaturan Approver Lembur </h5>
@@ -82,6 +82,47 @@
                                         </div>
 
                                     @endforeach
+                                </tbody>
+                           </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-xl-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5> Pengaturan Jam Kerja </h5>
+                        </div>
+                        <div class="card-body">
+                           <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Deskripsi Pengaturan</td>
+                                        <td>Value</td>
+                                        <td>Aksi</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <form action="/lembur/pengaturan_jam" method="post">
+                                        @csrf
+                                        @method("put")
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Jam Masuk</td>
+                                            <td><input type="time" name="jam_masuk" value="{{ $jam_kerja->jam_masuk }}" class="form-control"></td>
+                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Waktu Kerja</td>
+                                            <td><input type="time" name="jam_kerja" value="{{ $jam_kerja->jam_kerja }}" class="form-control"></td>
+                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                        </tr>
+                                    </form>
                                 </tbody>
                            </table>
                         </div>
