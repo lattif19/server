@@ -24,8 +24,8 @@
                             <h5> Pengajuan Lembur Hari Biasa </h5>
                         </div>
                         <div class="card-body">
-                           <table class="table">
-                                <thead align="center">
+                           <table class="table table-bordered mb-5">
+                                <thead align="center" class="table-dark">
                                     <tr>
                                         <td width="10px">NO</td>
                                         <td>Tanggal</td>
@@ -37,24 +37,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <div hidden>{{ $total_lembur = 0; }}</div>
                                     @foreach ($jam_lembur as $d)
                                         @if ($d->hari_libur == 0)
                                             <tr>
                                                 <td>{{ $loop->index+1 }}</td>
                                                 <td>{{ $d->tanggal }}</td>
                                                 <td>{{ $d->keterangan }}</td>
-                                                <td>{{ $d->jam_masuk }}</td>
-                                                <td>{{ $pengaturan_jam->jam_kerja }}+ Waktu Kerja</td>
-                                                <td>{{ $d->jam_pulang }}</td>
-                                                <td>{{ $d->jam_pulang }} - Jam Pulang Standar</td>
+                                                <td>{{ format_jam($d->jam_masuk) }}</td>
+                                                <td>{{ $jam_standar = jam_pulang_standar($d->jam_masuk, $pengaturan_jam->jam_masuk, $pengaturan_jam->jam_kerja) }}</td>
+                                                <td>{{ format_jam($d->jam_pulang) }}</td>
+                                                <td>{{ $jum_jam_lembur = jumlah_lembur($d->jam_pulang, $jam_standar) }}</td>  
                                             </tr>
-                                        @endif  
+                                            <div hidden>{{ $total_lembur += to_menit($jum_jam_lembur) }}</div>
+                                            @endif 
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td colspan="6">Total</td>
-                                        <td>Total Lembur</td>
+                                        <td class="bg-info">{{ menit_to_jam($total_lembur) }}</td>
                                     </tr>
                                 </tfoot>
                            </table>
@@ -70,35 +72,39 @@
                             <h5> Pengajuan Lembur Libur </h5>
                         </div>
                         <div class="card-body">
-                           <table class="table">
-                                <thead align="center">
+                           <table class="table mb-5">
+                                <thead align="center" class="table-dark">
                                     <tr>
                                         <td width="10px">NO</td>
                                         <td>Tanggal</td>
                                         <td>Keterangan / Deskripsi</td>
                                         <td>Jam Masuk</td>
-                                        <td>Jam Pulang Standar</td>
                                         <td>Jam Pulang Sebenarnya</td>
                                         <td>Waktu Lembur</td>
-                                        <td>Aksi</td>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <div hidden>{{ $total_libur = 0; }}</div>
                                     @foreach ($jam_lembur as $d)
                                         @if ($d->hari_libur == 1)
                                             <tr>
                                                 <td>{{ $loop->index+1 }}</td>
                                                 <td>{{ $d->tanggal }}</td>
                                                 <td>{{ $d->keterangan }}</td>
-                                                <td>{{ $d->jam_masuk }}</td>
-                                                <td>Jam Masuk + Waktu Kerja</td>
-                                                <td>{{ $d->jam_pulang }}</td>
-                                                <td>Jam Pulang - Jam Pulang Standar</td>
-                                                <td>Rubah</td>
+                                                <td>{{ format_jam($d->jam_masuk) }}</td>
+                                                <td>{{ format_jam($d->jam_pulang) }}</td>
+                                                <td>{{ $jum_jam_lembur = jumlah_lembur($d->jam_pulang, $d->jam_masuk) }}</td>  
                                             </tr>
-                                        @endif  
+                                            <div hidden>{{ $total_libur += to_menit($jum_jam_lembur) }}</div>
+                                            @endif 
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">Total</td>
+                                        <td class="bg-info">{{ menit_to_jam($total_libur) }}</td>
+                                    </tr>
+                                </tfoot>
                            </table>
                         </div>
                     </div>
@@ -111,6 +117,53 @@
             </div>
         </div>
 
+<?php
+
+    function menit_to_jam($menit){
+        $jam = floor($menit/60);
+                if($jam < 1){ $jam2 = "00"; }elseif($jam<10){ $jam2= "0".$jam; }else{ $jam2 = $jam; }
+        $m  = $menit-($jam*60);
+                if($m < 10){ $menit = "0".$m; }else{ $menit = $m; }
+        return $jam2.":".$menit;
+    }
+
+    function jumlah_lembur($jam_pulang, $jam_standar){
+        $total  = to_menit($jam_pulang) - to_menit($jam_standar);
+        $jam    = floor($total/60);
+                if($jam < 1){ $jam2 = "00"; }elseif($jam<10){ $jam2= "0".$jam; }else{ $jam2 = $jam; }
+        $m      = $total-($jam*60);
+                if($m < 10){ $menit = "0".$m; }else{ $menit = $m; }
+        return $jam2.":".$menit;
+    }
+
+    function jam_pulang_standar($data, $jam_masuk, $jam_kerja){
+        //normal
+        if(to_menit($data) <= 480){
+            $data = (to_menit($jam_masuk)+to_menit($jam_kerja))/60; 
+            return $data.":00";
+        }
+        //telat
+            $total = (to_menit($jam_masuk)+to_menit($jam_kerja))+(to_menit($data)-to_menit($jam_masuk));
+            $jam = floor($total/60);
+            $m = $total-($jam*60);
+                if($m < 10){ $menit = "0".$m; }else{ $menit = $m; }
+            return $jam.":".$menit;
+        }
+    
+  
+    
+    function format_jam($data){
+        return substr($data,"0", 5);
+    }
+    function to_menit($data){
+        return (substr($data, "0", 2) * 60)+substr($data, "3", 2);
+    }
+
+
+
+
+    
+?> 
 
 
 @if(session()->has('success'))
