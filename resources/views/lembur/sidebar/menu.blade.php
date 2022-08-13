@@ -13,6 +13,12 @@
                 Pengajuan Lembur
             </a>
 
+            <a class="nav-link" href="/lembur_approved">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Data Lembur
+            </a>
+
+
             <a class="nav-link" href="/lembur_settings">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Pengaturan

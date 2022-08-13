@@ -22,6 +22,7 @@
                                         <td>Periode</td>
                                         <td>Total Hari Biasa </td>
                                         <td>Total Hari Libur </td>
+                                        <td>Keterangan </td>
                                         <td>Status </td>
                                         <td>Aksi</td>
                                     </tr>
@@ -33,6 +34,7 @@
                                                 <td>{{ $i->periode }}</td>
                                                 <td>{{ format_jam($i->total_biasa) }} </td>
                                                 <td>{{ format_jam($i->total_libur) }} </td>
+                                                <td>{{ format_jam($i->keterangan) }} </td>
                                                 <td>{{ $i->status }} </td>
                                                 <td width="250px"> 
                                                     @if ($i->total_biasa == "00:00:00" and $i->total_libur == "00:00:00")

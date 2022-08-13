@@ -59,6 +59,7 @@
 
                                                 <input type="hidden" name="hari_libur[]" value="{{ $d->hari_libur }}">
                                                 <input type="hidden" name="tanggal[]" value="{{ $d->tanggal }}">
+                                                <input type="hidden" name="keterangan[]" value="{{ $d->keterangan }}">
                                                 <input type="hidden" name="jam_masuk_kantor[]" value="{{ $pengaturan_jam->jam_masuk }}">
                                                 <input type="hidden" name="jam_kerja_kantor[]" value="{{ $pengaturan_jam->jam_kerja }}">
                                                 <input type="hidden" name="jam_masuk[]" value="{{ $d->jam_masuk }}">

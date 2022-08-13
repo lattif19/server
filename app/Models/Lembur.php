@@ -14,6 +14,38 @@ class Lembur extends Model
     protected $table = 'lembur';
     protected $guarded = ['id'];
 
+    public function get_pengajuan_lembur_hrd(){
+        return DB::table("pegawai")
+                    ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
+                    ->select("pegawai.user_id", "pegawai.nama", "lembur_pengajuan.periode", "lembur_pengajuan.total_biasa", "lembur_pengajuan.total_libur", "lembur_pengajuan.id")
+                    ->where("lembur_pengajuan.status", "Disetujui")
+                    ->paginate(10);
+    }
+
+    public function get_lembur_id($id){
+        return DB::table("lembur_pengajuan")
+                ->select(
+                    "lembur_pengajuan.id as id",
+                    "lembur_pengajuan.periode",
+                    "lembur_pengajuan.status",
+                    "lembur_pengajuan.total_biasa",
+                    "lembur_pengajuan.total_libur",
+                    "lembur_pengajuan_detail.tanggal",
+                    "lembur_pengajuan_detail.hari_libur",
+                    "lembur_pengajuan_detail.keterangan",
+                    "lembur_pengajuan_detail.jam_masuk",
+                    "lembur_pengajuan_detail.jam_pulang",
+                    "lembur_pengajuan_detail.jam_masuk_kantor",
+                    "lembur_pengajuan_detail.jam_kerja_kantor",
+                    "lembur_pengajuan_detail.jam_pulang_standar",
+                    "lembur_pengajuan_detail.jam_lembur",
+                    )
+                ->join("lembur_pengajuan_detail", "lembur_pengajuan.id", "=", "lembur_pengajuan_detail.lembur_pengajuan_id")
+                ->where("lembur_pengajuan.id", $id)
+                ->get();
+    }
+
+
     public function get_pengajuan_lembur($id){
         // SELECT pegawai.user_id, pegawai.nama, lembur_pengajuan.periode, lembur_pengajuan.total_biasa, lembur_pengajuan.total_libur, lembur_pengajuan.id
         // FROM pegawai 

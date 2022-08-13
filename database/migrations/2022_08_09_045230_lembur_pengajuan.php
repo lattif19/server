@@ -20,6 +20,7 @@ class LemburPengajuan extends Migration
             $table->time("total_biasa")->nullable();
             $table->time("total_libur")->nullable();
             $table->text("status")->nullable();
+            $table->text("keterangan")->nullable();
             $table->timestamps();
         });
     }

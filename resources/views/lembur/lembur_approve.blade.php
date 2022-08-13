@@ -35,8 +35,58 @@
                                                 <td>{{ $d->periode }}</td>
                                                 <td>{{ format_jam($d->total_biasa) }}</td>
                                                 <td>{{ format_jam($d->total_libur) }}</td>
-                                                <td>Persetujuan</td>
+                                                <td>
+                                                    <a href="#" data-toggle="modal" data-target="#persetujuan{{ $d->id }}">Persetujuan</a> 
+                                                    <a href="/lembur_approve/detail/{{ $d->id }}">Detail</a>
+                                                </td>
                                             </tr>
+
+
+
+
+
+                                            <div class="modal fade" id="persetujuan{{ $d->id }}" tabindex="-1" role="dialog"
+                                                aria-labelledby="persetujuan{{ $d->id }}"
+                                                aria-hidden="true">
+    
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="persetujuan{{ $d->id }}">Persetujuan Lembur</h5>
+                                                                <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/lembur_aprove/aksi" method="post">
+                                                                @csrf
+                                                                @method("put")
+                                                                    <div class="form-group mt-3">
+                                                                        <label for="keterangan" class="mb-3">Keterangan</label>
+                                                                        <textarea name="keterangan" class="form-control" rows="5"></textarea>
+                                                                    </div>
+                                                                    <div class="form-group mt-3">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="status" value="Disetujui" checked>
+                                                                            <label class="form-check-label" for="inlineRadio1">Disetujui</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="radio" name="status" value="Dikembalikan">
+                                                                            <label class="form-check-label" for="inlineRadio2">Dikembalikan</label>
+                                                                        </div>
+                                                                    </div>
+                                                                        
+                                                                <div class="form-group mt-5">
+                                                                    <input type="hidden" name="pengajuan_lembur_id" value="{{ $d->id }}">
+                                                                    <button class="btn col-lg-2 btn-primary" type="submit"> Submit </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         @endforeach
                                     </tbody>
                                         @else
@@ -53,6 +103,11 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
 
 @if(session()->has('success'))
         <div class="alert alert-success" role="alert">

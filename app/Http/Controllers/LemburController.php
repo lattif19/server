@@ -10,9 +10,37 @@ use Illuminate\Support\Facades\Auth;
 
 class LemburController extends Controller
 {
+
+    public function lembur_approved(){
+        return view("lembur.lembur_approved",[
+            "title" => "Pengajuan Lembur",
+            "pengajuan_lembur" => Lembur::get_pengajuan_lembur_hrd(),
+        ]);
+    }
+
+    public function lembur_approve_aksi(Request $request){
+        $id['id'] = $request->pengajuan_lembur_id;
+        $data['keterangan'] = $request->keterangan;
+        $data['status'] = $request->status;
+
+        
+        DB::table("lembur_pengajuan")->where($id)->update($data);
+        return back()->with("success", "Proses Pengajuan Lembur Berhasil");
+    }
+
+    public function lembur_approve_detail(Request $request){
+        $id = $request->id;
+
+        return view("lembur.lembur_approve_detail",[
+            "title" => "Detail Pengajuan Lembur",
+            "detail" => Lembur::get_lembur_id($id),
+        ]);
+    }
+
+
     public function lembur_approve(){
         $id = Auth::user()->id;
-        
+
         return view("lembur.lembur_approve", [
             "title" => "Pengajuan Lembur",
             "pengajuan_lembur" => Lembur::get_pengajuan_lembur($id),
@@ -38,6 +66,7 @@ class LemburController extends Controller
                     "lembur_pengajuan_id" => $lembur_id,
                     "hari_libur" => $request->hari_libur[$x],
                     "tanggal" => $request->tanggal[$x],
+                    "keterangan" => $request->keterangan[$x],
                     "jam_masuk_kantor" => $request->jam_masuk_kantor[$x],
                     "jam_kerja_kantor" => $request->jam_kerja_kantor[$x],
                     "jam_masuk" => $request->jam_masuk[$x],
