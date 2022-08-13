@@ -15,7 +15,7 @@
                 Data Absensi
             </a>
             
-            <a class="nav-link {{ Request::is('absen_pengaturan*') ? 'active' : ''}}" href="/absen_pengaturan">
+            <a class="nav-link {{ Request::is('absen_pengaturan*') ? 'active' : ''}}" href="/absen_pengaturan2">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Pengaturan
             </a>

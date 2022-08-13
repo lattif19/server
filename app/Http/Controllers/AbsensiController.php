@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 class AbsensiController extends Controller
 {
     public function pengaturan_tambah_mapping(Request $request){
+        // dd($request);
         $data['user_id'] = $request->user_id;
         $rubah['lembur_absen_id'] = $request->absen_id;
 
@@ -20,10 +21,20 @@ class AbsensiController extends Controller
         $validate = DB::table('pegawai')->where($data)->update($rubah);
         
         if($validate){
-            return redirect("/absen_pengaturan")->with("success", "Penambahan Data Berhasil");
+            return redirect("/absen_pengaturan2")->with("success", "Penambahan Data Berhasil");
         }
-        return redirect("/absen_pengaturan")->with("error", "Penambahan Data Gagal");
+        return redirect("/absen_pengaturan2")->with("error", "Penambahan Data Gagal");
     }
+
+
+    public function pengaturan2(){
+        return view("absen.pengaturan2", [
+            "title" => "Absensi dan Pegawai",
+            "pegawai" => Pegawai::all(),
+            "absensi" => Absensi::distinct()->get(['absen_id','nama']),
+        ]);
+    }
+
 
     public function pengaturan(){
         return view("absen.pengaturan", [
