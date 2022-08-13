@@ -14,6 +14,23 @@ class Lembur extends Model
     protected $table = 'lembur';
     protected $guarded = ['id'];
 
+    public function get_pengajuan_lembur($id){
+        // SELECT pegawai.user_id, pegawai.nama, lembur_pengajuan.periode, lembur_pengajuan.total_biasa, lembur_pengajuan.total_libur, lembur_pengajuan.id
+        // FROM pegawai 
+        // JOIN lembur_pengajuan ON lembur_pengajuan.user_id = pegawai.user_id
+        // WHERE
+        //     pegawai.lembur_approve_id=1
+        //     AND lembur_pengajuan.status = "Diajukan"
+
+        return DB::table("pegawai")
+                    ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
+                    ->select("pegawai.user_id", "pegawai.nama", "lembur_pengajuan.periode", "lembur_pengajuan.total_biasa", "lembur_pengajuan.total_libur", "lembur_pengajuan.id")
+                    ->where("pegawai.lembur_approve_id", $id)
+                    ->where("lembur_pengajuan.status", "Diajukan")
+                    ->get();
+    }
+
+
 
     public function perhitungan_total_jam($data){
         // SELECT 
@@ -40,10 +57,13 @@ class Lembur extends Model
             ->join("lembur_pengajuan", "lembur_pengajuan.user_id","=","pegawai.user_id")    
             ->join("lembur_catatan", "lembur_catatan.lembur_pengajuan_id","=","lembur_pengajuan.id")    
             ->join("lembur_absensi", "lembur_absensi.tanggal","=","lembur_catatan.tanggal")
+
             ->where("pegawai.user_id", $data['user_id'])    
             ->where("lembur_pengajuan.periode", $data['periode'])    
             ->where("lembur_absensi.absen_id", $id_absen[0]["lembur_absen_id"])
+            
             ->select(
+            
             "lembur_catatan.tanggal", 
             "lembur_catatan.keterangan", 
             "lembur_catatan.hari_libur", 

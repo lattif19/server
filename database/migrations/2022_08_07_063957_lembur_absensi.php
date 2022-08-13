@@ -20,9 +20,9 @@ class LemburAbsensi extends Migration
             $table->date("tanggal")->nullable();
             $table->time("jam_masuk")->nullable();
             $table->time("jam_pulang")->nullable();
-            $table->boolean("hari_libur")->default(false);
-            $table->time("jam_pulang_kerja")->nullable();
-            $table->time("jam_pulang_sebenarnya")->nullable();
+            // $table->boolean("hari_libur")->default(false);
+            // $table->time("jam_pulang_kerja")->nullable();
+            // $table->time("jam_pulang_sebenarnya")->nullable();
             $table->timestamps();
         });
     }

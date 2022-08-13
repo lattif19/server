@@ -10,6 +10,7 @@ use App\Models\PegawaiLevelUser;
 use App\Models\Pegawai;
 use App\Models\Jabatan;
 use App\Models\Divisi;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,15 +22,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //  User::factory(1)->create();
-
+         DB::table("lembur_settings")->insert(["jam_masuk"=>"08:00:00", "jam_kerja" => "09:00:00"]);
          User::create([ 'username' => "administrator",   'email' => "admin@gmail.com",    'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "approver",        'email' => "approver@gmail.com", 'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "user",            'email' => "user@gmail.com",     'password' => bcrypt("s2pjakarta"), ]);
 
-         Pegawai::create(['nik' => '202201J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'1', 'nama' => 'Administrator',  'user_id' => '1' ]);
-         Pegawai::create(['nik' => '202202J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'2', 'nama' => 'Approver',       'user_id' => '2' ]);
-         Pegawai::create(['nik' => '202203J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'5', 'nama' => 'User',           'user_id' => '3' ]);
-         
+         Pegawai::create(['nik' => '202201J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'1', 'nama' => 'Administrator',  'user_id' => '1' ,'lembur_absen_id' => '1']);
+         Pegawai::create(['nik' => '202202J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'2', 'nama' => 'Approver',       'user_id' => '2' ,'lembur_absen_id' => '2']);
+         Pegawai::create(['nik' => '202203J', 'pegawai_divisi_id' => '1', 'pegawai_jabatan_id'=>'5', 'nama' => 'User',           'user_id' => '3' ,'lembur_absen_id' => '3']);
          
          Divisi::create(['nama' => 'IT']);
          Divisi::create(['nama' => 'Keuangan']);

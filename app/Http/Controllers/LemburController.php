@@ -10,6 +10,47 @@ use Illuminate\Support\Facades\Auth;
 
 class LemburController extends Controller
 {
+    public function lembur_approve(){
+        $id = Auth::user()->id;
+        
+        return view("lembur.lembur_approve", [
+            "title" => "Pengajuan Lembur",
+            "pengajuan_lembur" => Lembur::get_pengajuan_lembur($id),
+        ]);
+    }
+
+    public function lembur_simpan_total(Request $request){
+
+        $user_id['user_id'] = Auth::user()->id;
+        $periode['periode'] = $request->lembur_pengajuan_periode;
+        
+        $data["total_biasa"] = $request->total_biasa;
+        $data["total_libur"] = $request->total_libur;
+        $data["status"] = "Diajukan";
+
+        DB::table("lembur_pengajuan")->where($user_id)->where($periode)->update($data);
+        
+        
+        $lembur_id = DB::table("lembur_pengajuan")->where($user_id)->where($periode)->first()->id;        
+        
+            for($x=0; $x<=count($request->hari_libur)-1; $x++){
+                DB::table("lembur_pengajuan_detail")->insert([
+                    "lembur_pengajuan_id" => $lembur_id,
+                    "hari_libur" => $request->hari_libur[$x],
+                    "tanggal" => $request->tanggal[$x],
+                    "jam_masuk_kantor" => $request->jam_masuk_kantor[$x],
+                    "jam_kerja_kantor" => $request->jam_kerja_kantor[$x],
+                    "jam_masuk" => $request->jam_masuk[$x],
+                    "jam_pulang" => $request->jam_pulang[$x],
+                    "jam_pulang_standar" => $request->jam_pulang_standar[$x],
+                    "jam_lembur" => $request->jam_lembur[$x],
+                ]);
+            }
+
+        return redirect("/lembur")->with("success", "Proses Pengajuan Lembur Berhasil");
+
+    }
+
     public function lembur_hitung_total(Request $request){
         $data["user_id"] = Auth::user()->id;
         $data["periode"] = ucfirst(str_replace("-", " ", $request->periode));
@@ -107,7 +148,7 @@ class LemburController extends Controller
        
 
         return view("lembur.lembur_detail", [
-            "title" => "Periode ".$periode,
+            "title" => $periode,
             "lembur_pengajuan_id" => $request->lembur_pengajuan_id,
             "biasa" => $biasa,
             "libur" => $libur,

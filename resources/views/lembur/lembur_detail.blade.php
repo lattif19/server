@@ -10,11 +10,16 @@
             </ol>
             <div class="row">
                 <div class="col-xl-12">
-                    <div class="card mb-4 col-lg-2">
-                        <button class="btn btn-primary btn-lg"
-                            data-toggle="modal" data-target="#tambahData">Buat Pengajuan
-                        </button>
 
+
+                    <div class="card mb-4 col-md-4">
+                            <div class="btn-group">
+                                <button class="btn btn-success mr-2" data-toggle="modal" data-target="#tambahData">Tambah Pengajuan </button>
+
+                                <a class="btn btn-dark ml-2" method="post" href="/lembur/calculating/{{ Str::slug($title) }}/{{ $lembur_pengajuan_id }}">Hitung Total</a>
+                            </div>
+                        
+                    
                         <div class="modal fade" id="tambahData" tabindex="-1" role="dialog"
                             aria-labelledby="tambahData"
                             aria-hidden="true">
@@ -62,13 +67,15 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                     </div>
+
+
+
+
+
+
+
+
                 </div>
             </div>
 

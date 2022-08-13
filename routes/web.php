@@ -57,6 +57,8 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::put('/lembur_settings', [LemburController::class, 'lembur_pengaturan_put']);
     Route::put('/lembur/pengaturan_jam', [LemburController::class, 'lembur_pengaturan_jam']);
     Route::get('/lembur/calculating/{periode}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_hitung_total']);
+    Route::post('/lembur/calculated/', [LemburController::class, 'lembur_simpan_total']);
+    Route::get('/lembur_approve', [LemburController::class, 'lembur_approve']);
     
 
 
