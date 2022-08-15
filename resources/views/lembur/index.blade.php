@@ -43,6 +43,7 @@
                                                     @else
                                                         <a href="/lembur/calculated/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a> 
                                                     @endif
+                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">Print</a>
                                                 </td>
                                             </tr>
                                         @endforeach                                       

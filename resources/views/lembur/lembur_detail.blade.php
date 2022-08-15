@@ -37,7 +37,7 @@
                                             @csrf
                                             <div class="form-group mb-4">
                                                 <label for="tanggal" class="mb-2">Tanggal</label>
-                                                <input type="date" name="tanggal" class="form-control" required>
+                                                <input type="date" name="tanggal" class="form-control" required value="{{ date("Y-m-d") }}">
                                             </div>
 
                                             <div class="form-group mb-4">

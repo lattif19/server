@@ -7,9 +7,23 @@ use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+
+
 
 class LemburController extends Controller
 {
+
+    public function print_pdf(Request $request){
+        $data["periode"] = $request->periode;
+        $data["id"] = $request->pengajuan_lembur_id;
+
+        $pdf = PDF::loadView('lembur.lembur_print', $data);
+    
+        // return $pdf->download('itsolutionstuff.pdf');
+        $pdf->setPaper('A4');
+        return $pdf->stream();
+    }
 
     public function lembur_approved(){
         return view("lembur.lembur_approved",[

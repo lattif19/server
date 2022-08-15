@@ -36,14 +36,14 @@ class AbsensiController extends Controller
     }
 
 
-    public function pengaturan(){
-        return view("absen.pengaturan", [
-            "pegawai" => Pegawai::all(),
-            "absensi" => Absensi::distinct()->get(['absen_id','nama']),
-            "pegawaiMapped"=> Absensi::get_mapped(),
-            "title" => "Absensi dan Karyawan",
-        ]);
-    }
+    // public function pengaturan(){
+    //     return view("absen.pengaturan", [
+    //         "pegawai" => Pegawai::all(),
+    //         "absensi" => Absensi::distinct()->get(['absen_id','nama']),
+    //         "pegawaiMapped"=> Absensi::get_mapped(),
+    //         "title" => "Absensi dan Karyawan",
+    //     ]);
+    // }
 
 
 

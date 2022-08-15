@@ -21,7 +21,7 @@
     <form class="form-signin" action="/login" method="post">
       @csrf
       <div class="text-center mb-4">
-        <img class="mb-4" src="/img/logo-S2P.jpg" alt="" width="85" height="72">
+        <img class="mb-4" src="/img/logo.jpg" alt="" width="85" height="72">
         <h1 class="h4 mb-3 font-weight-normal">PT SUMBER SEGARA PRIMADAYA</h1>
       </div>
 
