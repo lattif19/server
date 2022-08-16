@@ -16,13 +16,14 @@ class LemburController extends Controller
 
     public function print_pdf(Request $request){
         $data["periode"] = $request->periode;
-        $data["id"] = $request->pengajuan_lembur_id;
+        $data['lembur'] = Lembur::get_lembur_id($request->pengajuan_lembur_id);
 
-        $pdf = PDF::loadView('lembur.lembur_print', $data);
+        return view("lembur.lembur_print", $data);
+        // $pdf = PDF::loadView('lembur.lembur_print', $data);
     
-        // return $pdf->download('itsolutionstuff.pdf');
-        $pdf->setPaper('A4');
-        return $pdf->stream();
+        // // return $pdf->download('itsolutionstuff.pdf');
+        // $pdf->setPaper('A4');
+        // return $pdf->stream();
     }
 
     public function lembur_approved(){
@@ -138,7 +139,7 @@ class LemburController extends Controller
         $data = DB::table("lembur_settings")->get();
         
         return view("lembur.lembur_pengaturan", [
-            "user" => Pegawai::get(),
+            "user" => Pegawai::paginate(10),
             "users" => Pegawai::get(),
             "jam_kerja" => $data[0],
             "title" => "Pengaturan Lembur"

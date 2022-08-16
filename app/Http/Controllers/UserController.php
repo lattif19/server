@@ -150,12 +150,40 @@ class UserController extends Controller
         ]);
     }
 
+    public function hak_akses_put2(Request $request){
+        $id['id'] = $request->id;
+        $data['pegawai_level_user_id'] = $request->pegawai_level_user_id;
+
+        DB::table("pegawai_hak_akses")->where($id)->update($data);
+        return back()->with('success', "Data berhasil di input");
+    }
+
+
+    public function hak_akses_put(Request $request){
+        $data['user_id'] = $request->user_id;
+        $data['modul_id'] = $request->modul_id;
+        $data['pegawai_level_user_id'] = $request->level_id;
+
+        $validate = DB::table('pegawai_hak_akses')
+                ->where("user_id", $request->user_id)
+                ->where("modul_id", $request->modul_id)->get()->count();
+
+        if($validate == 0 ){
+            DB::table('pegawai_hak_akses')
+            ->where("user_id", $request->user_id)
+            ->where("modul_id", $request->modul_id)->insertOrIgnore($data);
+            return back()->with('success', "Data berhasil di input");
+        }else{
+            return back()->with('error', "Hak Akses Sudah Tersedia, silahkan rubah data yang sudah ada");
+        }
+    }
 
     public function hak_akses(){
         // dd(Pegawai::hak_akses());
         return view("pegawai.hak_akses",[
             'title'   => "Manageman Hak Akses",
             'hak_akses' => Pegawai::hak_akses(),
+            'pegawai' => Pegawai::get(),
             'modul' => Pegawai::get_modul(),
             'level' => Pegawai::get_level(),
         ]);

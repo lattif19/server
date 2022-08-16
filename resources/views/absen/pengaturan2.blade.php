@@ -30,8 +30,8 @@
                                         <tr>
                                             <td>{{ $p->nama }}</td>
                                             <td>   
-                                                    @foreach ($pegawai as $nama)
-                                                        @if($p->lembur_absen_id == $nama->user_id)
+                                                    @foreach ($absensi as $nama)
+                                                        @if($p->lembur_absen_id == $nama->absen_id)
                                                             {{ $nama->nama }}
                                                         @endif    
                                                     @endforeach
@@ -64,6 +64,7 @@
                                                                 <div class="form-group mb-4">
                                                                     
                                                                     <select class="form-control" name="absen_id" required>
+                                                                        <option value="0">-- Kosong -- </option>
                                                                             @if ($absensi)
                                                                                 @foreach ($absensi as $pa)
                                                                                     <option value="{{ $pa->absen_id }}" 
@@ -96,6 +97,11 @@
                                         </div>
                                         @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"> {{ $pegawai->links() }}</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -73,6 +73,8 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/main', [DashboardController::class, 'index'])->name('home');
     Route::get('/pegawai/{nik}', [UserController::class, 'detail']);
     Route::get('/hak_akses', [UserController::class, 'hak_akses']);
+    Route::post('/hak_akses_put', [UserController::class, 'hak_akses_put']);
+    Route::post('/hak_akses_put2', [UserController::class, 'hak_akses_put2']);
     Route::get('/pegawai', [UserController::class, 'index']);
     Route::get('/divisi', [UserController::class, 'divisi']);
     Route::get('/jabatan', [UserController::class, 'jabatan']);

@@ -30,7 +30,7 @@ class AbsensiController extends Controller
     public function pengaturan2(){
         return view("absen.pengaturan2", [
             "title" => "Absensi dan Pegawai",
-            "pegawai" => Pegawai::all(),
+            "pegawai" => Pegawai::paginate(10),
             "absensi" => Absensi::distinct()->get(['absen_id','nama']),
         ]);
     }

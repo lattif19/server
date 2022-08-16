@@ -83,6 +83,11 @@
 
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">{{ $user->links() }}</td>
+                                    </tr>
+                                </tfoot>
                            </table>
                         </div>
                     </div>

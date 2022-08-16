@@ -83,6 +83,13 @@
                             @endforeach
 
                             </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="6">
+                                  {{ $pegawai->links() }}
+                                </td>
+                              </tr>
+                            </tfoot>
                           </table>
                     </div>
                 </div>

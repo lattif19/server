@@ -31,7 +31,7 @@
                             
                             @foreach ($hak_akses as $p)    
                                 <tr>
-                                    <th scope="row">{{ $p->id }}</th>
+                                    <th scope="row">{{ $loop->index+1 }}</th>
                                     <th scope="col">{{ $p->nama }}</th>
                                     <th scope="col">{{ $p->modul }}</th>
                                     <th scope="col">{{ $p->level }}</th>
@@ -52,12 +52,12 @@
                                               </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form>
-                            
+                                                <form action="/hak_akses_put2" method="post">
+                                                  @csrf
                                                       <div class="form-group row mb-3">
                                                         <label for="nama" class="col-sm-2 col-form-label">Level</label>
                                                         <div class="col-sm-10">
-                                                            <select class="form-control custom-select" name="level">
+                                                            <select class="form-control custom-select" name="pegawai_level_user_id">
                                                                 @foreach ($level as $x)
                                                                     <option value="{{ $x->id }}" @if ($x->nama == $p->level)
                                                                     selected    
@@ -70,11 +70,12 @@
                                                       </div>
                                                       
                                                       
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                              <button type="button" class="btn btn-primary">Tambah</button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <input type="hidden" name="id" value="{{ $p->id }}">
+                                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                      <button type="submit" class="btn btn-primary">Rubah</button>
+                                                  </form>
                                             </div>
                                           </div>
                                         </div>
@@ -87,6 +88,11 @@
                             @endforeach
 
                             </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="5"> {{ $hak_akses->links() }}</td>
+                              </tr>
+                            </tfoot>
                           </table>
                     </div>
                 </div>
@@ -104,14 +110,15 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/hak_akses_put" method="post">
+                      @csrf
                         <div class="form-group row mb-3">
                           <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                           <div class="col-sm-10">
-                            <select class="form-control custom-select" name="nama">
+                            <select class="form-control custom-select" name="user_id">
                                 <option selected>--Pilih Satu--</option>
-                                @foreach ($hak_akses as $p)
-                                    <option value="{{ $p->id }}">
+                                @foreach ($pegawai as $p)
+                                    <option value="{{ $p->user_id }}">
                                       {{ $p->nama }}
                                     </option>
                                 @endforeach
@@ -122,7 +129,7 @@
                         <div class="form-group row mb-3">
                             <label for="nama" class="col-sm-2 col-form-label">Modul</label>
                             <div class="col-sm-10">
-                                <select class="form-control custom-select" name="modul">
+                                <select class="form-control custom-select" name="modul_id">
                                     <option selected>--Pilih Satu--</option>
                                     @foreach ($modul as $p)
                                         <option value="{{ $p->id }}">
@@ -136,7 +143,7 @@
                           <div class="form-group row mb-3">
                             <label for="nama" class="col-sm-2 col-form-label">Level</label>
                             <div class="col-sm-10">
-                                <select class="form-control custom-select" name="level">
+                                <select class="form-control custom-select" name="level_id">
                                     <option selected>--Pilih Satu--</option>
                                     @foreach ($level as $p)
                                         <option value="{{ $p->id }}">
@@ -146,19 +153,28 @@
                                   </select>
                             </div>
                           </div>
-                          
-                          
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                  <button type="button" class="btn btn-primary">Tambah</button>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                          <button type="submit" class="btn btn-primary">Tambah</button>
+                        </form>
                 </div>
               </div>
             </div>
           </div>
           
           
+  @if(session()->has('success'))
+  <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+  </div>
+  @endif
+  @if(session()->has('error'))
+          <div class="alert alert-danger" role="alert">
+              {{ session('error') }}
+          </div>
+  @endif
+
 
 @endsection
 

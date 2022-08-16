@@ -23,6 +23,7 @@
                                             <td>Periode</td>
                                             <td>Hari Biasa</td>
                                             <td>Hari Libur</td>
+                                            <td>Status</td>
                                             <td>Aksi</td>
                                         </tr>
                                     </thead>
@@ -35,8 +36,8 @@
                                                 <td>{{ $d->periode }}</td>
                                                 <td>{{ format_jam($d->total_biasa) }}</td>
                                                 <td>{{ format_jam($d->total_libur) }}</td>
+                                                <td>{{ $d->status }}</td>
                                                 <td>
-                                                    
                                                     <a href="/lembur_approve/detail/{{ $d->id }}">Detail</a>
                                                 </td>
                                             </tr>

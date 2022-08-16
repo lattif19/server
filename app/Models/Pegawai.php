@@ -77,7 +77,8 @@ class Pegawai extends Model
                  ->join("modul","modul.id","=","pegawai_hak_akses.modul_id")
                  ->join("pegawai_level_user","pegawai_level_user.id","=","pegawai_hak_akses.pegawai_level_user_id")
                  ->select("pegawai_hak_akses.id", "pegawai.nama", "modul.nama as modul", "pegawai_level_user.nama as level")
-                ->get();
+                 ->orderBy("pegawai.nama", "asc")
+                ->paginate(10);
     }
 
     public function get_jabatan(){
@@ -94,7 +95,7 @@ class Pegawai extends Model
                 ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
                 ->join("pegawai_jabatan", "pegawai_jabatan.id", "=", "pegawai.pegawai_jabatan_id")
                 ->select("pegawai.id", "pegawai.nik","pegawai.user_id", "pegawai.nama", "users.email", "pegawai_jabatan.nama as jabatan", "pegawai_divisi.nama as divisi")
-                ->get();
+                ->paginate(10);
     }
 
 }

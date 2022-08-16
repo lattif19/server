@@ -17,8 +17,15 @@ class Lembur extends Model
     public function get_pengajuan_lembur_hrd(){
         return DB::table("pegawai")
                     ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
-                    ->select("pegawai.user_id", "pegawai.nama", "lembur_pengajuan.periode", "lembur_pengajuan.total_biasa", "lembur_pengajuan.total_libur", "lembur_pengajuan.id")
+                    ->select(   "pegawai.user_id", 
+                                "pegawai.nama", 
+                                "lembur_pengajuan.periode", 
+                                "lembur_pengajuan.total_biasa", 
+                                "lembur_pengajuan.total_libur",
+                                "lembur_pengajuan.status", 
+                                "lembur_pengajuan.id")
                     ->where("lembur_pengajuan.status", "Disetujui")
+                    ->orWhere("lembur_pengajuan.status", "Diajukan")
                     ->paginate(10);
     }
 
@@ -47,13 +54,6 @@ class Lembur extends Model
 
 
     public function get_pengajuan_lembur($id){
-        // SELECT pegawai.user_id, pegawai.nama, lembur_pengajuan.periode, lembur_pengajuan.total_biasa, lembur_pengajuan.total_libur, lembur_pengajuan.id
-        // FROM pegawai 
-        // JOIN lembur_pengajuan ON lembur_pengajuan.user_id = pegawai.user_id
-        // WHERE
-        //     pegawai.lembur_approve_id=1
-        //     AND lembur_pengajuan.status = "Diajukan"
-
         return DB::table("pegawai")
                     ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
                     ->select("pegawai.user_id", "pegawai.nama", "lembur_pengajuan.periode", "lembur_pengajuan.total_biasa", "lembur_pengajuan.total_libur", "lembur_pengajuan.id")
@@ -65,24 +65,6 @@ class Lembur extends Model
 
 
     public function perhitungan_total_jam($data){
-        // SELECT 
-            // lembur_catatan.tanggal, 
-            // lembur_catatan.keterangan, 
-            // lembur_absensi.jam_masuk, 
-            // lembur_absensi.jam_pulang, 
-            // lembur_absensi.id, 
-            // pegawai.user_id, 
-            // pegawai.lembur_absen_id 
-        // FROM pegawai
-        // JOIN lembur_pengajuan ON lembur_pengajuan.user_id = pegawai.user_id
-        // JOIN lembur_catatan ON lembur_catatan.lembur_pengajuan_id = lembur_pengajuan.id
-        // JOIN lembur_absensi ON lembur_absensi.tanggal = lembur_catatan.tanggal
-
-        // WHERE 
-        //     pegawai.user_id=3
-        //     AND lembur_pengajuan.periode = "Agustus 2022"
-        //     AND lembur_absensi.absen_id = 3
-
         $id_absen = Pegawai::where("user_id", $data['user_id'])->select("lembur_absen_id")->get();
 
         $hasil = DB::table("pegawai")
