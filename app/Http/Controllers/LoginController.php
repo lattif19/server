@@ -18,23 +18,16 @@ class LoginController extends Controller
         ];
 
         if(Auth::attempt($data)){
+            //Cara Manual
+            // $id["nomor_id"] = Auth::user()->id;
+            //$request->session()->put($id);
+            // session("nomor_id");
+
+
             $request->session()->regenerate();
             return redirect()->intended("/main");
         }
         return back()->with("LoginError", "Login Failed");
-
-
-        $test2 = [
-            "nama" => "admin",
-            "password" => "admin",
-            "email" => "admin@email.com",
-            "modul1" => "Manageman Pegawai",
-            "level1" => "Administrator",
-            "modul2" => "Managemen Presensi",
-            "level2" => "Administrator",
-        ];
-
-        
     }
 
 
@@ -45,9 +38,5 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
-    }
-
-    public function tampil_session(Request $request){
-        dd(session()->get('name'));
     }
 }
