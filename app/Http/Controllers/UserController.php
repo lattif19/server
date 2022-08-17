@@ -56,10 +56,15 @@ class UserController extends Controller
 
 
         if(Pegawai::pegawai_validasi($data)){
+
+            
             
             $data['user_id'] = DB::table('users')->insertGetId($user);
-
+            
             if(DB::table('pegawai')->insert($data)){
+                for($i=1; $i <= count(DB::table("modul")->get()); $i++){
+                    DB::table("pegawai_hak_akses")->insert(["user_id" => $data['user_id'] , "modul_id"=> $i, "pegawai_level_user_id" => 4]);
+                }
                 return redirect('/pegawai')->with('success', "Data berhasil di input");
             }else{
                 DB::table('users')->where("id", "=", $data['user_id'])->delete();
@@ -178,11 +183,16 @@ class UserController extends Controller
         }
     }
 
-    public function hak_akses(){
-        // dd(Pegawai::hak_akses());
+    public function hak_akses(Request $request){
+        if($request->cari){
+            $data_level = Pegawai::hak_akses_cari($request->cari);
+        }
+        $data_level = Pegawai::hak_akses_cari("");
+            // $data_level = Pegawai::hak_akses();
+
         return view("pegawai.hak_akses",[
             'title'   => "Manageman Hak Akses",
-            'hak_akses' => Pegawai::hak_akses(),
+            'hak_akses' => Pegawai::hak_akses_cari($request->cari),
             'pegawai' => Pegawai::get(),
             'modul' => Pegawai::get_modul(),
             'level' => Pegawai::get_level(),

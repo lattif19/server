@@ -70,7 +70,6 @@ class Pegawai extends Model
     }
 
     
-
     public function hak_akses(){
         return DB::table("pegawai_hak_akses")
                  ->join("pegawai","pegawai.id","=","pegawai_hak_akses.user_id")
@@ -80,6 +79,20 @@ class Pegawai extends Model
                  ->orderBy("pegawai.nama", "asc")
                 ->paginate(10);
     }
+
+
+    public function hak_akses_cari($data){
+        return DB::table("pegawai_hak_akses")
+                 ->join("pegawai","pegawai.id","=","pegawai_hak_akses.user_id")
+                 ->join("modul","modul.id","=","pegawai_hak_akses.modul_id")
+                 ->join("pegawai_level_user","pegawai_level_user.id","=","pegawai_hak_akses.pegawai_level_user_id")
+                 ->select("pegawai_hak_akses.id", "pegawai.nama", "modul.nama as modul", "pegawai_level_user.nama as level")
+                 ->where("pegawai.nama", "like" , "%".$data."%")
+                 ->orderBy("pegawai.nama", "asc")
+                ->paginate(10);
+    }
+
+
 
     public function get_jabatan(){
         return DB::table("pegawai_jabatan")->get();

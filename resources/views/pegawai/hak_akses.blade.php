@@ -12,9 +12,16 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-2">
-                        <div class="card-header">
+                        <div class="navbar card-header">
                             <a href="#" class="btn btn-primary" data-toggle="modal" 
                             data-target="#exampleModalCenter">Tambah Hak Akses User</a>
+
+                            
+                                <form method="get" action="hak_akses">
+                                  <input type="search" placeholder="Cari... " name="cari" aria-label="Search" value="{{ request('cari') }}">
+                                  <button class="btn btn-primary" type="submit">Search</button>
+                                </form>
+                            
                         </div>
                         <table class="table">
                             <thead>
@@ -31,7 +38,7 @@
                             
                             @foreach ($hak_akses as $p)    
                                 <tr>
-                                    <th scope="row">{{ $loop->index+1 }}</th>
+                                    <th scope="row">{{ $hak_akses->firstItem() + $loop->index }}</th>
                                     <th scope="col">{{ $p->nama }}</th>
                                     <th scope="col">{{ $p->modul }}</th>
                                     <th scope="col">{{ $p->level }}</th>
@@ -90,7 +97,7 @@
                             </tbody>
                             <tfoot>
                               <tr>
-                                <td colspan="5"> {{ $hak_akses->links() }}</td>
+                                <td colspan="5"> {{ $hak_akses->withQueryString()->links() }}</td>
                               </tr>
                             </tfoot>
                           </table>
