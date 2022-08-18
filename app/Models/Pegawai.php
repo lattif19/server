@@ -59,6 +59,18 @@ class Pegawai extends Model
         return DB::table('pegawai_level_user')->get();
     }
 
+
+    public function get_profile($id){
+        return DB::table("pegawai")
+                ->join("users", "users.id", "=", "pegawai.user_id")
+                ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
+                ->join("pegawai_jabatan", "pegawai_jabatan.id", "=", "pegawai.pegawai_jabatan_id")
+                ->select("pegawai.id", "pegawai.nik", "pegawai.user_id", "pegawai.nama", "users.email", "pegawai_jabatan.nama as jabatan", "pegawai_divisi.nama as divisi")
+                ->where("pegawai.user_id","=", $id)
+                ->get();
+    }
+
+
     public function get_detail($nik){
         return DB::table("pegawai")
                 ->join("users", "users.id", "=", "pegawai.user_id")

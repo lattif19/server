@@ -80,7 +80,7 @@ Route::group(['middleware' => ["auth"]], function(){
 
 
 
-    Route::group(['middleware' => ["pegawai"]], function(){
+    //Route::group(['middleware' => ["pegawai"]], function(){
         Route::get('/pegawai', [UserController::class, 'index']);
         Route::get('/pegawai/{nik}', [UserController::class, 'detail']);
         Route::get('/hak_akses', [UserController::class, 'hak_akses']);
@@ -95,7 +95,8 @@ Route::group(['middleware' => ["auth"]], function(){
         Route::post('/pegawai', [UserController::class, 'pegawai_store']);
         Route::put('/pegawai', [UserController::class, 'pegawai_put']);
         Route::put('/pegawai/reset', [UserController::class, 'reset_password']);
-    });
+        Route::get('/profile/{id}', [UserController::class, 'profile_pegawai']);
+    //});
 
 });
 

@@ -10,6 +10,15 @@ use App\Models\Pegawai;
 class UserController extends Controller
 {
 
+    public function profile_pegawai($id){
+        return view("pegawai.profile",[
+            "title" => "Profile",
+            'divisi' => Pegawai::get_divisi(),
+            'pegawai' => Pegawai::get_profile($id),
+            'jabatan' => Pegawai::get_jabatan(),
+        ]);
+    }
+
     public function reset_password(Request $request){
         $id["id"] = $request->id;
         $data["password"] = bcrypt($request->password1);
