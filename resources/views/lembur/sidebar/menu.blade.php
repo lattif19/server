@@ -10,6 +10,12 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Lembur
                 </a>
+
+                <a class="nav-link" href="/lembur_settings/approver">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Pengaturan
+                </a>
+
             @endcan
 
 
@@ -28,6 +34,10 @@
                 <a class="nav-link" href="/lembur_approve">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Pengajuan Lembur
+                </a>
+                <a class="nav-link" href="/lembur_settings/approver">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Pengaturan
                 </a>
             @endcan
 

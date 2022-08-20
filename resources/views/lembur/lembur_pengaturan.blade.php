@@ -13,7 +13,14 @@
                 <div class="col-xl-6">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5> Pengaturan Approver Lembur </h5>
+                            
+                            <nav class="navbar navbar-light bg-light justify-content-between">
+                                <h5 class="mb-2"> Pengaturan Approver Lembur </h5> 
+                                <form class="form-inline">
+                                  <input class="" type="search" placeholder="Search" aria-label="Search" name="nama">
+                                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                              </nav>
                         </div>
                         <div class="card-body">
                            <table class="table">
@@ -28,7 +35,7 @@
                                 <tbody>
                                     @foreach ($user as $i)
                                         <tr>
-                                            <td>{{ $loop->index+1 }}</td>
+                                            <td>{{ $user->firstItem() + $loop->index }}</td>
                                             <td>{{ $i->nama }}</td>
                                             <td>
                                                 @foreach ($users as $p)
@@ -85,7 +92,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="4">{{ $user->links() }}</td>
+                                        <td colspan="4">{{ $user->withQueryString()->links() }}</td>
                                     </tr>
                                 </tfoot>
                            </table>
@@ -107,7 +114,7 @@
                                         <td>#</td>
                                         <td>Pengaturan</td>
                                         <td>Value</td>
-                                        <td>Aksi</td>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,14 +125,14 @@
                                             <td>1</td>
                                             <td>Waktu Masuk</td>
                                             <td><input type="time" name="jam_masuk" value="{{ $jam_kerja->jam_masuk }}" class="form-control"></td>
-                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                            
                                         </tr>
 
                                         <tr>
                                             <td>2</td>
                                             <td>Waktu Kerja</td>
                                             <td><input type="time" name="jam_kerja" value="{{ $jam_kerja->jam_kerja }}" class="form-control"></td>
-                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                            
                                         </tr>
 
                                         <tr>
@@ -144,7 +151,7 @@
                                                   </div>
 
                                             </td>
-                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                            
                                         </tr>
 
                                         <tr>
@@ -162,7 +169,7 @@
                                                     <label class="form-check-label" >Tidak Aktif</label>
                                                   </div>
                                             </td>
-                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                            
                                         </tr>
 
                                         <tr>
@@ -180,11 +187,19 @@
                                                     <label class="form-check-label">Tidak Aktif</label>
                                                   </div>
                                             </td>
-                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                            
                                         </tr>
 
-                                    </form>
-                                </tbody>
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="3">
+                                                <input type="submit" value="Submit" class="btn btn-dark form-control">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </form>
                            </table>
                         </div>
                     </div>

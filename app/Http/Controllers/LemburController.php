@@ -138,11 +138,27 @@ class LemburController extends Controller
         return back()->with("error", "Penambahan Data Gagal");
     }
 
-    public function lembur_pengaturan(){
+    public function lembur_pengaturan_user(){
+        return view("lembur.lembur_pengaturan_user", [
+            "title"     => "Menentukan Approver",
+            "data_user" => Pegawai::get(),
+
+        ]);
+    }
+
+    public function lembur_pengaturan(Request $request){
+        
+        if($request->nama){
+            $pegawai = DB::table("pegawai")
+                            ->where("nama", "like", "%".$request->nama."%")
+                            ->paginate(10);
+        }else{
+            $pegawai = DB::table("pegawai")->paginate(10); 
+        }
+
         $data = DB::table("lembur_settings")->get();
-        // dd($data);
         return view("lembur.lembur_pengaturan", [
-            "user" => Pegawai::paginate(10),
+            "user" => $pegawai,
             "users" => Pegawai::get(),
             "jam_kerja" => $data[0],
             "title" => "Pengaturan Lembur"
