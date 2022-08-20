@@ -39,7 +39,7 @@
                                                 <td width="250px"> 
                                                     @if ($i->total_biasa == "00:00:00" and $i->total_libur == "00:00:00")
                                                         <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a>&nbsp;|&nbsp;
-                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">Hitung Total</a>    
+                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">Hitung Total</a> &nbsp;|&nbsp;   
                                                     @else
                                                         <a href="/lembur/calculated/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a> 
                                                     @endif

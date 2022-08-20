@@ -17,6 +17,9 @@ class LemburSettings extends Migration
             $table->id();
             $table->time("jam_masuk")->default("08:00:00");
             $table->time("jam_kerja")->default("09:00:00");
+            $table->boolean("edit_jam_masuk")->default("0");
+            $table->boolean("edit_jam_kerja")->default("0");
+            $table->boolean("edit_jam_pulang")->default("0");
             $table->timestamps();
         });
     }

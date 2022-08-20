@@ -63,7 +63,7 @@ class LemburController extends Controller
     }
 
     public function lembur_simpan_total(Request $request){
-
+        //dd($request);
         $user_id['user_id'] = Auth::user()->id;
         $periode['periode'] = $request->lembur_pengajuan_periode;
         
@@ -113,6 +113,9 @@ class LemburController extends Controller
     public function lembur_pengaturan_jam(Request $request){
         $data['jam_kerja'] = $request->jam_kerja;
         $data['jam_masuk'] = $request->jam_masuk;
+        $data["edit_jam_masuk"] = $request->edit_jam_masuk;
+        $data["edit_jam_kerja"] = $request->edit_jam_kerja;
+        $data["edit_jam_pulang"] = $request->edit_jam_pulang;
         
         
         $id = DB::table("lembur_settings")->get("id")->count();
@@ -137,7 +140,7 @@ class LemburController extends Controller
 
     public function lembur_pengaturan(){
         $data = DB::table("lembur_settings")->get();
-        
+        // dd($data);
         return view("lembur.lembur_pengaturan", [
             "user" => Pegawai::paginate(10),
             "users" => Pegawai::get(),

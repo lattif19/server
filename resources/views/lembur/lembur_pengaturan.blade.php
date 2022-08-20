@@ -98,14 +98,14 @@
                 <div class="col-xl-6">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5> Pengaturan Jam Kerja </h5>
+                            <h5> Pengaturan Waktu Kerja </h5>
                         </div>
                         <div class="card-body">
                            <table class="table">
                                 <thead>
                                     <tr>
                                         <td>#</td>
-                                        <td>Deskripsi Pengaturan</td>
+                                        <td>Pengaturan</td>
                                         <td>Value</td>
                                         <td>Aksi</td>
                                     </tr>
@@ -116,17 +116,73 @@
                                         @method("put")
                                         <tr>
                                             <td>1</td>
-                                            <td>Jam Masuk</td>
+                                            <td>Waktu Masuk</td>
                                             <td><input type="time" name="jam_masuk" value="{{ $jam_kerja->jam_masuk }}" class="form-control"></td>
                                             <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
                                         </tr>
 
                                         <tr>
-                                            <td>1</td>
+                                            <td>2</td>
                                             <td>Waktu Kerja</td>
                                             <td><input type="time" name="jam_kerja" value="{{ $jam_kerja->jam_kerja }}" class="form-control"></td>
                                             <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
                                         </tr>
+
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Edit Jam Masuk</td>
+                                            <td>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="edit_jam_masuk" value="1" 
+                                                    @if($jam_kerja->edit_jam_masuk == 1) checked @endif>
+                                                    <label class="form-check-label">Aktif</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="edit_jam_masuk" value="0"
+                                                    @if($jam_kerja->edit_jam_masuk == 0) checked @endif>
+                                                    <label class="form-check-label">Tidak Aktif</label>
+                                                  </div>
+
+                                            </td>
+                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Edit Jam Kerja</td>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="edit_jam_kerja" value="1"
+                                                    @if($jam_kerja->edit_jam_kerja == 1) checked @endif>
+                                                    <label class="form-check-label" >Aktif</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="edit_jam_kerja" value="0"
+                                                    @if($jam_kerja->edit_jam_kerja == 0) checked @endif>
+                                                    <label class="form-check-label" >Tidak Aktif</label>
+                                                  </div>
+                                            </td>
+                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Edit Jam Pulang</td>
+                                            <td>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="edit_jam_pulang" value="1"
+                                                    @if($jam_kerja->edit_jam_pulang == 1) checked @endif>
+                                                    <label class="form-check-label">Aktif</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="edit_jam_pulang" value="0"
+                                                    @if($jam_kerja->edit_jam_pulang == 0) checked @endif>
+                                                    <label class="form-check-label">Tidak Aktif</label>
+                                                  </div>
+                                            </td>
+                                            <td><input type="submit" value="Submit" class="btn btn-sm btn-dark"></td>
+                                        </tr>
+
                                     </form>
                                 </tbody>
                            </table>
