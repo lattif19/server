@@ -14,6 +14,11 @@ use PDF;
 class LemburController extends Controller
 {
 
+    public function print_belum_diajukan(){
+
+        return view("lembur.lembur_print_pengajuan");
+    }
+
     public function print_pdf(Request $request){
         $data["periode"] = $request->periode;
         $data['lembur'] = Lembur::get_lembur_id($request->pengajuan_lembur_id);
@@ -26,20 +31,25 @@ class LemburController extends Controller
         // return $pdf->stream();
     }
 
-    public function lembur_approved(){
+    public function lembur_approved(Request $request){
         return view("lembur.lembur_approved",[
             "title" => "Pengajuan Lembur",
-            "pengajuan_lembur" => Lembur::get_pengajuan_lembur_hrd(),
+            "pengajuan_lembur" => Lembur::get_pengajuan_lembur_hrd($request->cari),
         ]);
     }
 
     public function lembur_approve_aksi(Request $request){
         $id['id'] = $request->pengajuan_lembur_id;
-        $data['keterangan'] = $request->keterangan;
         $data['status'] = $request->status;
+
+        $riwayat['lembur_pengajuan_id'] = $id['id'];
+        $riwayat['status_pengajuan'] = $data['status'];
+        $riwayat['komentar'] = $request->keterangan;
+        $riwayat['created_at'] = date("Y-m-d H:i:s");
 
         
         DB::table("lembur_pengajuan")->where($id)->update($data);
+        DB::table("lembur_riwayat_pengajuan")->insertOrIgnore($riwayat);
         return back()->with("success", "Proses Pengajuan Lembur Berhasil");
     }
 
@@ -64,17 +74,26 @@ class LemburController extends Controller
 
     public function lembur_simpan_total(Request $request){
         //dd($request);
-        $user_id['user_id'] = Auth::user()->id;
-        $periode['periode'] = $request->lembur_pengajuan_periode;
-        
-        $data["total_biasa"] = $request->total_biasa;
-        $data["total_libur"] = $request->total_libur;
-        $data["status"] = "Diajukan";
+        $user_id['user_id']             = Auth::user()->id;
+        $periode['periode']             = $request->lembur_pengajuan_periode;
+        $data["total_biasa"]            = $request->total_biasa;
+        $data["total_libur"]            = $request->total_libur;
+        $data['status']                 = "Diajukan";
+
+    
 
         DB::table("lembur_pengajuan")->where($user_id)->where($periode)->update($data);
+
         
         
-        $lembur_id = DB::table("lembur_pengajuan")->where($user_id)->where($periode)->first()->id;        
+        $lembur_id = DB::table("lembur_pengajuan")->where($user_id)->where($periode)->first()->id;
+
+        $riwayat['lembur_pengajuan_id']     = $lembur_id;
+        $riwayat['status_pengajuan']        = "Diajukan";
+        $riwayat['created_at']              = date("Y-m-d H:i:s");
+
+        DB::table("lembur_riwayat_pengajuan")->insertOrIgnore($riwayat);
+
         
             for($x=0; $x<=count($request->hari_libur)-1; $x++){
                 DB::table("lembur_pengajuan_detail")->insert([
@@ -219,26 +238,20 @@ class LemburController extends Controller
         ]);
     }
     
-    public function index()
+    public function index(Request $request)
     {
-
+        
         $is_created = Lembur::cek_pengajuan($this->generate_periode());
         if($is_created <= 0 ){
             $this->pengajuan_kosong();
         }
 
         return view('lembur.index', [
-            "pengajuanLembur" => Lembur::get_data_pengajuan(),
+            "pengajuanLembur" => Lembur::get_data_pengajuan($request->cari),
             "title" => "Pengajuan Lembur",
         ]);
     }
 
-
-
-
-    ##
-    ##
-    ##
 
     public function pengajuan_kosong(){
         $data['user_id'] = Auth::user()->id;
@@ -247,7 +260,10 @@ class LemburController extends Controller
         $data['total_libur'] = "00:00:00";
         $data['status'] = "Belum Diajukan";
 
-        return Lembur::buat_pengajuan_awal($data);
+        $riwayat['status_pengajuan'] = "Belum Diajukan";
+        $riwayat['created_at'] = date("Y-m-d H:i:s");
+
+        return Lembur::buat_pengajuan_awal($data, $riwayat);
     }
 
 

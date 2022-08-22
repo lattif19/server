@@ -13,10 +13,9 @@
                 <div class="col-xl-12">
                     <div class="card mb-4">
                         <div class="card-header">
-                            @can("absensiApprove")
                             <button class="btn btn-primary" data-toggle="modal" data-target="#persetujuan">Persetujuan</button>
-                            @endcan
                         </div>
+                        
                         <div class="card-body">
                             <h5> Pengajuan Lembur Hari Biasa </h5>
                             <table class="table table-bordered">

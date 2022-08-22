@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class LemburPengajuan extends Migration
+class LemburRiwayatPengajuan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class LemburPengajuan extends Migration
      */
     public function up()
     {
-        Schema::create('lembur_pengajuan', function (Blueprint $table) {
+        Schema::create('lembur_riwayat_pengajuan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id");
-            $table->text("periode");
-            $table->time("total_biasa")->nullable();
-            $table->time("total_libur")->nullable();
-            $table->text("status")->nullable();
+            $table->foreignId("lembur_pengajuan_id");
+            $table->text("status_pengajuan");
+            $table->text("komentar")->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class LemburPengajuan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lembur_pengajuan');
+        Schema::dropIfExists('lembur_riwayat_pengajuan');
     }
 }

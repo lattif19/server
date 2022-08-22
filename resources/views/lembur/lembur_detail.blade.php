@@ -100,7 +100,7 @@
                                         @foreach ($biasa as $i)
                                             <tr>
                                                 <td align="center">{{ $loop->index+1 }}</td>
-                                                <td>{{ $i->tanggal }} </td>
+                                                <td>{{ tanggl_id($i->tanggal) }} </td>
                                                 <td>{{ $i->keterangan }} </td>
                                                 <td>
                                                     <a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">Rubah</a>&nbsp;|&nbsp;
@@ -225,7 +225,7 @@
                                         @foreach ($libur as $i)
                                             <tr>
                                                 <td align="center">{{ $loop->index+1 }}</td>
-                                                <td>{{ $i->tanggal }} </td>
+                                                <td>{{ tanggl_id($i->tanggal) }} </td>
                                                 <td>{{ $i->keterangan }} </td>
                                                 <td><a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">Rubah</a>&nbsp;|&nbsp;
                                                     <a href="#" data-toggle="modal" data-target="#hapusData{{ $i->id }}">Hapus</a></td>

@@ -12,6 +12,12 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-4">
+                        <div class="card-header end">
+                            <form action="/lembur_approved" method="get" class="form-inline">
+                                <input type="search" placeholder="cari.." name="cari" value="{{ request()->cari }}">
+                                <button class="btn btn-dark inline">Cari</button>
+                            </form>
+                        </div>
                         <div class="card-body">
                             
         
@@ -31,7 +37,7 @@
                                         @if(count($pengajuan_lembur) > 0)
                                         @foreach ($pengajuan_lembur as $d)
                                             <tr>
-                                                <td>{{ $loop->index+1 }}</td>
+                                                <td>{{ $pengajuan_lembur->firstItem() + $loop->index  }}</td>
                                                 <td>{{ $d->nama }}</td>
                                                 <td>{{ $d->periode }}</td>
                                                 <td>{{ format_jam($d->total_biasa) }}</td>
@@ -46,12 +52,20 @@
                                         @endforeach
                                     </tbody>
                                         @else
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="5"> Tidak Ada Pengajuan</td>
-                                        </tr>
-                                    </tfoot>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5"> Tidak Ada Pengajuan</td>
+                                            </tr>
+                                        </tfoot>
                                         @endif
+                                        
+                                        
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5"> {{ $pengajuan_lembur->withQueryString()->links() }}</td>
+                                            </tr>
+                                        </tfoot>
+                                       
                                 </table>
                             
                         </div>

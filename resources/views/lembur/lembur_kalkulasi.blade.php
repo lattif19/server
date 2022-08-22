@@ -11,7 +11,7 @@
 
 
 
-
+        @if(count($jam_lembur) > 0)
         <form action="/lembur/calculated/" method="post">@csrf
             <div class="row">
                 <div class="col-xl-12">
@@ -157,7 +157,6 @@
                 </div>
 
 
-                
                 <div class="col-xl-12">
                     <div class="card mb-4">
                         <div class="card-header">
@@ -259,6 +258,10 @@
 
         </form>
         </div>
+
+        @else
+            <h1 class="text-warning bg-dark">Data Absensi Belum Di Upload</h1>
+        @endif
 
 
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}

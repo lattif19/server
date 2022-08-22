@@ -73,6 +73,8 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::put('/lembur_aprove/aksi', [LemburController::class, 'lembur_approve_aksi']);
     Route::get('/lembur_approved', [LemburController::class, 'lembur_approved']);
     Route::get('/lembur/print/{pengajuan_lembur_id}/{periode}', [LemburController::class, 'print_pdf']);
+    Route::get('/lembur/print_pengajuan/{pengajuan_lembur_id}/{periode}', [LemburController::class, 'print_belum_diajukan']);
+
     Route::get('/absen', [AbsensiController::class, 'statistik']);
     route::post('/absen', [AbsensiController::class, 'import_absensi']);
     Route::get('/absen_data', [AbsensiController::class, 'index']);

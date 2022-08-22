@@ -4,21 +4,30 @@
 
 @section('container')
         <div class="container-fluid px-4">
-            <h1 class="mt-4">{{ $title }}</h1>
+            <div class="row">
+                <h1 class="mt-4">{{ $title }}</h1>
+            </div>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
+            
+
+
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-4">
-                        <div class="card-header">
-                            <h5> Daftar Pengajuan Lembur </h5>
+                        <div class="nav justify-content-between card-header">
+                            <h2>Riwayat Pengajuan</h2>
+                            <form action="/lembur" method="get">
+                                <input  type="search" placeholder="Cari..." name="cari" value="{{ request()->cari }}">
+                                <button class="btn btn-dark text-light" type="submit">Cari</button>
+                            </form>
                         </div>
                         <div class="card-body">
                             <table class="table">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-dark text-light">
                                         <td>Periode</td>
                                         <td>Total Hari Biasa </td>
                                         <td>Total Hari Libur </td>
@@ -34,16 +43,22 @@
                                                 <td>{{ $i->periode }}</td>
                                                 <td>{{ format_jam($i->total_biasa) }} </td>
                                                 <td>{{ format_jam($i->total_libur) }} </td>
-                                                <td>{{ format_jam($i->keterangan) }} </td>
-                                                <td>{{ $i->status }} </td>
+                                                <td>{{ $i->keterangan }} </td>
+                                                <td>
+                                                    
+                                                    {{ $i->status }} 
+                                                
+                                                </td>
                                                 <td width="250px"> 
-                                                    @if ($i->total_biasa == "00:00:00" and $i->total_libur == "00:00:00")
+                                                    @if ($i->status == "Belum Diajukan" or $i->status == "Dikembalikan")
                                                         <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a>&nbsp;|&nbsp;
-                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">Hitung Total</a> &nbsp;|&nbsp;   
+                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">Hitung Total</a> &nbsp;|&nbsp;
+                                                        {{-- <a href="/lembur/print_pengajuan/{{ $i->id }}/{{  Str::slug($i->periode) }}">Print</a>    --}}
                                                     @else
-                                                        <a href="/lembur/calculated/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a> 
-                                                    @endif
-                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">Print</a>
+                                                        <a href="/lembur/calculated/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a>
+                                                        @endif
+                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">Print</a> 
+                                                    
                                                 </td>
                                             </tr>
                                         @endforeach                                       
@@ -53,13 +68,13 @@
                                         </tr>
                                     @endif
                                 </tbody>
-                                <tfoot>
-                                    @if ($pengajuanLembur)
-                                        @if ($pengajuanLembur->count()>10)
+                                @if ($pengajuanLembur)
+                                    @if ($pengajuanLembur->count()>10)
+                                        <tfoot>
                                             {!! $pengajuanLembur->links() !!}                         
+                                        </tfoot>
                                         @endif
                                     @endif
-                                </tfoot>
                             </table>
                         </div>
                     </div>

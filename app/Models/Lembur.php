@@ -14,7 +14,7 @@ class Lembur extends Model
     protected $table = 'lembur';
     protected $guarded = ['id'];
 
-    public function get_pengajuan_lembur_hrd(){
+    public function get_pengajuan_lembur_hrd($data){
         return DB::table("pegawai")
                     ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
                     ->select(   "pegawai.user_id", 
@@ -22,10 +22,13 @@ class Lembur extends Model
                                 "lembur_pengajuan.periode", 
                                 "lembur_pengajuan.total_biasa", 
                                 "lembur_pengajuan.total_libur",
-                                "lembur_pengajuan.status", 
+                                "lembur_pengajuan.status",
                                 "lembur_pengajuan.id")
-                    ->where("lembur_pengajuan.status", "Disetujui")
-                    ->orWhere("lembur_pengajuan.status", "Diajukan")
+                     ->where("lembur_pengajuan.status", "Disetujui")
+                     ->Where("lembur_pengajuan.status", "Diajukan")
+                     ->orWhere("pegawai.nama", "like", "%".$data."%")
+                     ->orWhere("lembur_pengajuan.periode", "like", "%".$data."%")
+                     ->orderBy("lembur_pengajuan.id", "desc")
                     ->paginate(10);
     }
 
@@ -56,7 +59,12 @@ class Lembur extends Model
     public function get_pengajuan_lembur($id){
         return DB::table("pegawai")
                     ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
-                    ->select("pegawai.user_id", "pegawai.nama", "lembur_pengajuan.periode", "lembur_pengajuan.total_biasa", "lembur_pengajuan.total_libur", "lembur_pengajuan.id")
+                    ->select(   "pegawai.user_id", 
+                                "pegawai.nama", 
+                                "lembur_pengajuan.periode", 
+                                "lembur_pengajuan.total_biasa", 
+                                "lembur_pengajuan.total_libur", 
+                                "lembur_pengajuan.id")
                     ->where("pegawai.lembur_approve_id", $id)
                     ->where("lembur_pengajuan.status", "Diajukan")
                     ->get();
@@ -117,16 +125,28 @@ class Lembur extends Model
             ->get();
     }
 
-    public function get_data_pengajuan(){
+    public function get_data_pengajuan($data){
         $id['user_id'] = Auth::user()->id;
+
         return DB::table("lembur_pengajuan")
-                    ->where($id)
-                    ->orderBy('id', 'desc')
-                    ->paginate(10);
+        ->select("id", "periode", "total_biasa", "total_libur")
+        ->selectRaw("(SELECT status_pengajuan from lembur_riwayat_pengajuan WHERE lembur_riwayat_pengajuan.lembur_pengajuan_id = lembur_pengajuan.id ORDER by id DESC LIMIT 1) as status")
+        ->selectRaw("(SELECT komentar from lembur_riwayat_pengajuan WHERE lembur_riwayat_pengajuan.lembur_pengajuan_id = lembur_pengajuan.id ORDER by id DESC LIMIT 1) as keterangan")
+        ->where($id)->where("periode", "like", "%".$data."%")->paginate(10);
+
+
+        // return DB::table("lembur_pengajuan")
+        //             ->where($id)
+        //             ->where("periode", "like", "%".$data."%")
+        //             ->orderBy('id', 'desc')
+        //             ->paginate(10);
+                    
     }
 
-    public function buat_pengajuan_awal($data){
-        return DB::table("lembur_pengajuan")->insert($data);
+    public function buat_pengajuan_awal($data, $riwayat){
+
+        $riwayat['lembur_pengajuan_id'] = DB::table("lembur_pengajuan")->insertGetId($data);
+        return DB::table("lembur_riwayat_pengajuan")->insert($riwayat);
     }
 
     public function cek_pengajuan($periode){
