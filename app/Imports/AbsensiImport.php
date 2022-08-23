@@ -16,8 +16,8 @@ class AbsensiImport implements ToModel, WithHeadingRow
             'absen_id' => $row['person_id'],
             'nama' => $row["name"],
             'tanggal' => date("Y-m-d", (($row["date"]-25569)*86400)),
-            'jam_masuk' => date("H:i:s", (($row["chek_in"]-25569)*86400)),
-            'jam_pulang' => date("H:i:s", (($row["chek_out"]-25569)*86400)),
+            'jam_masuk' => date("H:i:s", (($row["check_in"]-25569)*86400)),
+            'jam_pulang' => date("H:i:s", (($row["check_out"]-25569)*86400)),
         ]);
     }
 }
