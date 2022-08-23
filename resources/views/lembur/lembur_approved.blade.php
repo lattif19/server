@@ -14,7 +14,7 @@
                     <div class="card mb-4">
                         <div class="card-header end">
                             <form action="/lembur_approved" method="get" class="form-inline">
-                                <input type="search" placeholder="cari.." name="cari" value="{{ request()->cari }}">
+                                <input type="search" placeholder="cari nama.." name="cari" value="{{ request()->cari }}">
                                 <button class="btn btn-dark inline">Cari</button>
                             </form>
                         </div>
@@ -24,27 +24,49 @@
                                 <table class="table table-bordered">
                                     <thead class="table-light">
                                         <tr>
-                                            <td>No</td>
+                                            <td align="center" width="80px">No</td>
                                             <td>Nama</td>
                                             <td>Periode</td>
-                                            <td>Hari Biasa</td>
-                                            <td>Hari Libur</td>
-                                            <td>Status</td>
-                                            <td>Aksi</td>
+                                            <td align="center" width="150px">Hari Biasa</td>
+                                            <td align="center" width="150px">Hari Libur</td>
+                                            <td align="center" width="100px">Status</td>
+                                            <td align="center" width="100px">Aksi</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @if(count($pengajuan_lembur) > 0)
                                         @foreach ($pengajuan_lembur as $d)
                                             <tr>
-                                                <td>{{ $pengajuan_lembur->firstItem() + $loop->index  }}</td>
+                                                <td align="center">{{ $pengajuan_lembur->firstItem() + $loop->index  }}</td>
                                                 <td>{{ $d->nama }}</td>
                                                 <td>{{ $d->periode }}</td>
-                                                <td>{{ format_jam($d->total_biasa) }}</td>
-                                                <td>{{ format_jam($d->total_libur) }}</td>
-                                                <td>{{ $d->status }}</td>
-                                                <td>
-                                                    <a href="/lembur_approve/detail/{{ $d->id }}">Detail</a>
+                                                <td align="center">{{ format_jam($d->total_biasa) }}</td>
+                                                <td align="center">{{ format_jam($d->total_libur) }}</td>
+                                                @if($d->status == "Disetujui")
+                                                    <td align="center" class="bg-success">
+                                                        <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                            <div class="text-light">
+                                                                {{ $d->status }}
+                                                            </div>
+                                                        </a>
+                                                    </td>
+                                                @else
+                                                    <td align="center" class="bg-secondary">
+                                                        <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                        <div class="text-light">
+                                                            {{ $d->status }}
+                                                        </div>
+                                                        </a>
+                                                    </td>
+                                                @endif
+                                                </td>
+                                                <td align="center">
+                                                    {{-- <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                        <span class="material-symbols-outlined">info</span>
+                                                    </a> --}}
+                                                    <a href="/lembur/print/{{ $d->id }}/{{ Str::slug($d->periode) }}">
+                                                        <span class="material-symbols-outlined">print</span>
+                                                    </a>
                                                 </td>
                                             </tr>
 

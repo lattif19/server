@@ -25,9 +25,9 @@ class Lembur extends Model
                                 "lembur_pengajuan.status",
                                 "lembur_pengajuan.id")
                      ->where("lembur_pengajuan.status", "Disetujui")
-                     ->Where("lembur_pengajuan.status", "Diajukan")
-                     ->orWhere("pegawai.nama", "like", "%".$data."%")
-                     ->orWhere("lembur_pengajuan.periode", "like", "%".$data."%")
+                     ->orWhere("lembur_pengajuan.status", "Diajukan")
+                     ->Where("pegawai.nama", "like", "%".$data."%")
+                    //  ->Where("lembur_pengajuan.periode", "like", "%".$data."%")
                      ->orderBy("lembur_pengajuan.id", "desc")
                     ->paginate(10);
     }

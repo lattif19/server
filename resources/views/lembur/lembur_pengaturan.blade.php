@@ -29,7 +29,7 @@
                                         <td>Nomor</td>
                                         <td>Nama Pegawai</td>
                                         <td>Nama Manager / Approver</td>
-                                        <td>Aksi</td>
+                                        <td width="100px" align="center">Aksi</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,9 +42,11 @@
                                                     @if($i->lembur_approve_id == $p->user_id) {{ $p->nama }} @endif
                                                 @endforeach
                                             </td>
-                                            <td width="100px">
+                                            <td width="100px" align="center">
                                                 <a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">
-                                                    Rubah
+                                                    <span class="material-icons">
+                                                        edit
+                                                    </span>
                                                 </a>
                                             </td>
                                         </tr>
@@ -80,7 +82,9 @@
 
                                                             <div class="form-group mt-5">
                                                                 <input type="hidden" name="user_id" value="{{ $i->user_id }}">
-                                                                <button class="btn col-lg-2 btn-success" type="submit"> Rubah </button>
+                                                                <button class="btn col-lg-2 btn-success" type="submit">
+                                                                    Rubah
+                                                                </button>
                                                             </div>
                                                         </form>
                                                     </div>

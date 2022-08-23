@@ -3,6 +3,11 @@
 @include('lembur.sidebar.menu')
 
 @section('container')
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
         <div class="container-fluid px-4">
             <div class="row">
                 <h1 class="mt-4">{{ $title }}</h1>
@@ -33,31 +38,47 @@
                                         <td>Total Hari Libur </td>
                                         <td>Keterangan </td>
                                         <td>Status </td>
-                                        <td>Aksi</td>
+                                        <td  width="150px" align="center">Aksi</td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($pengajuanLembur)
                                         @foreach ($pengajuanLembur as $i)
                                             <tr>
-                                                <td>{{ $i->periode }}</td>
+                                                <td>
+                                                    @if ($i->status == "Belum Diajukan" or $i->status == "Dikembalikan")
+                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">
+                                                            <strong>{{ $i->periode }} </strong>
+                                                        </a>
+                                                    @else
+                                                        <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}">
+                                                            <strong>{{ $i->periode }} </strong>
+                                                        </a>
+                                                    @endif
+                                                </td>
                                                 <td>{{ format_jam($i->total_biasa) }} </td>
                                                 <td>{{ format_jam($i->total_libur) }} </td>
                                                 <td>{{ $i->keterangan }} </td>
                                                 <td>
-                                                    
                                                     {{ $i->status }} 
-                                                
                                                 </td>
-                                                <td width="250px"> 
+                                                <td align="center"> 
                                                     @if ($i->status == "Belum Diajukan" or $i->status == "Dikembalikan")
-                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a>&nbsp;|&nbsp;
-                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">Hitung Total</a> &nbsp;|&nbsp;
-                                                        {{-- <a href="/lembur/print_pengajuan/{{ $i->id }}/{{  Str::slug($i->periode) }}">Print</a>    --}}
+                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">
+                                                            <span class="material-symbols-outlined">info</span>
+                                                        </a>
+                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">
+                                                            <span class="material-symbols-outlined">summarize</span>
+                                                        </a>
+                                                                                                              
                                                     @else
-                                                        <a href="/lembur/calculated/{{  Str::slug($i->periode) }}/{{ $i->id }}">Detail</a>
+                                                        <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}">
+                                                            <span class="material-symbols-outlined">info</span>
+                                                        </a>
                                                         @endif
-                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">Print</a> 
+                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">
+                                                        <span class="material-symbols-outlined">print</span>
+                                                    </a> 
                                                     
                                                 </td>
                                             </tr>

@@ -14,27 +14,45 @@ use PDF;
 class LemburController extends Controller
 {
 
-    public function print_belum_diajukan(){
+    public function lembur_preview_total(Request $request){
+        $id = $request->id;
 
-        return view("lembur.lembur_print_pengajuan");
+        return view("lembur.lembur_preview_detail",[
+            "title" => "Detail Pengajuan Lembur",
+            "detail" => Lembur::get_lembur_id($id),
+        ]);
     }
 
     public function print_pdf(Request $request){
+        $user_id = DB::table("lembur_pengajuan")->where("id", $request->pengajuan_lembur_id)->get()[0]->user_id;
+        $approver_id = DB::table("pegawai")->where("user_id", $user_id)->get()[0]->lembur_approve_id;
+
         $data["periode"] = $request->periode;
         $data['lembur'] = Lembur::get_lembur_id($request->pengajuan_lembur_id);
+        
+        if($approver_id != null){   
+            $nama_approver = DB::table("pegawai")->where("user_id", $approver_id)->get()[0]->nama;
+            $data["nama_approver"] = $nama_approver;
+        }else{
+            $data["nama_approver"] = "-- Belum Ditentukan --"; 
+        }
+
+        if(count($data['lembur']) == 0 ){
+            return view("lembur.error.e_print");
+        }
 
         return view("lembur.lembur_print", $data);
-        // $pdf = PDF::loadView('lembur.lembur_print', $data);
-    
-        // // return $pdf->download('itsolutionstuff.pdf');
-        // $pdf->setPaper('A4');
-        // return $pdf->stream();
+
     }
 
     public function lembur_approved(Request $request){
+
+        $data_pengajuan = Lembur::get_pengajuan_lembur_hrd($request->cari);
+
+
         return view("lembur.lembur_approved",[
             "title" => "Pengajuan Lembur",
-            "pengajuan_lembur" => Lembur::get_pengajuan_lembur_hrd($request->cari),
+            "pengajuan_lembur" => $data_pengajuan,
         ]);
     }
 
@@ -56,7 +74,7 @@ class LemburController extends Controller
     public function lembur_approve_detail(Request $request){
         $id = $request->id;
 
-        return view("lembur.lembur_approve_detail",[
+        return view("lembur.lembur_preview_detail",[
             "title" => "Detail Pengajuan Lembur",
             "detail" => Lembur::get_lembur_id($id),
         ]);
@@ -94,9 +112,11 @@ class LemburController extends Controller
 
         DB::table("lembur_riwayat_pengajuan")->insertOrIgnore($riwayat);
 
-        
+            //Masalah dinisni ketika sudah ada pengajuan lembur 
+            // Total Lembur juga masih salah
             for($x=0; $x<=count($request->hari_libur)-1; $x++){
-                DB::table("lembur_pengajuan_detail")->insert([
+                DB::table("lembur_pengajuan_detail")->where("lembur_pengajuan_id", $lembur_id)->where("tanggal", $request->tanggal[$x])->updateOrInsert([
+                //DB::table("lembur_pengajuan_detail")->insert([
                     "lembur_pengajuan_id" => $lembur_id,
                     "hari_libur" => $request->hari_libur[$x],
                     "tanggal" => $request->tanggal[$x],
@@ -120,11 +140,15 @@ class LemburController extends Controller
         $data["lembur_pengajuan_id"] = $request->lembur_pengajuan_id;
         $jam = DB::table("lembur_settings")->get();
 
+        $perhitungan = Lembur::perhitungan_total_jam($data);
+        
+        if(count($perhitungan) == 0){ return view("lembur.error.e_absensi_belum_ada"); }
+        
 
         return view("lembur.lembur_kalkulasi", [
             "title" => $data["periode"],
             "pengaturan_jam" => $jam[0],
-            "jam_lembur" => Lembur::perhitungan_total_jam($data),
+            "jam_lembur" => $perhitungan,
             
         ]);
     }

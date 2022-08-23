@@ -11,13 +11,19 @@
         font-size : 12px;
     }
 </style>
+
+@if(count($lembur) > 0) 
 <div hidden>
-    {{ $id_approve = DB::table('pegawai')->where("user_id", auth()->user()->id)->get()[0]->lembur_approve_id}}
+    
     {{ $tanggal_pengajuan = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Diajukan")->orderBy("id", "desc")->limit("1")->get() }}
     {{ $tanggal_approve = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Disetujui")->orderBy("id", "desc")->limit("1")->get() }}
     {{ $tanggal_diterima = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Diterima")->orderBy("id", "desc")->limit("1")->get() }}
+    
 </div>
-@if(count($lembur) > 0) 
+
+
+
+
 
 <table>
     <tr>
@@ -131,8 +137,9 @@
     <tr align="center">
         <td>{{ DB::table('pegawai')->where("user_id", auth()->user()->id)->get()[0]->nama }}</td>
         <td>
-            @if($id_approve > 0)
-            {{ DB::table('pegawai')->where("user_id", $id_approve)->get()[0]->nama }}
+            {{-- {{ dd($nama_approver) }} --}}
+            @if($nama_approver != null)
+            {{ $nama_approver }}
             @else
             -- Belum Ditentukan --
             @endif
@@ -140,19 +147,18 @@
         <td>HR & GA</td>
     </tr>
 </table>
-
+<script type="text/javascript">
+     window.print(); 
+</script>
 @else
 <p align="center">
-
     <h1 class="mt-10">Pengajuan Lembur</h1>
     <h4 class="mt-5">
         Tidak dapat di print karena belum ada perhitungan lembur
     </h4>
 </p>
 @endif
-<script type="text/javascript">
-        window.print(); 
-</script>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 

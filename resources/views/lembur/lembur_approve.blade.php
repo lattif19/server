@@ -3,6 +3,11 @@
 @include('lembur.sidebar.menu')
 
 @section('container')
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
         <div class="container-fluid px-4">
             <h1 class="mt-4">{{ $title }}</h1>
             <ol class="breadcrumb mb-4">
@@ -18,26 +23,38 @@
                                 <table class="table table-bordered">
                                     <thead class="table-light">
                                         <tr>
-                                            <td>No</td>
-                                            <td>Nama</td>
+                                            <td width="100px" align="center">No</td>
+                                            <td width="300px" >Nama</td>
                                             <td>Periode</td>
-                                            <td>Hari Biasa</td>
-                                            <td>Hari Libur</td>
-                                            <td>Aksi</td>
+                                            <td width="100px" align="center">Hari Biasa</td>
+                                            <td width="100px" align="center">Hari Libur</td>
+                                            <td width="150px" align="center">Aksi</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @if(count($pengajuan_lembur) > 0)
                                         @foreach ($pengajuan_lembur as $d)
                                             <tr>
-                                                <td>{{ $loop->index+1 }}</td>
-                                                <td>{{ $d->nama }}</td>
-                                                <td>{{ $d->periode }}</td>
-                                                <td>{{ format_jam($d->total_biasa) }}</td>
-                                                <td>{{ format_jam($d->total_libur) }}</td>
+                                                <td align="center">{{ $loop->index+1 }}</td>
                                                 <td>
-                                                    <a href="#" data-toggle="modal" data-target="#persetujuan{{ $d->id }}">Persetujuan</a> 
-                                                    <a href="/lembur_approve/detail/{{ $d->id }}">Detail</a>
+                                                    <a href="/lembur_approve/detail/{{ $d->id }}"">
+                                                        <strong>{{ $d->nama }}</strong>
+                                                    </a>
+                                                </td>
+                                                <td>{{ $d->periode }}</td>
+                                                <td align="center">{{ format_jam($d->total_biasa) }}</td>
+                                                <td align="center">{{ format_jam($d->total_libur) }}</td>
+                                                <td align="center">
+                                                    <a href="#" data-toggle="modal" data-target="#persetujuan{{ $d->id }}">
+                                                        <span class="material-icons">
+                                                            verified
+                                                        </span>
+                                                    </a> 
+                                                    <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                        <span class="material-icons">
+                                                            info
+                                                        </span>
+                                                    </a>
                                                 </td>
                                             </tr>
 
