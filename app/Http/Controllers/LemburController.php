@@ -243,18 +243,22 @@ class LemburController extends Controller
     }
 
     public function lembur_pengajuan_harian(Request $request){
-
         
         $data['user_id'] = Auth::user()->id;
         $data['tanggal'] = $request->tanggal;
         $data['keterangan'] = $request->keterangan;
         $data['hari_libur'] = $request->hari_libur;
         $data['lembur_pengajuan_id'] = $request->lembur_pengajuan_id;
-
-            if(DB::table("lembur_catatan")->insert($data)){
+        $data['created_at'] = date("Y-m-d H:i:s");
+        
+        
+        $validated = DB::table("lembur_catatan")->where("tanggal", $data['tanggal'])->where("lembur_pengajuan_id", $data['lembur_pengajuan_id'])->count();
+            
+            if($validated == 0 && $data['tanggal'] <= today()){
+                DB::table("lembur_catatan")->insert($data);     
                 return back()->with("success", "Penambahan Data Berhasil");
-            }
-            return back()->with("error", "Penambahan Data Gagal");
+             }
+             return back()->with("error", "Sistem tidak mengizinkan menambah catatan dengan tanggal yang sama atau tanggal sebelum waktunya");
     }
 
 

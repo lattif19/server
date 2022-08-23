@@ -37,16 +37,17 @@ class UserController extends Controller
         $data['nama'] = $request->nama;
         $data['pegawai_jabatan_id'] = $request->pegawai_jabatan_id;
         $data['pegawai_divisi_id'] = $request->pegawai_divisi_id;
+        //$data['email'] = $request->email;
 
         $user['email'] = $request->email;
         $id['id'] = $request->user_id;
 
-            if(DB::table('pegawai')->where($pegawai)->update($data)){
-               DB::table('users')->where($id)->update($user);
+        DB::table('pegawai')->where($pegawai)->update($data);
+        if(DB::table('users')->where($id)->update($user)){
                 return redirect('/pegawai')->with('success', "Data berhasil dirubah");
-            }else{
+        }else{
                 return redirect('/pegawai')->with('error', "Data gagal dirubah");
-            }
+        }
     }
 
     public function pegawai_store(Request $request){
