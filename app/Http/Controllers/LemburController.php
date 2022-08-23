@@ -14,6 +14,19 @@ use PDF;
 class LemburController extends Controller
 {
 
+    public function reporting(Request $request){
+        $periode = DB::table("lembur_pengajuan")->distinct()->orderBy("id", "desc")->get('periode');
+        $periode_hari_ini = $this->generate_periode();
+        $data_lembur = Lembur::get_data_report($request->periode, $request->jenis_report, $request->filter);
+        
+        return view("lembur.lembur_report",[
+            "title"                 => "Laporan Lembur",
+            "periode"               => $periode,
+            "periode_hari_ini"      => $periode_hari_ini,
+            "data_lembur"           => $data_lembur,
+        ]);
+    }
+
     public function lembur_preview_total(Request $request){
         $id = $request->id;
 

@@ -7,12 +7,60 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
+use Matrix\Operators\Operator;
 
 class Lembur extends Model
 {
     use HasFactory;
     protected $table = 'lembur';
     protected $guarded = ['id'];
+
+
+    public function get_data_report($periode, $jenis, $filter){
+        if($filter=="semua" || $filter==""){ $status = "Belum Diajukan"; $operator = "!="; }else{ $status=$filter;  $operator = "like";}
+        
+        if($jenis=="general"){
+            return DB::table("lembur_pengajuan")
+                    ->join("pegawai","pegawai.user_id", "=", "lembur_pengajuan.user_id")
+                    ->select(
+                                "lembur_pengajuan.user_id as user_id",
+                                "lembur_pengajuan.total_biasa",
+                                "lembur_pengajuan.total_libur",
+                                "lembur_pengajuan.status",
+                                )
+                    ->selectRaw("(select nama from pegawai where pegawai.user_id = lembur_pengajuan.user_id) as nama")
+                    ->where("lembur_pengajuan.status", $operator, $status )
+                    ->where("lembur_pengajuan.periode", "=", $periode)
+                    ->get();
+            
+         }else{ 
+            return DB::table("lembur_pengajuan")
+                    ->join("lembur_pengajuan_detail", "lembur_pengajuan_detail.lembur_pengajuan_id","=","lembur_pengajuan.id")
+                    ->join("pegawai","pegawai.user_id", "=", "lembur_pengajuan.user_id")
+                    ->select(
+                                "lembur_pengajuan.id",
+                                "lembur_pengajuan.user_id as user_id",
+                                "lembur_pengajuan.total_biasa",
+                                "lembur_pengajuan.total_libur",
+                                "lembur_pengajuan.status",
+                                "lembur_pengajuan_detail.tanggal",
+                                "lembur_pengajuan_detail.keterangan",
+                                "lembur_pengajuan_detail.hari_libur",
+                                "lembur_pengajuan_detail.jam_masuk",
+                                "lembur_pengajuan_detail.jam_pulang",
+                                "lembur_pengajuan_detail.jam_pulang_standar",
+                                "lembur_pengajuan_detail.jam_lembur",
+                                )
+                    ->selectRaw("(select nama from pegawai where pegawai.user_id = lembur_pengajuan.user_id) as nama")
+                    ->where("lembur_pengajuan.status", $operator, $status )
+                    ->where("lembur_pengajuan.periode", "=", $periode)
+                    ->orderBy("nama", "asc")
+                    ->orderBy("hari_libur", "asc")
+                    ->get();
+         }
+        
+        
+    }
 
     public function get_pengajuan_lembur_hrd($data){
         return DB::table("pegawai")

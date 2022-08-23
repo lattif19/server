@@ -58,6 +58,7 @@ Route::group(['middleware' => ["auth"]], function(){
 
 
     Route::get('/lembur', [LemburController::class, 'index']);
+    Route::get('/lembur_report', [LemburController::class, 'reporting']);
     Route::get('/lembur/{detail}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_detail']);
     Route::post('/lembur/pengajuan_harian', [LemburController::class, 'lembur_pengajuan_harian']);
     Route::put('/lembur/rubah_pengjuan_lembur', [LemburController::class, 'rubah_pengajuan_lembur']);
