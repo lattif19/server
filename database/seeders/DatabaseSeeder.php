@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
          Pegawai::create(['nik' => '20220033J',   'nama' => 'Admin HRD',                  'user_id' => '2',    'lembur_absen_id' => '1',    'pegawai_divisi_id' => '1',   'pegawai_jabatan_id'=>'5']);
          Pegawai::create(['nik' => '20220002J',   'nama' => 'Approver',                   'user_id' => '3',    'lembur_absen_id' => '2',    'pegawai_divisi_id' => '1',   'pegawai_jabatan_id'=>'2']);
          Pegawai::create(['nik' => '20220003J',   'nama' => 'User',                       'user_id' => '4',    'lembur_absen_id' => '3',    'pegawai_divisi_id' => '1',   'pegawai_jabatan_id'=>'5']);
+         
          Pegawai::create(['nik' => '20220004J',   'nama' => 'Nur Ardhiansyah',            'user_id' => '5',        'pegawai_divisi_id' => '1',   'pegawai_jabatan_id'=>'5']);
          Pegawai::create(['nik' => '20220005J',   'nama' => 'Krisdina Yulianto',          'user_id' => '6',        'pegawai_divisi_id' => '1',   'pegawai_jabatan_id'=>'5']);
          Pegawai::create(['nik' => '20220006J',   'nama' => 'Ahmad Tuanto',               'user_id' => '7',        'pegawai_divisi_id' => '1',   'pegawai_jabatan_id'=>'5']);

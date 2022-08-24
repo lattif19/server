@@ -127,6 +127,8 @@
                                                                 Hapus Data ini..?
                                                                 <div class="form-group mt-5">
                                                                     <input type="hidden" name="lembur_catatan" value="{{ $i->id }}">
+                                                                    <input type="hidden" name="tanggal" value="{{ $i->tanggal }}">
+                                                                    <input type="hidden" name="lembur_pengajuan_id" value="{{ $i->lembur_pengajuan_id }}">
                                                                     <button class="btn col-lg-2 btn-warning btn-lg" type="submit"> Hapus </button>
                                                                 </div>
                                                             </form>

@@ -58,7 +58,7 @@
                                                     </td>
                                                 @else
                                                     <td align="center" class="bg-secondary">
-                                                        <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                        <a href="/lembur_approved/detail/{{ $d->id }}">
                                                         <div class="text-light">
                                                             {{ $d->status }}
                                                         </div>

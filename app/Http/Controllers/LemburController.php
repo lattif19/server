@@ -87,6 +87,17 @@ class LemburController extends Controller
     public function lembur_approve_detail(Request $request){
         $id = $request->id;
 
+        return view("lembur.lembur_approve_detail",[
+     // return view("lembur.lembur_preview_detail",[
+            "title" => "Detail Pengajuan Lembur",
+            "detail" => Lembur::get_lembur_id($id),
+        ]);
+    }
+
+    public function lembur_approved_detail(Request $request){
+        $id = $request->id;
+
+        //return view("lembur.lembur_approve_detail",[
         return view("lembur.lembur_preview_detail",[
             "title" => "Detail Pengajuan Lembur",
             "detail" => Lembur::get_lembur_id($id),
@@ -125,22 +136,23 @@ class LemburController extends Controller
 
         DB::table("lembur_riwayat_pengajuan")->insertOrIgnore($riwayat);
 
-            //Masalah dinisni ketika sudah ada pengajuan lembur 
-            // Total Lembur juga masih salah
             for($x=0; $x<=count($request->hari_libur)-1; $x++){
-                DB::table("lembur_pengajuan_detail")->where("lembur_pengajuan_id", $lembur_id)->where("tanggal", $request->tanggal[$x])->updateOrInsert([
-                //DB::table("lembur_pengajuan_detail")->insert([
-                    "lembur_pengajuan_id" => $lembur_id,
-                    "hari_libur" => $request->hari_libur[$x],
-                    "tanggal" => $request->tanggal[$x],
-                    "keterangan" => $request->keterangan[$x],
-                    "jam_masuk_kantor" => $request->jam_masuk_kantor[$x],
-                    "jam_kerja_kantor" => $request->jam_kerja_kantor[$x],
-                    "jam_masuk" => $request->jam_masuk[$x],
-                    "jam_pulang" => $request->jam_pulang[$x],
-                    "jam_pulang_standar" => $request->jam_pulang_standar[$x],
-                    "jam_lembur" => $request->jam_lembur[$x],
-                ]);
+                    $data2["lembur_pengajuan_id"]     = $lembur_id;
+                    $data2["hari_libur"]              = $request->hari_libur[$x];
+                    $data2["tanggal"]                 = $request->tanggal[$x];
+                    $data2["keterangan"]              = $request->keterangan[$x];
+                    $data2["jam_masuk_kantor"]        = $request->jam_masuk_kantor[$x];
+                    $data2["jam_kerja_kantor"]        = $request->jam_kerja_kantor[$x];
+                    $data2["jam_masuk"]               = $request->jam_masuk[$x];
+                    $data2["jam_pulang"]              = $request->jam_pulang[$x];
+                    $data2["jam_pulang_standar"]      = $request->jam_pulang_standar[$x];
+                    $data2["jam_lembur"]              = $request->jam_lembur[$x];
+
+                 if(DB::table('lembur_pengajuan_detail')->where("lembur_pengajuan_id", $data2["lembur_pengajuan_id"])->where("tanggal",$data2["tanggal"])->count() == 1){
+                    DB::table("lembur_pengajuan_detail")->where("lembur_pengajuan_id", $data2["lembur_pengajuan_id"])->where("tanggal",$data2["tanggal"])->update($data2);
+                }else{
+                    DB::table("lembur_pengajuan_detail")->insert($data2);
+                }
             }
 
         return redirect("/lembur")->with("success", "Proses Pengajuan Lembur Berhasil");
@@ -222,12 +234,29 @@ class LemburController extends Controller
     }
 
     public function hapus_pengajuan_lembur(Request $request){
-        $id['id'] = $request->lembur_catatan;
+        $id['id']               = $request->lembur_catatan;
+        $tanggal                = $request->tanggal;
+        $lembur_pengajuan_id    = $request->lembur_pengajuan_id;
 
-        if(DB::table("lembur_catatan")->delete($id)){
-            return back()->with("success", "Penambahan Data Berhasil");
+
+        // dd($id);
+        #   harus di cek dulu apakah sudah ada kalkulasi atau belum
+        #   jika ada hapus kalulasinya juga
+        
+
+
+        if( DB::table('lembur_pengajuan_detail')->where("lembur_pengajuan_id", $lembur_pengajuan_id)->where("tanggal", $tanggal)->count() == 1){
+            DB::table('lembur_pengajuan_detail')->where("lembur_pengajuan_id", $lembur_pengajuan_id)->where("tanggal", $tanggal)->delete();
+            DB::table("lembur_catatan")->delete($id);
+        
+        }else{
+            DB::table("lembur_catatan")->delete($id);
         }
-        return back()->with("error", "Penambahan Data Gagal");
+
+        // if(DB::table("lembur_catatan")->delete($id)){
+        return back()->with("success", "Penambahan Data Berhasil");
+        // }
+        // return back()->with("error", "Penambahan Data Gagal");
     }
 
     public function rubah_pengajuan_lembur(Request $request){

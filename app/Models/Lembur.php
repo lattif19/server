@@ -152,7 +152,7 @@ class Lembur extends Model
     public function get_catatan_libur($periode, $id){
         return DB::table("lembur_catatan")
             ->join("lembur_pengajuan","lembur_catatan.lembur_pengajuan_id","=","lembur_pengajuan.id")
-            ->select("lembur_catatan.id", "lembur_catatan.tanggal", "lembur_catatan.keterangan" )
+            ->select("lembur_catatan.id", "lembur_catatan.tanggal", "lembur_catatan.keterangan", "lembur_catatan.lembur_pengajuan_id" )
             ->where("lembur_catatan.user_id", $id)
             ->where("lembur_pengajuan.periode", $periode)
             ->where("lembur_catatan.hari_libur", "1")
@@ -164,7 +164,7 @@ class Lembur extends Model
     public function get_catatan_biasa($periode, $id){
         return DB::table("lembur_catatan")
             ->join("lembur_pengajuan","lembur_catatan.lembur_pengajuan_id","=","lembur_pengajuan.id")
-            ->select("lembur_catatan.id", "lembur_catatan.tanggal", "lembur_catatan.keterangan" )
+            ->select("lembur_catatan.id", "lembur_catatan.tanggal", "lembur_catatan.keterangan", "lembur_catatan.lembur_pengajuan_id" )
             ->where("lembur_catatan.user_id", $id)
             ->where("lembur_pengajuan.periode", $periode)
             ->where("lembur_catatan.hari_libur", "0")
