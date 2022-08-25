@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>S2P Office Helper</title>
-
+    <link rel="shortcut icon" href="/img/favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="/css/bootstrap.min.css" rel="stylesheet">

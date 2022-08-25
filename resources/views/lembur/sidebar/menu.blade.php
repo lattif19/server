@@ -96,8 +96,8 @@
         </div>
     </div>
     <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        Start Bootstrap
+        <div class="fa fa-address-card"></div>
+        {{ DB::table("pegawai")->where("user_id", auth()->user()->id)->get()[0]->nama }}
     </div>
 </nav>
     

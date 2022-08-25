@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
 {
+
+    public function api_chart_data(){
+        $absensi_id = DB::table("pegawai")->where("user_id",auth()->user()->id)->get()[0]->lembur_absen_id;
+        $data = DB::table("lembur_absensi")->where("absen_id", $absensi_id)->orderBy("tanggal", "desc")->limit(10)->get(["tanggal", "jam_masuk", "jam_pulang"]);
+        dd($data);
+    }
+
+
     public function pengaturan_tambah_mapping(Request $request){
         // dd($request);
         $data['user_id'] = $request->user_id;
@@ -36,17 +44,6 @@ class AbsensiController extends Controller
     }
 
 
-    // public function pengaturan(){
-    //     return view("absen.pengaturan", [
-    //         "pegawai" => Pegawai::all(),
-    //         "absensi" => Absensi::distinct()->get(['absen_id','nama']),
-    //         "pegawaiMapped"=> Absensi::get_mapped(),
-    //         "title" => "Absensi dan Karyawan",
-    //     ]);
-    // }
-
-
-
 
     public function import_absensi(Request $request){
         Excel::import(new AbsensiImport, $request->file("absensi"));
@@ -65,12 +62,20 @@ class AbsensiController extends Controller
 
 
     public function statistik(){
+        $absensi_id = DB::table("pegawai")->where("user_id",auth()->user()->id)->get()[0]->lembur_absen_id;
+        $data = DB::table("lembur_absensi")->where("absen_id", $absensi_id)->orderBy("tanggal", "desc")->limit(10)->get(["tanggal", "jam_masuk", "jam_pulang"]);
+        // dd( json_decode($data) );
+        
+        
+        
         return view("absen.statistik", [
             "title" => "Statistik Absensi",
         ]);
     }
 
-
+    public function jam_to_chart($data){
+        
+    }   
     public function create()
     {
         //

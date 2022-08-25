@@ -42,11 +42,13 @@ class UserController extends Controller
         $user['email'] = $request->email;
         $id['id'] = $request->user_id;
 
-        DB::table('pegawai')->where($pegawai)->update($data);
-        if(DB::table('users')->where($id)->update($user)){
-                return redirect('/pegawai')->with('success', "Data berhasil dirubah");
+        $validate1 = DB::table('pegawai')->where($pegawai)->update($data);
+        $validate2 = DB::table('users')->where($id)->update($user);
+
+        if($validate1 || $validate2){
+            return redirect('/pegawai')->with('success', "Data berhasil dirubah");
         }else{
-                return redirect('/pegawai')->with('error', "Data gagal dirubah");
+            return redirect('/pegawai')->with('error', "Data gagal dirubah");
         }
     }
 
