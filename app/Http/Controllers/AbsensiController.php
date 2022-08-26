@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AbsensiImport;
 use App\Models\Pegawai;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class AbsensiController extends Controller
 {
@@ -63,19 +64,44 @@ class AbsensiController extends Controller
 
     public function statistik(){
         $absensi_id = DB::table("pegawai")->where("user_id",auth()->user()->id)->get()[0]->lembur_absen_id;
-        $data = DB::table("lembur_absensi")->where("absen_id", $absensi_id)->orderBy("tanggal", "desc")->limit(10)->get(["tanggal", "jam_masuk", "jam_pulang"]);
-        // dd( json_decode($data) );
-        
-        
+        $data = DB::table("lembur_absensi")->where("absen_id", $absensi_id)->orderBy("tanggal", "desc")->limit(7)->get(["jam_masuk", "jam_pulang", "tanggal"])->reverse();
+        $jam_masuk = $this->jam_to_chart($data, "jam_masuk");
+        $jam_pulang = $this->jam_to_chart($data, "jam_pulang");
+        $tanggal = $this->tanggal_to_chart($data, "tanggal");
         
         return view("absen.statistik", [
             "title" => "Statistik Absensi",
+            "jam_masuk" => $jam_masuk,
+            "jam_pulang" => $jam_pulang,
+            "tanggal" => $tanggal,
         ]);
+
+
+
+
+
+
+
+
     }
 
-    public function jam_to_chart($data){
-        
-    }   
+    public function tanggal_to_chart($data, $string){
+        $y = "";
+        for($x=0; $x<count($data); $x++){
+            $y .= tanggl_id($data[$x]->$string).",";
+        }
+        return $y;
+    }
+
+    public function jam_to_chart($data, $string){
+        $y = "";
+        for($x=0; $x<count($data); $x++){
+            $y .= substr($data[$x]->$string, "0","5").",";
+        }
+        return  str_replace(":",".",$y);
+    }
+    
+    
     public function create()
     {
         //

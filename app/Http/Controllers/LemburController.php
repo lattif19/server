@@ -15,7 +15,10 @@ class LemburController extends Controller
 {
 
     public function reporting(Request $request){
-        $periode = DB::table("lembur_pengajuan")->distinct()->orderBy("id", "desc")->get('periode');
+        
+        // $periode = DB::table("lembur_pengajuan")->distinct()->orderBy("id", "desc")->get('periode');
+        
+        $periode = DB::table("lembur_pengajuan")->distinct()->get('periode');
         $periode_hari_ini = $this->generate_periode();
         $data_lembur = Lembur::get_data_report($request->periode, $request->jenis_report, $request->filter);
         

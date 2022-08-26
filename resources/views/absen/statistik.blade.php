@@ -25,10 +25,10 @@
 </div>
 
 <div hidden>
-    <input type="hidden" id="jam-masuk"     value="8.00,7.45,8.40,7.56,8.15,8.59">
-    <input type="hidden" id="jam-kantor"    value="8.00,8.00,8.00,8.00,8.00,8.00">
-    <input type="hidden" id="jam-pulang"    value="17.56, 17.34, 18.34, 19.56, 17.30, 17.36">
-    <input type="hidden" id="tanggal"       value="2022-08-01,2022-08-02,2022-08-03,2022-08-04,2022-08-05,2022-08-06">
+    <input type="hidden" id="jam-masuk"     value="{{ $jam_masuk }}">
+    <input type="hidden" id="jam-kantor"    value="">
+    <input type="hidden" id="jam-pulang"    value="{{ $jam_pulang }}">
+    <input type="hidden" id="tanggal"       value="{{ $tanggal }}">
 </div>
 
 

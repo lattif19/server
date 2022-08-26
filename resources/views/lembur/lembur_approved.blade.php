@@ -50,7 +50,7 @@
                                                 <td align="center">{{ format_jam($d->total_libur) }}</td>
                                                 @if($d->status == "Disetujui")
                                                     <td align="center" class="bg-success">
-                                                        <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                        <a href="/lembur_approved/detail/{{ $d->id }}">
                                                             <div class="text-light">
                                                                 {{ $d->status }}
                                                             </div>
@@ -67,7 +67,7 @@
                                                 @endif
                                                 </td>
                                                 <td align="center">
-                                                    {{-- <a href="/lembur_approve/detail/{{ $d->id }}">
+                                                    {{-- <a href="/lembur_approved/detail/{{ $d->id }}">
                                                         <span class="material-symbols-outlined">info</span>
                                                     </a> --}}
                                                     <a href="/lembur/print/{{ $d->id }}/{{ Str::slug($d->periode) }}">
