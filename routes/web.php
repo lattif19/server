@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\AbsensiController;
-use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\SppdController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Asset\KendaraanController;
 use App\Models\Absensi;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +51,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::group(['middleware' => ["auth"]], function(){
     Route::get('/main', [DashboardController::class, 'index'])->name('home')->middleware("auth");
-    Route::get('/asset', [AssetController::class, 'index']);
+    Route::get('/kendaraan', [KendaraanController::class, 'index']);
     Route::get('/sppd', [SppdController::class, 'index']);
 
 

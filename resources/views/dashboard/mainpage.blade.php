@@ -103,16 +103,16 @@
           </div> --}}
 
 
-        {{-- <div class="card mb-4 box-shadow">
+        <div class="card mb-4 box-shadow">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal">Managemen Asset</h4>
+              <h4 class="my-0 font-weight-normal">Kendaraan</h4>
             </div>
             <div class="card-body">
-              <a href="/asset">
+              <a href="/kendaraan">
                 <span class="material-icons" style="font-size: 190px;">category</span>
               </a>
             </div>
-          </div> --}}
+          </div>
 
 
 
