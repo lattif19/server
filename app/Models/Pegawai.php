@@ -13,7 +13,7 @@ class Pegawai extends Model
     protected $guarded = ['id'];
 
 
-    public function pegawai_validasi($data){
+    static function pegawai_validasi($data){
         $valid =  DB::table('pegawai')
                     ->where("pegawai.nik","=", $data['nik'])
                     ->count();
@@ -27,7 +27,7 @@ class Pegawai extends Model
 
 
 
-    public function jabatan_validasi($data){
+    static function jabatan_validasi($data){
         $valid =  DB::table('pegawai_jabatan')
                     ->where("pegawai_jabatan.nama","=", $data['nama'])
                     ->count();
@@ -39,7 +39,7 @@ class Pegawai extends Model
         }
     }
 
-    public function divisi_validasi($data){
+    static function divisi_validasi($data){
         $valid =  DB::table('pegawai_divisi')
                     ->where("pegawai_divisi.nama","=", $data['nama'])
                     ->count();
@@ -51,16 +51,16 @@ class Pegawai extends Model
         }
     }
 
-    public function get_modul(){
+    static function get_modul(){
         return DB::table('modul')->get();
     }
 
-    public function get_level(){
+    static function get_level(){
         return DB::table('pegawai_level_user')->get();
     }
 
 
-    public function get_profile($id){
+    static function get_profile($id){
         return DB::table("pegawai")
                 ->join("users", "users.id", "=", "pegawai.user_id")
                 ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
@@ -71,7 +71,7 @@ class Pegawai extends Model
     }
 
 
-    public function get_detail($nik){
+    static function get_detail($nik){
         return DB::table("pegawai")
                 ->join("users", "users.id", "=", "pegawai.user_id")
                 ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
@@ -82,7 +82,7 @@ class Pegawai extends Model
     }
 
     
-    public function hak_akses(){
+    static function hak_akses(){
         return DB::table("pegawai_hak_akses")
                  ->join("pegawai","pegawai.id","=","pegawai_hak_akses.user_id")
                  ->join("modul","modul.id","=","pegawai_hak_akses.modul_id")
@@ -93,7 +93,7 @@ class Pegawai extends Model
     }
 
 
-    public function hak_akses_cari($data){
+    static function hak_akses_cari($data){
         return DB::table("pegawai_hak_akses")
                  ->join("pegawai","pegawai.id","=","pegawai_hak_akses.user_id")
                  ->join("modul","modul.id","=","pegawai_hak_akses.modul_id")
@@ -106,15 +106,15 @@ class Pegawai extends Model
 
 
 
-    public function get_jabatan(){
+    static function get_jabatan(){
         return DB::table("pegawai_jabatan")->get();
     }
 
-    public function get_divisi(){
+    static function get_divisi(){
         return DB::table("pegawai_divisi")->get();
     }
 
-    public function get_pegawai(){
+    static function get_pegawai(){
         return DB::table("pegawai")
                 ->join("users", "users.id", "=", "pegawai.user_id")
                 ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
