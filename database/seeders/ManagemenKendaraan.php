@@ -13,6 +13,6 @@ class ManagemenKendaraan extends Seeder
      */
     public function run()
     {
-        //
+        // nanti tambahan untuk add database seeder
     }
 }
