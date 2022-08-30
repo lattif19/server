@@ -13,7 +13,7 @@ class Absensi extends Model
     protected $table = 'lembur_absensi';
 
 
-    public function get_mapped(){
+    static function get_mapped(){
 
         return DB::table("pegawai")
         ->distinct("pegawai.id")

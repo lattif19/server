@@ -16,7 +16,7 @@ class Lembur extends Model
     protected $guarded = ['id'];
 
 
-    public function get_data_report($periode, $jenis, $filter){
+    static function get_data_report($periode, $jenis, $filter){
         if($filter=="semua" || $filter==""){ $status = "Belum Diajukan"; $operator = "!="; }else{ $status=$filter;  $operator = "like";}
         
         if($jenis=="general"){
@@ -62,7 +62,7 @@ class Lembur extends Model
         
     }
 
-    public function get_pengajuan_lembur_hrd($data){
+    static function get_pengajuan_lembur_hrd($data){
         return DB::table("pegawai")
                     ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
                     ->select(   "pegawai.user_id", 
@@ -79,7 +79,7 @@ class Lembur extends Model
                     ->paginate(10);
     }
 
-    public function get_lembur_id($id){
+    static function get_lembur_id($id){
         return DB::table("lembur_pengajuan")
                 ->select(
                     "lembur_pengajuan.id as id",
@@ -103,7 +103,7 @@ class Lembur extends Model
     }
 
 
-    public function get_pengajuan_lembur($id){
+    static function get_pengajuan_lembur($id){
         return DB::table("pegawai")
                     ->join("lembur_pengajuan", "lembur_pengajuan.user_id", "=" ,"pegawai.user_id")
                     ->select(   "pegawai.user_id", 
@@ -119,7 +119,7 @@ class Lembur extends Model
 
 
 
-    public function perhitungan_total_jam($data){
+    static function perhitungan_total_jam($data){
         $id_absen = Pegawai::where("user_id", $data['user_id'])->select("lembur_absen_id")->get();
 
         $hasil = DB::table("pegawai")
@@ -149,7 +149,7 @@ class Lembur extends Model
 
 
 
-    public function get_catatan_libur($periode, $id){
+    static function get_catatan_libur($periode, $id){
         return DB::table("lembur_catatan")
             ->join("lembur_pengajuan","lembur_catatan.lembur_pengajuan_id","=","lembur_pengajuan.id")
             ->select("lembur_catatan.id", "lembur_catatan.tanggal", "lembur_catatan.keterangan", "lembur_catatan.lembur_pengajuan_id" )
@@ -161,7 +161,7 @@ class Lembur extends Model
     }
 
 
-    public function get_catatan_biasa($periode, $id){
+    static function get_catatan_biasa($periode, $id){
         return DB::table("lembur_catatan")
             ->join("lembur_pengajuan","lembur_catatan.lembur_pengajuan_id","=","lembur_pengajuan.id")
             ->select("lembur_catatan.id", "lembur_catatan.tanggal", "lembur_catatan.keterangan", "lembur_catatan.lembur_pengajuan_id" )
@@ -172,7 +172,7 @@ class Lembur extends Model
             ->get();
     }
 
-    public function get_data_pengajuan($data){
+    static function get_data_pengajuan($data){
         $id['user_id'] = Auth::user()->id;
 
         return DB::table("lembur_pengajuan")
@@ -190,13 +190,13 @@ class Lembur extends Model
                     
     }
 
-    public function buat_pengajuan_awal($data, $riwayat){
+    static function buat_pengajuan_awal($data, $riwayat){
 
         $riwayat['lembur_pengajuan_id'] = DB::table("lembur_pengajuan")->insertGetId($data);
         return DB::table("lembur_riwayat_pengajuan")->insert($riwayat);
     }
 
-    public function cek_pengajuan($periode){
+    static function cek_pengajuan($periode){
         //nantinya mengembalikan data false atau true
         $data['periode'] = $periode;
         $id['user_id'] = Auth::user()->id;
