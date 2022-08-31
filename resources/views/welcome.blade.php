@@ -60,8 +60,8 @@
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <a href="/main">
-        <p class="mt-5 mb-3 text-muted text-center">&copy; 2022</p>
+      <a href="#">
+        <p class="mt-5 mb-3 text-muted text-center">&copy; S2P Jakarta</p>
       </a>
     </form>
 
