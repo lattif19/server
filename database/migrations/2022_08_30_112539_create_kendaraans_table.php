@@ -15,8 +15,8 @@ class CreateKendaraansTable extends Migration
     {
         Schema::create('a_kendaraan', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('driver_id')->nullable();
             $table->foreignId('a_jenis_kendaraan_id')->nullable();
-            $table->foreignId('user_id')->nullable();
             $table->string('nama');
             $table->string('keterangan')->nullable();
             $table->date('tanggal_pembelian')->nullable();
