@@ -102,7 +102,7 @@
             </div>
           </div> --}}
 
-
+        @can("pegawaiHrd")
         <div class="card mb-4 box-shadow">
             <div class="card-header">
               <h4 class="my-0 font-weight-normal">Kendaraan</h4>
@@ -113,6 +113,7 @@
               </a>
             </div>
           </div>
+          @endcan
 
 
 
