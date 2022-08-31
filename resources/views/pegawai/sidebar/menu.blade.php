@@ -4,19 +4,15 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
 
-
-
-            <div class="sb-sidenav-menu-heading">Menu</div>
-
             <a class="nav-link {{ Request::is('pegawai*') ? 'active' : ''}}" href="/pegawai">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                 Pegawai
             </a>
 
 
 
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#organisasi" aria-expanded="false" aria-controls="organisasi">
-                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                <div class="sb-nav-link-icon"><i class="fa fa-institution"></i></div>
                 Organisasi
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
@@ -34,7 +30,7 @@
 
 
             <a class="nav-link {{ Request::is('hak_akses*') ? 'active' : ''}}" href="/hak_akses">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                <div class="sb-nav-link-icon"><i class="fa fa-wrench"></i></div>
                 Hak Akses
             </a>
 
