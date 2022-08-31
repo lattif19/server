@@ -109,7 +109,7 @@
             </div>
             <div class="card-body">
               <a href="/kendaraan">
-                <span class="material-icons" style="font-size: 190px;">category</span>
+                <span class="material-icons" style="font-size: 190px;">minor_crash</span>
               </a>
             </div>
           </div>
