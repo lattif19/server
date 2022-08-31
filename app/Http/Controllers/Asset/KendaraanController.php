@@ -13,4 +13,8 @@ class KendaraanController extends Controller
     public function test(){
         return "test fungsi";
     }
+    
+    public function tambah(){
+        return "fungsi tambah";
+    }
 }
