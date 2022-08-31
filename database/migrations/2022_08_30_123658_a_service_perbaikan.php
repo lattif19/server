@@ -16,9 +16,9 @@ class AServicePerbaikan extends Migration
         Schema::create('a_service_perbaikan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->foreignId('a_kendaraan_id')->nullable();
-            $table->foreignId('a_jenis_service_id')->nullable();
-            $table->foreignId('a_status_perbaikan_id')->nullable();
+            $table->foreignId('a_kendaraan_id')->nullable();        
+            $table->foreignId('a_jenis_service_id')->nullable();    
+            $table->foreignId('a_status_perbaikan_id')->nullable(); 
             $table->string('nama_bengkel');
             $table->text('keterangan');
             $table->date('tanggal_booking')->nullable();

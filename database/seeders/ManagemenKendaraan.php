@@ -37,7 +37,26 @@ class ManagemenKendaraan extends Seeder
         DB::table("a_status_perbaikan")->insert(["nama"=>"Booking",             "keterangan" => "Menjadwalkan Perbaikan"]);
         DB::table("a_status_perbaikan")->insert(["nama"=>"Proses Perbaikan",    "keterangan" => "Perbaikan Dalam Proses"]);
         DB::table("a_status_perbaikan")->insert(["nama"=>"Selesai",             "keterangan" => "Perbaikan Selesai"]);
-
+        
+        DB::table("a_jenis_service")->insert(["nama"=>"Perbaikan",              "keterangan" => "Perbaikan Mobil"]);
+        DB::table("a_jenis_service")->insert(["nama"=>"Service Berkala",        "keterangan" => "Service Rutin"]);
+        DB::table("a_jenis_service")->insert(["nama"=>"Service Tune Up",        "keterangan" => "Tune Up Mobil"]);
+        DB::table("a_jenis_service")->insert(["nama"=>"Pergantian Sparepart",   "keterangan" => "Pergantian Sparepart"]);
+        DB::table("a_jenis_service")->insert(["nama"=>"Lain-lain",              "keterangan" => "Service yang tidak masuk kategori"]);
+        
+        DB::table("a_jenis_asuransi")->insert(["nama"=>"Asuransi All-Risk",             "keterangan" => "Asuransi menanggung semua jenis resiko"]);
+        DB::table("a_jenis_asuransi")->insert(["nama"=>"Total Loss Only (TLO)",         "keterangan" => "Asuransi dikhususkan untuk kehilangan total"]);
+        DB::table("a_jenis_asuransi")->insert(["nama"=>"Collision Coverage",            "keterangan" => "Asuransi menanggung resiko akibat kecelakaan"]);
+        DB::table("a_jenis_asuransi")->insert(["nama"=>"Liability Insurance",           "keterangan" => "Asuransi menanggung resiko akibat kecelakaan dan resiko medis pada pengendara"]);
+        DB::table("a_jenis_asuransi")->insert(["nama"=>"Personal Injury Protection",    "keterangan" => "Asuransi yang memberikan perlindungan bagi pengemudi"]);
+        
+        DB::table("a_jenis_premi")->insert(["nama"=>"bulanan",    "keterangan" => "Pembayaran premi dilakukan setiap tahun"]);
+        DB::table("a_jenis_premi")->insert(["nama"=>"tahunan",    "keterangan" => "Pembayaran premi dilakukan setiap bulan"]);
+        
+        DB::table("a_jenis_pajak")->insert(["nama"=>"tahunan",    "keterangan" => "Pajak Tahunan"]);
+        DB::table("a_jenis_pajak")->insert(["nama"=>"lima tahun",    "keterangan" => "Pajak Lima Tahun"]);
+        
         //ServicePerbaikan::create();
+        //a_jenis_pajak
     }
 }
