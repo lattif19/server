@@ -1,17 +1,7 @@
 ini masternya merubah data
 
-
-
-
-
-
-
-
-
-
-
-
-
+anto siboker
+gokil
 
 Contoh pengaturan virtual host windows untuk laravel 
 
@@ -27,3 +17,4 @@ Contoh pengaturan virtual host windows untuk laravel
     Require all granted
     </Directory>
 </VirtualHost>
+
