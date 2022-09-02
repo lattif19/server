@@ -207,6 +207,51 @@
                            </table>
                         </div>
                     </div>
+
+
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5>Periode Lembur</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <form action="/lembur_settings/add_user_periode" method="POST">
+                                @csrf
+                                <div class="form-group mb-3">
+                                    <label for="">Nama Pegawai</label>
+                                    <select name="user_id" class="form-control">
+                                        <option value="">--PILIH SATU--</option>
+                                        @foreach ( $users as $d)
+                                            <option value="{{ $d->user_id }}">{{ $d->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-gropu mb-3">
+                                    <label for="">Periode</label>
+                                    <select name="periode" class="form-control" required>
+                                        <option value="" selected>--PILIH SATU--</option>
+                                        <option value="Januari {{ date('Y') }}">Januari {{ date('Y') }}</option>
+                                        <option value="Februari {{ date('Y') }}">Februari {{ date('Y') }}</option>
+                                        <option value="Maret {{ date('Y') }}">Maret {{ date('Y') }}</option>
+                                        <option value="April {{ date('Y') }}">April {{ date('Y') }}</option>
+                                        <option value="Mei {{ date('Y') }}">Mei {{ date('Y') }}</option>
+                                        <option value="Juni {{ date('Y') }}">Juni {{ date('Y') }}</option>
+                                        <option value="Juli {{ date('Y') }}">Juli {{ date('Y') }}</option>
+                                        <option value="Agustus {{ date('Y') }}">Agustus {{ date('Y') }}</option>
+                                        <option value="September {{ date('Y') }}">September {{ date('Y') }}</option>
+                                        <option value="Oktober {{ date('Y') }}">Oktober {{ date('Y') }}</option>
+                                        <option value="November {{ date('Y') }}">November {{ date('Y') }}</option>
+                                        <option value="Desember {{ date('Y') }}">Desember {{ date('Y') }}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-control">
+                                    <button class="btn btn-dark text-light" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 

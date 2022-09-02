@@ -217,6 +217,22 @@ class LemburController extends Controller
         ]);
     }
 
+    public function lembur_pengaturan_tambah_periode(Request $request){
+        $data['user_id'] = $request->user_id;
+        $data['periode'] = $request->periode;
+        $data['total_biasa'] = "00:00:00";
+        $data['total_libur'] = "00:00:00";
+        $data['status'] = "Belum Diajukan";
+
+        $riwayat['status_pengajuan'] = "Belum Diajukan";
+        $riwayat['created_at'] = date("Y-m-d H:i:s");
+
+        if(Lembur::buat_pengajuan_awal($data, $riwayat)){
+            return back()->with("success", "Penambahan Data Berhasil");
+        }
+        return back()->with("error", "Penambahan Data Gagal");
+    }
+
     public function lembur_pengaturan(Request $request){
         
         if($request->nama){
