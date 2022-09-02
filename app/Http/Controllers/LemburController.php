@@ -227,10 +227,14 @@ class LemburController extends Controller
         $riwayat['status_pengajuan'] = "Belum Diajukan";
         $riwayat['created_at'] = date("Y-m-d H:i:s");
 
-        if(Lembur::buat_pengajuan_awal($data, $riwayat)){
+        $validasi = DB::table("lembur_pengajuan")->where("user_id", $data['user_id'])->where("periode", $data['periode'])->count();
+
+        if($validasi == 0){
+            Lembur::buat_pengajuan_awal($data, $riwayat);
             return back()->with("success", "Penambahan Data Berhasil");
+        }else{
+            return back()->with("error", "Periode lembur sudah terbentuk");
         }
-        return back()->with("error", "Penambahan Data Gagal");
     }
 
     public function lembur_pengaturan(Request $request){
