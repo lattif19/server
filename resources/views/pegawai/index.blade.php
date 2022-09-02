@@ -12,8 +12,14 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-2">
-                        <div class="card-header">
+                        <div class="navbar card-header">
+                          
                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Tambah Data Pegawai</a>
+                            <form method="get" action="/pegawai">
+                              <input type="search" placeholder="Cari... " name="cari" aria-label="Search" value="{{ request('cari') }}">
+                              <button class="btn btn-primary" type="submit">Search</button>
+                            </form>
+                            
                         </div>
                         <table class="table">
                             <thead>
@@ -86,7 +92,7 @@
                             <tfoot>
                               <tr>
                                 <td colspan="6">
-                                  {{ $pegawai->links() }}
+                                  {{ $pegawai->withQueryString()->links() }}
                                 </td>
                               </tr>
                             </tfoot>

@@ -12,8 +12,12 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-4">
-                        <div class="card-header">
+                        <div class="navbar card-header">
                             Data Mapper
+                            <form method="get" action="/absen_pengaturan2">
+                                <input type="search" placeholder="Cari... " name="cari" aria-label="Search" value="{{ request('cari') }}">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                              </form>
                         </div>
                         <div class="card-body">
                             <table class="table">
@@ -99,7 +103,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="3"> {{ $pegawai->links() }}</td>
+                                        <td colspan="3"> {{ $pegawai->withQueryString()->links() }}</td>
                                     </tr>
                                 </tfoot>
                             </table>

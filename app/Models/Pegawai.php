@@ -123,4 +123,21 @@ class Pegawai extends Model
                 ->paginate(10);
     }
 
+    static function get_pegawai_cari($data){
+        return DB::table("pegawai")
+                ->join("users", "users.id", "=", "pegawai.user_id")
+                ->join("pegawai_divisi", "pegawai_divisi.id", "=", "pegawai.pegawai_divisi_id")
+                ->join("pegawai_jabatan", "pegawai_jabatan.id", "=", "pegawai.pegawai_jabatan_id")
+                ->where("pegawai.nama", "like", "%".$data."%")
+                ->select(   "pegawai.id", 
+                            "pegawai.nik",
+                            "pegawai.user_id", 
+                            "pegawai.nama",
+                            "pegawai.lembur_absen_id", 
+                            "users.email", 
+                            "pegawai_jabatan.nama as jabatan", 
+                            "pegawai_divisi.nama as divisi")
+                ->paginate(10);
+    }
+
 }

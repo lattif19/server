@@ -11,6 +11,13 @@ class UserController extends Controller
 {
 
     public function profile_pegawai($id){
+        
+        $id_login = auth()->user()->id;
+        
+        if($id_login != $id){
+            return abort(403);
+        }
+
         return view("pegawai.profile",[
             "title" => "Profile",
             'divisi' => Pegawai::get_divisi(),
@@ -227,13 +234,13 @@ class UserController extends Controller
     }
 
 
-    public function index(){
-        // dd(Pegawai::get_pegawai());
+    public function index(Request $request){
+
         return view('pegawai/index', 
             [   'title' => "Pegawai",
                 'divisi' => Pegawai::get_divisi(),
                 'jabatan' => Pegawai::get_jabatan(),
-                'pegawai' => Pegawai::get_pegawai(),
+                'pegawai' =>  Pegawai::get_pegawai_cari($request->cari),
         ]);
     }
 }

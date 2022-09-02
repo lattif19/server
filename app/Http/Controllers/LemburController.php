@@ -90,6 +90,20 @@ class LemburController extends Controller
     public function lembur_approve_detail(Request $request){
         $id = $request->id;
 
+        $user_id_pengaju = DB::table("lembur_pengajuan")->where("id", $id)->get()[0]->user_id;
+        $user_id_pegawai = DB::table('pegawai')->where("user_id", $user_id_pengaju)->get()[0]->lembur_approve_id;
+        
+        $user_id_approver = auth()->user()->id;
+        
+        // dd($user_id_pegawai != $user_id_approver);
+
+        if($user_id_pegawai != $user_id_approver){
+            return abort(403);
+        }
+
+
+
+
         return view("lembur.lembur_approve_detail",[
      // return view("lembur.lembur_preview_detail",[
             "title" => "Detail Pengajuan Lembur",

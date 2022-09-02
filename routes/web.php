@@ -70,7 +70,7 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::put('/lembur/pengaturan_jam', [LemburController::class, 'lembur_pengaturan_jam']);
     Route::get('/lembur/calculating/{periode}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_hitung_total']);
     Route::get('/lembur/calculated/{id}/{periode}', [LemburController::class, 'lembur_preview_total']);
-    Route::post('/lembur/calculated/', [LemburController::class, 'lembur_simpan_total']);
+    Route::get('/lembur/calculated/', [LemburController::class, 'lembur_simpan_total']);
     Route::get('/lembur_approve', [LemburController::class, 'lembur_approve']);
     Route::get('/lembur_approve/detail/{id}', [LemburController::class, 'lembur_approve_detail']);
     Route::get('/lembur_approved/detail/{id}', [LemburController::class, 'lembur_approved_detail']);

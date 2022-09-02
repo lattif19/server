@@ -12,7 +12,7 @@
 
 
         @if(count($jam_lembur) > 0)
-        <form action="/lembur/calculated/" method="POST">@csrf
+        <form action="/lembur/calculated/" method="get">@csrf
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-4 col-lg-2">

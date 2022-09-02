@@ -36,10 +36,13 @@ class AbsensiController extends Controller
     }
 
 
-    public function pengaturan2(){
+    public function pengaturan2(Request $request){
+
+        //dd(Absensi::distinct()->get(['absen_id','nama']));
+        
         return view("absen.pengaturan2", [
             "title" => "Absensi dan Pegawai",
-            "pegawai" => Pegawai::paginate(10),
+            "pegawai" => Pegawai::get_pegawai_cari($request->cari),
             "absensi" => Absensi::distinct()->get(['absen_id','nama']),
         ]);
     }

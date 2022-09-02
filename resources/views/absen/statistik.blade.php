@@ -26,7 +26,7 @@
 
 <div hidden>
     <input type="hidden" id="jam-masuk"     value="{{ $jam_masuk }}">
-    <input type="hidden" id="jam-kantor"    value="">
+    <input type="hidden" id="jam-kantor"    value="08.00,08.00,08.00,08.00,08.00,08.00,08.00">
     <input type="hidden" id="jam-pulang"    value="{{ $jam_pulang }}">
     <input type="hidden" id="tanggal"       value="{{ $tanggal }}">
 </div>
@@ -80,7 +80,7 @@ for(var i in tanggal){
 
     {
       label: 'Jam Masuk',
-      type: ['bar'],
+      type: ['line'],
       backgroundColor: 'skyblue',
       borderColor: 'skyblue',
       data: jam_masuk,
