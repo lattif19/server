@@ -75,10 +75,47 @@
                                                         <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}">
                                                             <span class="material-symbols-outlined">info</span>
                                                         </a>
-                                                        @endif
+                                                    @endif
                                                     <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">
                                                         <span class="material-symbols-outlined">print</span>
-                                                    </a> 
+                                                    </a>
+                                                    @if ($i->status == "Diajukan")
+                                                    
+                                                    <button class="btn btn-success mr-2" 
+                                                            data-toggle="modal" 
+                                                            data-target="#tambahData{{ $i->id }}">Tarik Pengajuan 
+                                                    </button>
+
+
+                                                    <div class="modal fade" id="tambahData{{ $i->id }}" tabindex="-1" role="dialog"
+                                                    aria-labelledby="tambahData{{ $i->id }}"
+                                                    aria-hidden="true">
+
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="tambahData{{ $i->id }}">Tarik Pengajuan Lembur</h5>
+                                                                        <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="/lembur/tarik_pengajuan_lembur" method="POST">
+                                                                        @csrf
+                                                                        <h4>Yakin Ya, pengajuan ga jadi diaajukan dulu, emeng mau di edit apa..?</h4>
+                                                                        <h5>Pengajuan yang akan di Tarik : <strong>{{ $i->periode }}</strong></h5>
+                                                                        <input type="hidden" name="lembur_pengajuan_id" value="{{ $i->id }}">
+                                                                        <div class="form-group mt-5">
+                                                                            <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Tarik </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    @endif 
                                                     
                                                 </td>
                                             </tr>

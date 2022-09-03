@@ -89,6 +89,16 @@
                                         @if($filter == "diajukan") checked @endif>
                                 <label class="form-check-label" for="inlineRadio2">Diajukan</label>
                             </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" 
+                                        type="radio" 
+                                        name="filter" 
+                                        id="inlineRadio3" 
+                                        value="selesai" 
+                                        @if($filter == "selesai") checked @endif>
+                                <label class="form-check-label" for="inlineRadio3">Selesai</label>
+                            </div>
                         </div>
 
                         <hr>

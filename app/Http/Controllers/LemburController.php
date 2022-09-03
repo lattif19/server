@@ -14,6 +14,39 @@ use PDF;
 class LemburController extends Controller
 {
 
+    public function proses_terima_pengajuan(Request $request){
+        //dd($request->lembur_pengajuan_id);
+
+        $id['id'] = $request->lembur_pengajuan_id;
+        $lembur['status'] = "Selesai";
+
+        $riwayat['created_at'] = date("Y-m-d H:i:s");
+        $riwayat['lembur_pengajuan_id'] = $id['id'];
+        $riwayat['status_pengajuan'] = "Selesai";
+        $riwayat['komentar'] = "Pengajuan Diterima oleh Department HR&GA";
+
+        DB::table('lembur_pengajuan')->where($id)->update($lembur) ?
+        DB::table('lembur_riwayat_pengajuan')->insert($riwayat) : back()->with("error", "Penambahan Data Gagal");
+
+        return back()->with("success", "Proses penarikan data lembur berhasil");
+    }
+
+    public function proses_tarik_pengajuan(Request $request){
+        //dd($request->lembur_pengajuan_id);
+        $id['id'] = $request->lembur_pengajuan_id;
+        $lembur['status'] = "Belum Diajukan";
+
+        $riwayat['created_at'] = date("Y-m-d H:i:s");
+        $riwayat['lembur_pengajuan_id'] = $id['id'];
+        $riwayat['status_pengajuan'] = "Belum Diajukan";
+        $riwayat['komentar'] = "Pengajuan Ditarik";
+
+        DB::table('lembur_pengajuan')->where($id)->update($lembur) ?
+        DB::table('lembur_riwayat_pengajuan')->insert($riwayat) : back()->with("error", "Penambahan Data Gagal");
+
+        return back()->with("success", "Proses penarikan data lembur berhasil");
+    }
+
     public function reporting(Request $request){
         
         // $periode = DB::table("lembur_pengajuan")->distinct()->orderBy("id", "desc")->get('periode');

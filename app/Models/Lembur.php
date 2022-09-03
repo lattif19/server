@@ -17,7 +17,10 @@ class Lembur extends Model
 
 
     static function get_data_report($periode, $jenis, $filter){
-        if($filter=="semua" || $filter==""){ $status = "Belum Diajukan"; $operator = "!="; }else{ $status=$filter;  $operator = "like";}
+        if($filter=="semua" || $filter==""){ 
+            $status = "Belum Diajukan"; $operator = "!="; 
+        }else{ 
+            $status=$filter;  $operator = "like";}
         
         if($jenis=="general"){
             return DB::table("lembur_pengajuan")
@@ -29,8 +32,8 @@ class Lembur extends Model
                                 "lembur_pengajuan.status",
                                 )
                     ->selectRaw("(select nama from pegawai where pegawai.user_id = lembur_pengajuan.user_id) as nama")
-                    ->where("lembur_pengajuan.status", $operator, $status )
                     ->where("lembur_pengajuan.periode", "=", $periode)
+                    ->where("lembur_pengajuan.status", $operator, $status )
                     ->get();
             
          }else{ 
@@ -74,6 +77,7 @@ class Lembur extends Model
                                 "lembur_pengajuan.id")
                      ->where("lembur_pengajuan.status", "Disetujui")
                      ->orWhere("lembur_pengajuan.status", "Diajukan")
+                     ->orWhere("lembur_pengajuan.status", "Selesai")
                      ->Where("pegawai.nama", "like", "%".$data."%")
                      ->orderBy("lembur_pengajuan.id", "desc")
                     ->paginate(10);
