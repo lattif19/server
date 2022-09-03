@@ -14,7 +14,7 @@ use PDF;
 class LemburController extends Controller
 {
 
-    public function proses_terima_pengajuan(Request $request){
+        public function proses_terima_pengajuan(Request $request){
         //dd($request->lembur_pengajuan_id);
 
         $id['id'] = $request->lembur_pengajuan_id;
@@ -78,7 +78,22 @@ class LemburController extends Controller
 
         $data["periode"] = $request->periode;
         $data['lembur'] = Lembur::get_lembur_id($request->pengajuan_lembur_id);
+
+
+        //validasi
+        $qr_diajukan = DB::table('validasi')->where('modul', "Lembur-Diajukan")->where("id_validasi", $request->pengajuan_lembur_id)->get();
+        $qr_disetujui = DB::table('validasi')->where('modul', "Lembur-Disetujui")->where("id_validasi", $request->pengajuan_lembur_id)->get();
+        $qr_selesai = DB::table('validasi')->where('modul', "Lembur-Selesai")->where("id_validasi", $request->pengajuan_lembur_id)->get();
         
+        
+        if(count($qr_diajukan) > 0){
+            $data['qr_diajukan'] = $qr_diajukan[0]->link_validasi."?kec=".$qr_diajukan[0]->link_validasi_cek;
+        }else{
+            $data['qr_diajukan'] = "";
+        }
+
+
+
         if($approver_id != null){   
             $nama_approver = DB::table("pegawai")->where("user_id", $approver_id)->get()[0]->nama;
             $data["nama_approver"] = $nama_approver;
@@ -185,7 +200,6 @@ class LemburController extends Controller
         $riwayat['created_at']              = date("Y-m-d H:i:s");
 
         DB::table("lembur_riwayat_pengajuan")->insertOrIgnore($riwayat);
-
             for($x=0; $x<=count($request->hari_libur)-1; $x++){
                     $data2["lembur_pengajuan_id"]     = $lembur_id;
                     $data2["hari_libur"]              = $request->hari_libur[$x];
@@ -204,7 +218,8 @@ class LemburController extends Controller
                     DB::table("lembur_pengajuan_detail")->insert($data2);
                 }
             }
-
+        
+        $this->generate_qrlink("Lembur-Diajukan", $riwayat['lembur_pengajuan_id']);
         return redirect("/lembur")->with("success", "Proses Pengajuan Lembur Berhasil");
 
     }
@@ -449,6 +464,39 @@ class LemburController extends Controller
     public function destroy(Lembur $lembur)
     {
         //
+    }
+
+    public function cek_link_validasi(Request $request){
+       $id_lembur =  DB::table('validasi')->where('link_validasi', $request->link)->where("link_validasi_cek", $request->kec)->get()[0]->id_validasi;
+        
+        return view("validasi.lembur_validasi", [
+            'link1' => $id_lembur,
+            'link2' => $id_lembur,
+        ]);
+    }
+
+    public function generate_qrlink($modul, $data_id){
+        
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                                    // Contoh Field
+        $data['modul'] = $modul;                    // Lembur-Diajukan => untuk identifikasi valiasi {"Diajukan", "Disetujui", "Selesai"}
+        $data['id_validasi'] = $data_id;           // Link Pengajuan Lembur
+        $data['created_by'] = auth()->user()->id;   
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['link_validasi'] = substr(str_shuffle($permitted_chars), 0, 16);
+        $data['link_validasi_cek'] = substr(str_shuffle($permitted_chars), 0, 8);
+
+        //get data validasi dulu
+        $validate = DB::table('validasi')->where('created_by', $data['created_by'])->where('modul', $data['modul'])->count();
+
+        if($validate == 0){
+        DB::table('validasi')->insert($data) ? back()->with("success", "Proses berhasil") :
+        back()->with("error", "Penambahan validasi");
+        }else{
+            DB::table('validasi')->where('created_by', $data['created_by'])->where('modul', $data['modul'])->update($data) ? 
+            back()->with("success", "Proses berhasil") :
+            back()->with("error", "Penambahan validasi");
+        }
     }
 
     public function bulan_ini(){   return $bulan = date("m");}

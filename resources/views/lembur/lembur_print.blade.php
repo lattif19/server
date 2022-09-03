@@ -130,7 +130,12 @@
         <td>Diterima Oleh</td>
     </tr>
     <tr align="center">
-        <td>{{ tanggl_id($tanggal_pengajuan[0]->created_at) }} <br><br><br><br> </td>
+        <td>{{ tanggl_id($tanggal_pengajuan[0]->created_at) }} <br>
+            @if($qr_diajukan != null)
+            {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan); !!}
+                {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan !!}
+            @endif
+        </td>
         <td>@if(count($tanggal_approve) > 0)  {{ tanggl_id($tanggal_approve[0]->created_at) }} <br><br><br><br> @endif </td>
         <td>@if(count($tanggal_diterima) > 0) {{ tanggl_id($tanggal_diterima[0]->created_at) }} <br><br><br><br> @endif</td>
     </tr>

@@ -43,9 +43,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () { return view('welcome'); })->middleware("guest")->name("login");
 Route::post('/login', [LoginController::class, 'autenticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::get("/validasi", function(){
-    return view("validasi.lembur_validasi");
-});
+Route::get("/validasi/{link}", [LemburController::class, "cek_link_validasi"]);
 
 
 

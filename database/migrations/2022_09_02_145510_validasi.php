@@ -18,6 +18,8 @@ class Validasi extends Migration
             $table->text("modul");
             $table->text("id_validasi");
             $table->text("link_validasi");
+            $table->text("link_validasi_cek");
+            $table->text("created_by");
             $table->timestamps();
         });
     }
