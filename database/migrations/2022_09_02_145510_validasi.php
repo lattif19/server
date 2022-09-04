@@ -20,6 +20,7 @@ class Validasi extends Migration
             $table->text("link_validasi");
             $table->text("link_validasi_cek");
             $table->text("created_by");
+            $table->text("status")->nullable();
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class LemburPengajuanDetail extends Migration
             $table->id();
             $table->foreignId("lembur_pengajuan_id");
             $table->date("tanggal");
-            $table->boolean("hari_libur");
+            $table->boolean("hari_libur")->nullable();
             $table->text("keterangan")->nullable();
             $table->time("jam_masuk_kantor")->nullable();
             $table->time("jam_kerja_kantor")->nullable();

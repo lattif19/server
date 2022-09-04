@@ -136,7 +136,12 @@
                 {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan !!}
             @endif
         </td>
-        <td>@if(count($tanggal_approve) > 0)  {{ tanggl_id($tanggal_approve[0]->created_at) }} <br><br><br><br> @endif </td>
+        <td>@if(count($tanggal_approve) > 0)  {{ tanggl_id($tanggal_approve[0]->created_at) }} <br>@endif 
+            @if($qr_disetujui != null)
+            {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui); !!}
+                {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui !!}
+            @endif
+        </td>
         <td>@if(count($tanggal_diterima) > 0) {{ tanggl_id($tanggal_diterima[0]->created_at) }} <br><br><br><br> @endif</td>
     </tr>
     <tr align="center">

@@ -93,6 +93,13 @@ class LemburController extends Controller
         }
 
 
+        if(count($qr_disetujui) > 0){
+            $data['qr_disetujui'] = $qr_disetujui[0]->link_validasi."?kec=".$qr_disetujui[0]->link_validasi_cek;
+        }else{
+            $data['qr_disetujui'] = "";
+        }
+
+
 
         if($approver_id != null){   
             $nama_approver = DB::table("pegawai")->where("user_id", $approver_id)->get()[0]->nama;
@@ -129,7 +136,14 @@ class LemburController extends Controller
         $riwayat['komentar'] = $request->keterangan;
         $riwayat['created_at'] = date("Y-m-d H:i:s");
 
-        
+        if($data['status'] == "Disetujui"){
+            $this->generate_qrlink("Lembur-Disetujui", $riwayat['lembur_pengajuan_id'], "aktif");
+        }else{
+            DB::table("validasi")->where("modul","=", "Lembur-Diajukan")
+                                 ->where("id_validasi", "=", $id['id'])
+                                 ->update(["status"=>"tidak-aktif"]);
+        }
+
         DB::table("lembur_pengajuan")->where($id)->update($data);
         DB::table("lembur_riwayat_pengajuan")->insertOrIgnore($riwayat);
         return back()->with("success", "Proses Pengajuan Lembur Berhasil");
@@ -219,7 +233,7 @@ class LemburController extends Controller
                 }
             }
         
-        $this->generate_qrlink("Lembur-Diajukan", $riwayat['lembur_pengajuan_id']);
+        $this->generate_qrlink("Lembur-Diajukan", $riwayat['lembur_pengajuan_id'], "aktif");
         return redirect("/lembur")->with("success", "Proses Pengajuan Lembur Berhasil");
 
     }
@@ -467,15 +481,27 @@ class LemburController extends Controller
     }
 
     public function cek_link_validasi(Request $request){
-       $id_lembur =  DB::table('validasi')->where('link_validasi', $request->link)->where("link_validasi_cek", $request->kec)->get()[0]->id_validasi;
+       $validasi =  DB::table('validasi')
+                        ->where('link_validasi', $request->link)
+                        ->where("link_validasi_cek", $request->kec)
+                        ->where("status", "=", "aktif")
+                        ->get();
+        if(count($validasi) == 0){
+            return view("validasi.lembur_validasi_error");
+        }
+        $lembur_id = $validasi[0]->id_validasi;
+        $creatd_by = $validasi[0]->created_by;
+        
         
         return view("validasi.lembur_validasi", [
-            'link1' => $id_lembur,
-            'link2' => $id_lembur,
+            'status' => $validasi[0]->modul,
+            'data_lembur' => DB::table("lembur_pengajuan")->where("id", $lembur_id)->get(),
+            'data_creator' => DB::table("pegawai")->where("user_id", $creatd_by)->get(),
+            'riwayat' => DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur_id)->get(),
         ]);
     }
 
-    public function generate_qrlink($modul, $data_id){
+    public function generate_qrlink($modul, $data_id, $status){
         
         $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                                                     // Contoh Field
@@ -485,6 +511,8 @@ class LemburController extends Controller
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['link_validasi'] = substr(str_shuffle($permitted_chars), 0, 16);
         $data['link_validasi_cek'] = substr(str_shuffle($permitted_chars), 0, 8);
+        $data["status"] = $status;
+        
 
         //get data validasi dulu
         $validate = DB::table('validasi')->where('created_by', $data['created_by'])->where('modul', $data['modul'])->count();
