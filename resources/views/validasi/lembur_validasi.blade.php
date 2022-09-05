@@ -26,12 +26,52 @@
 
     <hr>
     <h2>Riwayat Lembur</h2>
-    @foreach($riwayat as $i)
-        <ul>
-            <li>Status : {{ $i->status_pengajuan }}</li>
-            <li>Komentar : {{ $i->komentar }}</li>
-            <li>Tanggal : {{ $i->created_at }}</li>
-        </ul>
-        @endforeach
+    
+    @if($status == "Lembur-Diajukan")
+        @for ($data=0; $data<count($riwayat); $data++)
+            <ul>
+                <li>Status :    {{ $riwayat[$data]->status_pengajuan }}</li>
+                <li>Komentar :  {{ $riwayat[$data]->komentar }}</li>
+                <li>Tanggal :   {{ $riwayat[$data]->created_at }}</li>
+            </ul>
+            @if($riwayat[$data]->status_pengajuan == "Diajukan")
+                <?php break; ?>
+            @endif
+        @endfor
+    @endif
+
+
+    @if($status == "Lembur-Disetujui")
+        @for ($data=0; $data<count($riwayat); $data++)
+            <ul>
+                <li>Status :    {{ $riwayat[$data]->status_pengajuan }}</li>
+                <li>Komentar :  {{ $riwayat[$data]->komentar }}</li>
+                <li>Tanggal :   {{ $riwayat[$data]->created_at }}</li>
+            </ul>
+            @if($riwayat[$data]->status_pengajuan == "Diajukan")
+                
+                <ul>
+                    <li>Status :    {{ $riwayat[$data+1]->status_pengajuan }}</li>
+                    <li>Komentar :  {{ $riwayat[$data+1]->komentar }}</li>
+                    <li>Tanggal :   {{ $riwayat[$data+1]->created_at }}</li>
+                </ul>
+                <?php break; ?>
+            @endif
+        @endfor
+    @endif
+
+
+    @if($status == "Lembur-Selesai")
+        @for ($data=0; $data<count($riwayat); $data++)
+            <ul>
+                <li>Status :    {{ $riwayat[$data]->status_pengajuan }}</li>
+                <li>Komentar :  {{ $riwayat[$data]->komentar }}</li>
+                <li>Tanggal :   {{ $riwayat[$data]->created_at }}</li>
+            </ul>
+        @endfor
+    @endif
+
+
+
 </body>
 </html>
