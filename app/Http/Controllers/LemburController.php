@@ -537,7 +537,7 @@ class LemburController extends Controller
             DB::table('validasi')->insert($data) ? back()->with("success", "Proses berhasil") :
             back()->with("error", "Penambahan validasi");
         }else{
-            DB::table('validasi')->where('created_by', $data['created_by'])->where('modul', $data['modul'])->update($data) ? 
+            DB::table('validasi')->where('id_validasi', $data['id_validasi'])->where('modul', $data['modul'])->update($data) ? 
             back()->with("success", "Proses berhasil") :
             back()->with("error", "Penambahan validasi");
         }
