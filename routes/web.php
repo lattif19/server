@@ -60,11 +60,15 @@ Route::group(['middleware' => ["auth"]], function(){
 
 
     Route::get('/main', [DashboardController::class, 'index'])->name('home')->middleware("auth");
+    
     Route::get('/kendaraan', [KendaraanController::class, 'index']);
-    Route::get('/sppd', [SppdController::class, 'index']);
-
-
-
+    Route::get('/kendaraan/list/{parameter}', [KendaraanController::class, 'daftar_kendaraan']);
+    ///kendaraan/list
+    
+    
+    
+    
+    //Route::get('/sppd', [SppdController::class, 'index']);
 
     Route::get('/lembur', [LemburController::class, 'index']);
     Route::get('/lembur_report', [LemburController::class, 'reporting']);
