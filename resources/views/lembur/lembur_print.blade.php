@@ -132,17 +132,22 @@
     <tr align="center">
         <td>{{ tanggl_id($tanggal_pengajuan[0]->created_at) }} <br>
             @if($qr_diajukan != null)
-            {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan); !!}
-                {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan !!}
+                {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan); !!}
+                {{-- {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_diajukan !!} --}}
             @endif
         </td>
         <td>@if(count($tanggal_approve) > 0)  {{ tanggl_id($tanggal_approve[0]->created_at) }} <br>@endif 
             @if($qr_disetujui != null)
-            {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui); !!}
-                {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui !!}
+                {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui); !!}
+                {{-- {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui !!} --}}
             @endif
         </td>
-        <td>@if(count($tanggal_diterima) > 0) {{ tanggl_id($tanggal_diterima[0]->created_at) }} <br><br><br><br> @endif</td>
+        <td>@if(count($tanggal_diterima) > 0) {{ tanggl_id($tanggal_diterima[0]->created_at) }} <br>@endif
+            @if($qr_selesai != null)
+                {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_selesai); !!}
+                {{-- {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui !!} --}}
+            @endif
+        </td>
     </tr>
     <tr align="center">
         <td>{{ DB::table('pegawai')->where("user_id", auth()->user()->id)->get()[0]->nama }}</td>

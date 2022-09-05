@@ -25,10 +25,18 @@ class LemburController extends Controller
         $riwayat['status_pengajuan'] = "Selesai";
         $riwayat['komentar'] = "Pengajuan Diterima oleh Department HR&GA";
 
+        if($lembur['status'] == "Selesai"){
+            $this->generate_qrlink("Lembur-Selesai", $riwayat['lembur_pengajuan_id'], "aktif");
+        }else{
+            DB::table("validasi")->where("modul","=", "Lembur-Selesai")
+                                 ->where("id_validasi", "=", $id['id'])
+                                 ->update(["status"=>"tidak-aktif"]);
+        }
+
         DB::table('lembur_pengajuan')->where($id)->update($lembur) ?
         DB::table('lembur_riwayat_pengajuan')->insert($riwayat) : back()->with("error", "Penambahan Data Gagal");
 
-        return back()->with("success", "Proses penarikan data lembur berhasil");
+        return back()->with("success", "Proses pengajuan Lembur Telah selesai");
     }
 
     public function proses_tarik_pengajuan(Request $request){
@@ -98,6 +106,14 @@ class LemburController extends Controller
         }else{
             $data['qr_disetujui'] = "";
         }
+
+        if(count($qr_selesai) > 0){
+            $data['qr_selesai'] = $qr_selesai[0]->link_validasi."?kec=".$qr_selesai[0]->link_validasi_cek;
+        }else{
+            $data['qr_selesai'] = "";
+        }
+
+
 
 
 
