@@ -16,7 +16,7 @@ class LemburController extends Controller
 
         public function proses_terima_pengajuan(Request $request){
         //dd($request->lembur_pengajuan_id);
-
+        //
         $id['id'] = $request->lembur_pengajuan_id;
         $lembur['status'] = "Selesai";
 
@@ -531,11 +531,11 @@ class LemburController extends Controller
         
 
         //get data validasi dulu
-        $validate = DB::table('validasi')->where('created_by', $data['created_by'])->where('modul', $data['modul'])->count();
+        $validate = DB::table('validasi')->where('id_validasi', $data['id_validasi'])->where('modul', $data['modul'])->count();
 
         if($validate == 0){
-        DB::table('validasi')->insert($data) ? back()->with("success", "Proses berhasil") :
-        back()->with("error", "Penambahan validasi");
+            DB::table('validasi')->insert($data) ? back()->with("success", "Proses berhasil") :
+            back()->with("error", "Penambahan validasi");
         }else{
             DB::table('validasi')->where('created_by', $data['created_by'])->where('modul', $data['modul'])->update($data) ? 
             back()->with("success", "Proses berhasil") :
