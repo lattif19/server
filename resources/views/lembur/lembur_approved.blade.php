@@ -15,19 +15,18 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header end">
+            <!-- <div class="row"> -->
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <form action="/lembur_approved" method="get" class="form-inline">
                                 <input type="search" placeholder="cari nama.." name="cari" value="{{ request()->cari }}">
                                 <button class="btn btn-dark inline">Cari</button>
                             </form>
                         </div>
-                        <div class="card-body">
+                        <div class="box-body">
                             
-        
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-striped">
                                     <thead class="table-light">
                                         <tr>
                                             <td align="center" width="80px">No</td>
@@ -36,7 +35,7 @@
                                             <td align="center" width="150px">Hari Biasa</td>
                                             <td align="center" width="150px">Hari Libur</td>
                                             <td align="center" width="100px">Status</td>
-                                            <td align="center" width="100px">Aksi</td>
+                                            <td align="center" width="150px">Aksi</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,15 +74,16 @@
                                                 @endif
                                                 </td>
                                                 <td align="center">
-                                                    <a href="/lembur/print/{{ $d->id }}/{{ Str::slug($d->periode) }}">
-                                                        <span class="material-symbols-outlined">print</span>
+                                                    <a href="/lembur/print/{{ $d->id }}/{{ Str::slug($d->periode) }}" class="btn btn-primary btn-xs">
+                                                        <i class="fa fa-print" data-toogle="tooltip" data-placement="top" title="print"></i>
                                                     </a>
 
                                                     @if ($d->status == "Disetujui")
 
-                                                        <button class="btn btn-success mr-2" 
+                                                        <button class="btn btn-success btn-xs" 
                                                                 data-toggle="modal" 
-                                                                data-target="#tambahData{{ $d->id }}">Terima Pengajuan 
+                                                                data-target="#tambahData{{ $d->id }}">
+                                                                <i class="fa fa-check-circle" data-toogle="tooltip" data-placement="top" title="Terima Pengajuan "></i>
                                                         </button>
 
 
@@ -102,12 +102,12 @@
                                                                     <div class="modal-body">
                                                                         <form action="/lembur/terima_pengajuan_lembur" method="POST">
                                                                             @csrf
-                                                                            <h4>Yakin yaa, pengajuan lembur ini sudah diterima oleh Departement HR&GA ?</h4>
+                                                                            <h4>Apakah Anda Yakin Ingin Menerima Pengeajuan Lembur ?</h4>
                                                                             <h5>Pengjaun dari : <strong>{{ $d->nama }}</strong></h5>
                                                                             <h5>Periode  : <strong>{{ $d->periode }}</strong></h5>
                                                                             <input type="hidden" name="lembur_pengajuan_id" value="{{ $d->id }}">
                                                                             <div class="form-group mt-5">
-                                                                                <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Terima Donk </button>
+                                                                                <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Terima </button>
                                                                             </div>
                                                                         </form>
                                                                     </div>
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
 

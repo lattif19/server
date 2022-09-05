@@ -23,25 +23,26 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
+            <!-- <div class="row"> -->
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <h5> Pengajuan Lembur Hari Biasa </h5>
                         </div>
-                        <div class="card-body">
-                           <table class="table table-bordered mb-5">
-                                <thead align="center" class="table-dark">
-                                    <tr>
+
+                        <div class="box-body table-respon">
+                           <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="bg-dark text-light">
                                         <td width="10px">No</td>
-                                        <td width="200px">Tanggal</td>
-                                        <td>Keterangan / Deskripsi</td>
+                                        <td width="90px">Tanggal</td>
+                                        <td width="200px">Keterangan / Deskripsi</td>
                                         @if($pengaturan_jam->edit_jam_masuk == 1) <td width="90px">Jam Masuk <br> Kerja</td> @endif
                                         @if($pengaturan_jam->edit_jam_kerja == 1) <td width="90px">Jam Waktu <br> Kerja </td> @endif
-                                        <td width="90px">Jam Masuk</td>
-                                        <td width="100px">Jam Pulang <br> Standar</td>
-                                        <td width="100px">Jam Pulang <br> Sebenarnya</td>
-                                        <td width="100px">Waktu <br> Lembur</td>
+                                        <td width="60px">Jam Masuk</td>
+                                        <td width="60px">Jam Pulang <br> Standar</td>
+                                        <td width="60px">Jam Pulang <br> Sebenarnya</td>
+                                        <td width="60px">Waktu <br> Lembur</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -157,21 +158,21 @@
                 </div>
 
 
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <h5> Pengajuan Lembur Libur </h5>
                         </div>
-                        <div class="card-body">
-                           <table class="table table-bordered mb-5">
+                        <div class="box-body table-respon">
+                           <table class="table table-bordered table-striped">
                                 <thead align="center" class="table-dark">
                                     <tr>
                                         <td width="10px">No</td>
-                                        <td width="200px">Tanggal</td>
-                                        <td>Keterangan / Deskripsi</td>
-                                        <td width="100px">Jam Masuk</td>
-                                        <td width="100px">Jam Pulang Sebenarnya</td>
-                                        <td width="100px">Waktu Lembur</td>
+                                        <td width="90px">Tanggal</td>
+                                        <td width="200px">Keterangan / Deskripsi</td>
+                                        <td width="60px">Jam Masuk</td>
+                                        <td width="60px">Jam Pulang Sebenarnya</td>
+                                        <td width="60px">Waktu Lembur</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -254,7 +255,7 @@
 
 
 
-            </div>
+            <!-- </div> -->
 
         </form>
         </div>

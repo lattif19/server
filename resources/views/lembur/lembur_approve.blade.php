@@ -14,14 +14,14 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-body">
+            <!-- <div class="row"> -->
+                <div class="content">
+                    <div class="box">
+                        <div class="box-body">
                             
         
-                                <table class="table table-bordered">
-                                    <thead class="table-light">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="bg-dark text-light">
                                         <tr>
                                             <td width="100px" align="center">No</td>
                                             <td width="300px" >Nama</td>
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
 

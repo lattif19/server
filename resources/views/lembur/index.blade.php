@@ -95,7 +95,7 @@
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="tambahData{{ $i->id }}">Tarik Pengajuan Lembur</h5>
+                                                                    <h5 class="modal-title" id="tambahData{{ $i->id }}">Batal Pengajuan </h5>
                                                                         <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -103,11 +103,11 @@
                                                                 <div class="modal-body">
                                                                     <form action="/lembur/tarik_pengajuan_lembur" method="POST">
                                                                         @csrf
-                                                                        <h4>Yakin Ya, pengajuan ga jadi diaajukan dulu, emeng mau di edit apa..?</h4>
-                                                                        <h5>Pengajuan yang akan di Tarik : <strong>{{ $i->periode }}</strong></h5>
+                                                                        <h4>Apakah Anda Yakin Ingin Membatalkan Pengajuan Lembur ?</h4>
+                                                                        <h5>Pengajuan yang akan di Batalkan : <strong>{{ $i->periode }}</strong></h5>
                                                                         <input type="hidden" name="lembur_pengajuan_id" value="{{ $i->id }}">
                                                                         <div class="form-group mt-5">
-                                                                            <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Tarik </button>
+                                                                            <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Batal </button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
