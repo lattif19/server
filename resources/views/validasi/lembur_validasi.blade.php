@@ -34,14 +34,8 @@
             <li>Tanggal :   {{ $riwayat[$data]->created_at }}</li>
         </ul>
     
-            @if($status == "Lembur-Disetujui" && $riwayat[$data]->status_pengajuan == "Diajukan")
-                <ul>
-                    <li>Status :    {{ $riwayat[$data+1]->status_pengajuan }}</li>
-                    <li>Komentar :  {{ $riwayat[$data+1]->komentar }}</li>
-                    <li>Tanggal :   {{ $riwayat[$data+1]->created_at }}</li>
-                </ul>
+            @if($status == "Lembur-Disetujui" && $riwayat[$data]->status_pengajuan == "Disetujui")
                 <?php break; ?>
-            
             @elseif($status == "Lembur-Diajukan" && $riwayat[$data]->status_pengajuan == "Diajukan")
                 <?php break; ?>
             @endif
