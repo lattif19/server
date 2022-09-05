@@ -19,18 +19,18 @@
             
 
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="nav justify-content-between card-header">
+            <!-- <div class="row"> -->
+                <div class="content">
+                    <div class="box">
+                        <div class="nav justify-content-between box-header">
                             <h2>Riwayat Pengajuan</h2>
                             <form action="/lembur" method="get">
                                 <input  type="search" placeholder="Cari..." name="cari" value="{{ request()->cari }}">
                                 <button class="btn btn-dark text-light" type="submit">Cari</button>
                             </form>
                         </div>
-                        <div class="card-body">
-                            <table class="table">
+                        <div class="box-body table-respon">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr class="bg-dark text-light">
                                         <td>Periode</td>
@@ -38,7 +38,7 @@
                                         <td>Total Hari Libur </td>
                                         <td>Keterangan </td>
                                         <td>Status </td>
-                                        <td  width="150px" align="center">Aksi</td>
+                                        <td  width="180px" align="center">Aksi</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,26 +64,27 @@
                                                 </td>
                                                 <td align="center"> 
                                                     @if ($i->status == "Belum Diajukan" or $i->status == "Dikembalikan")
-                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}">
-                                                            <span class="material-symbols-outlined">info</span>
+                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}" class="btn btn-warning btn-xs">
+                                                            <i class="fa fa-info-circle" data-toogle="tooltip" data-placement="top" title="info"></i>
                                                         </a>
-                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}">
-                                                            <span class="material-symbols-outlined">summarize</span>
+                                                        <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}" class="btn btn-info btn-xs">
+                                                            <i class="fa fa-list-alt" data-toogle="tooltip" data-placement="top" title="summarize"></i>
                                                         </a>
                                                                                                               
                                                     @else
-                                                        <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}">
-                                                            <span class="material-symbols-outlined">info</span>
+                                                        <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}" class="btn btn-warning btn-xs">
+                                                            <i class="fa fa-info-circle" data-toogle="tooltip" data-placement="top" title="info"></i>
                                                         </a>
                                                     @endif
-                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}">
-                                                        <span class="material-symbols-outlined">print</span>
+                                                    <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}" class="btn btn-primary btn-xs">
+                                                        <i class="fa fa-print" data-toogle="tooltip" data-placement="top" title="print"></i>
                                                     </a>
                                                     @if ($i->status == "Diajukan")
                                                     
-                                                    <button class="btn btn-success mr-2" 
+                                                    <button class="btn btn-success btn-xs" 
                                                             data-toggle="modal" 
-                                                            data-target="#tambahData{{ $i->id }}">Tarik Pengajuan 
+                                                            data-target="#tambahData{{ $i->id }}">
+                                                            <i class="fa fa-arrow-circle-left" data-toogle="tooltip" data-placement="top" title="Batalkan Pengajuan"></i>
                                                     </button>
 
 
@@ -94,7 +95,7 @@
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="tambahData{{ $i->id }}">Tarik Pengajuan Lembur</h5>
+                                                                    <h5 class="modal-title" id="tambahData{{ $i->id }}">Batal Pengajuan </h5>
                                                                         <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
@@ -102,11 +103,11 @@
                                                                 <div class="modal-body">
                                                                     <form action="/lembur/tarik_pengajuan_lembur" method="POST">
                                                                         @csrf
-                                                                        <h4>Yakin Ya, pengajuan ga jadi diaajukan dulu, emeng mau di edit apa..?</h4>
-                                                                        <h5>Pengajuan yang akan di Tarik : <strong>{{ $i->periode }}</strong></h5>
+                                                                        <h4>Apakah Anda Yakin Ingin Membatalkan Pengajuan Lembur ?</h4>
+                                                                        <h5>Pengajuan yang akan di Batalkan : <strong>{{ $i->periode }}</strong></h5>
                                                                         <input type="hidden" name="lembur_pengajuan_id" value="{{ $i->id }}">
                                                                         <div class="form-group mt-5">
-                                                                            <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Tarik </button>
+                                                                            <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Batal </button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -137,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
 @if(session()->has('success'))

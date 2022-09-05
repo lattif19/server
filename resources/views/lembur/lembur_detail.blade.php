@@ -10,8 +10,6 @@
             </ol>
             <div class="row">
                 <div class="col-xl-12">
-
-
                     <div class="card mb-4 col-md-4">
                             <div class="btn-group">
                                 <button class="btn btn-success mr-2" data-toggle="modal" data-target="#tambahData">Tambah Pengajuan </button>
@@ -79,15 +77,15 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
+            <!-- <div class="row"> -->
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <h5> Pengajuan Lembur Hari Biasa </h5>
                         </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
+                        <div class="box-body table-respon">
+                            <table class="table table-bordered table-striped">
+                                <thead class="bg-dark text-light">
                                     <tr>
                                         <td width="50px">Nomor</td>
                                         <td width="150px">Tanggal </td>
@@ -103,7 +101,7 @@
                                                 <td>{{ tanggl_id($i->tanggal) }} </td>
                                                 <td>{{ $i->keterangan }} </td>
                                                 <td>
-                                                    <a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">Rubah</a>&nbsp;|&nbsp;
+                                                    <a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">Edit</a>&nbsp;|&nbsp;
                                                     <a href="#" data-toggle="modal" data-target="#hapusData{{ $i->id }}">Hapus</a>
 
                                                 </td>
@@ -179,7 +177,7 @@
 
                                                                 <div class="form-group mt-5">
                                                                     <input type="hidden" name="lembur_catatan" value="{{ $i->id }}">
-                                                                    <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Rubah </button>
+                                                                    <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Edit </button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -208,12 +206,12 @@
                     </div>
 
                     @if($libur->count()>0)
-                    <div class="card mb-4">
-                        <div class="card-header">
+                    <div class="box">
+                        <div class="box-header">
                             <h5> Pengajuan Lembur Hari Libur </h5>
                         </div>
-                        <div class="card-body">
-                            <table class="table">
+                        <div class="box-body table-respon">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td width="50px">Nomor</td>
@@ -333,7 +331,7 @@
 
 
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
 

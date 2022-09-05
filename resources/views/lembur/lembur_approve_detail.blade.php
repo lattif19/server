@@ -9,18 +9,18 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
+            <!-- <div class="row"> -->
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#persetujuan">Persetujuan</button>
                         </div>
                         
-                        <div class="card-body">
+                        <div class="box-body table-respon">
                             <h5> Pengajuan Lembur Hari Biasa </h5>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-dark text-light">
                                         <td width="10px">No</td>
                                         <td width="200px">Tanggal</td>
                                         <td>Keterangan / Deskripsi</td>
@@ -60,9 +60,9 @@
                             <hr class="mt-5 mb-5">
 
                             <h5> Pengajuan Lembur Libur </h5>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-dark text-light">
                                         <td width="10px">No</td>
                                         <td width="200px">Tanggal</td>
                                         <td>Keterangan</td>
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                </div>
-            </div>
+            <!-- </div> -->
         </div>
 
 
