@@ -12,15 +12,14 @@
     <hr>
     <h2>Data Lembur</h2>
     <ul>
+        <li>Nama : {{ DB::table("pegawai")->where("user_id", $data_lembur[0]->user_id)->get()[0]->nama }}</li>
         <li>Periode : {{ $data_lembur[0]->periode }}</li>
         <li>Lembur Hari Biasa : {{ $data_lembur[0]->total_biasa }}</li>
         <li>Total Hari Libur : {{ $data_lembur[0]->total_libur }}</li>
     </ul>
 
     <hr>
-    
-    
-    <h2>Data Approver</h2>
+    <h2>Data Yang Tandatangan</h2>
     <ul>
         <li>Nama : {{ $data_creator[0]->nama }}</li>
     </ul>

@@ -17,7 +17,7 @@
     
     {{ $tanggal_pengajuan = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Diajukan")->orderBy("id", "desc")->limit("1")->get() }}
     {{ $tanggal_approve = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Disetujui")->orderBy("id", "desc")->limit("1")->get() }}
-    {{ $tanggal_diterima = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Diterima")->orderBy("id", "desc")->limit("1")->get() }}
+    {{ $tanggal_diterima = DB::table("lembur_riwayat_pengajuan")->where("lembur_pengajuan_id", $lembur[0]->id)->where("status_pengajuan", "Selesai")->orderBy("id", "desc")->limit("1")->get() }}
     
 </div>
 
@@ -145,7 +145,7 @@
         <td>@if(count($tanggal_diterima) > 0) {{ tanggl_id($tanggal_diterima[0]->created_at) }} <br>@endif
             @if($qr_selesai != null)
                 {!! QrCode::size(100)->generate(request()->getSchemeAndHttpHost()."/validasi"."/".$qr_selesai); !!}
-                {{-- {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_disetujui !!} --}}
+                {{-- {!! request()->getSchemeAndHttpHost()."/validasi"."/".$qr_selesai !!} --}}
             @endif
         </td>
     </tr>

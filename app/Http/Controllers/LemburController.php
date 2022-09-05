@@ -93,7 +93,7 @@ class LemburController extends Controller
         $qr_disetujui = DB::table('validasi')->where('modul', "Lembur-Disetujui")->where("id_validasi", $request->pengajuan_lembur_id)->get();
         $qr_selesai = DB::table('validasi')->where('modul', "Lembur-Selesai")->where("id_validasi", $request->pengajuan_lembur_id)->get();
         
-        
+        //generate link validasi
         if(count($qr_diajukan) > 0){
             $data['qr_diajukan'] = $qr_diajukan[0]->link_validasi."?kec=".$qr_diajukan[0]->link_validasi_cek;
         }else{
@@ -112,7 +112,7 @@ class LemburController extends Controller
         }else{
             $data['qr_selesai'] = "";
         }
-
+        //tanggal_diterima //tanggal_approve
 
 
 
