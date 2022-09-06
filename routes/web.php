@@ -62,8 +62,14 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/main', [DashboardController::class, 'index'])->name('home')->middleware("auth");
     
     Route::get('/kendaraan', [KendaraanController::class, 'index']);
-    Route::get('/kendaraan/list/{parameter}', [KendaraanController::class, 'daftar_kendaraan']);
+    Route::get('/kendaraan/mobil', [KendaraanController::class, 'daftar_kendaraan']);
+    Route::get('/kendaraan/service', [KendaraanController::class, 'service']);
+    Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
+    Route::get('/kendaraan/setting', [KendaraanController::class, 'setting']);
     ///kendaraan/list
+    
+
+
     
     
     

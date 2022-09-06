@@ -9,9 +9,24 @@
                 Dashboard
             </a>
 
-            <a class="nav-link" href="/kendaraan/list/all">
+            <a class="nav-link" href="/kendaraan/mobil">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Kendaraan
+            </a>
+
+            <a class="nav-link" href="/kendaraan/service">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Perbaikan
+            </a>
+
+            <a class="nav-link" href="/kendaraan/asuransi">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Asuransi
+            </a>
+
+            <a class="nav-link" href="/kendaraan/setting">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Pengaturan
             </a>
 
         </div>

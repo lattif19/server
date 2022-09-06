@@ -17,9 +17,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="nav card">
-                        <div class="nav card-header">
+                        <div class="card-header">
                             <form action="/kendaraan/mobil">
-                                <input type="search" name="jenis" value="{{ request()->jenis }}">
+                                <input type="search" name="cari" value="{{ request()->cari }}">
                                 <button type="submit" class="bnt btn-sm btn-dark">Cari</button>
                             </form>
                         </div>
@@ -28,32 +28,26 @@
                                 <thead>
                                     <tr>
                                         <td>No</td>
-                                        <td>Nama Kendaraan</td>
                                         <td>No Polisi</td>
-                                        <td>PIC Driver</td>
-                                        <td>Kategori Kendaraan</td>
+                                        <td>Nama Kendaraan</td>
+                                        <td>Nama Asuransi</td>
+                                        <td>Jenis Asuransi</td>
+                                        <td>Nama PIC</td>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- {{ dd($mobil) }} --}}
-                                    @foreach ($mobil as $i)
+                                    @foreach ($asuransi as $i)    
                                         <tr>
-                                            <td>{{ $mobil->firstItem() + $loop->index }}</td>
-                                            <td>{{ $i->nama }}</td>
-                                            <td>{{ $i->no_polisi }}</td>
-                                            <td>{{ DB::table("pegawai")->where("user_id", $i->driver_id)->get()[0]->nama }}</td>
-                                            <td>{{ $i->a_jenis_kendaraan->nama }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="4">{{ $mobil->withQueryString()->links() }}</td>
-                                    </tr>
-                                </tfoot>
-                                
                             </table>
-                            
                         </div>
                     </div>
                 </div>

@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\ManagemenKendaraan\JenisKendaraan;
-use App\Models\ManagemenKendaraan\Kendaraan;
-use App\Models\ManagemenKendaraan\ServicePerbaikan;
+use App\Models\ManagemenKendaraan\AJenisKendaraan;
+use App\Models\ManagemenKendaraan\AKendaraan;
+use App\Models\ManagemenKendaraan\AAsuransi;
+use App\Models\ManagemenKendaraan\AServicePerbaikan;
 use Illuminate\Support\Facades\DB;
 
 class ManagemenKendaraan extends Seeder
@@ -17,21 +18,22 @@ class ManagemenKendaraan extends Seeder
      */
     public function run()
     {
-        JenisKendaraan::create(["nama"=>"Direksi",          "keterangan"=>"Asset Kendaran untuk Direksi" ]);
-        JenisKendaraan::create(["nama"=>"Operasional",      "keterangan"=>"Asset Kendaran untuk Operasional Kantor" ]);
-        JenisKendaraan::create(["nama"=>"Non-Aktif",        "keterangan"=>"Asset Kendaran yang telah non-aktif" ]);
 
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'1',     'no_polisi'=>'B 8338 DA',           'nama'=> 'Lexsus AL 300']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'1',     'no_polisi'=>'B 8338 DB',           'nama'=> 'Lexsus BL 400']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'1',     'no_polisi'=>'B 8338 DC',           'nama'=> 'Mazda AB 700 ']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'1',     'no_polisi'=>'B 8338 DE',           'nama'=> 'Mazda AB 700']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'1',     'no_polisi'=>'B 8338 DF',           'nama'=> 'Mazda AC 700']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'1',     'no_polisi'=>'B 8338 DG',           'nama'=> 'Avanza']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'2',     'no_polisi'=>'B 8338 OA',           'nama'=> 'Senia']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'2',     'no_polisi'=>'B 8338 OB',           'nama'=> 'Freed']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'2',     'no_polisi'=>'B 8338 OC',           'nama'=> 'Fenturer']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'2',     'no_polisi'=>'B 8338 OD',           'nama'=> 'Jimny']);
-        Kendaraan::create(['a_jenis_kendaraan_id'=>'3',     'no_polisi'=>'B 8338 NA',           'nama'=> 'Karimun']);
+        AJenisKendaraan::create(["nama"=>"Direksi",          "keterangan"=>"Asset Kendaran untuk Direksi" ]);
+        AJenisKendaraan::create(["nama"=>"Operasional",      "keterangan"=>"Asset Kendaran untuk Operasional Kantor" ]);
+        AJenisKendaraan::create(["nama"=>"Non-Aktif",        "keterangan"=>"Asset Kendaran yang telah non-aktif" ]);
+
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DA',  'nama'=> 'Lexsus AL 300']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DB',  'nama'=> 'Lexsus BL 400']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DC',  'nama'=> 'Mazda AB 700 ']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DE',  'nama'=> 'Mazda AB 700']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DF',  'nama'=> 'Mazda AC 700']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DG',  'nama'=> 'Avanza']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OA',  'nama'=> 'Senia']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OB',  'nama'=> 'Freed']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OC',  'nama'=> 'Fenturer']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OD',  'nama'=> 'Jimny']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'3',  'driver_id'=> "1",  'no_polisi'=>'B 8338 NA',  'nama'=> 'Karimun']);
 
         DB::table("a_status_perbaikan")->insert(["nama"=>"Pengajuan",           "keterangan" => "Pengajuan perbaikan oleh Driver"]);
         DB::table("a_status_perbaikan")->insert(["nama"=>"Booking",             "keterangan" => "Menjadwalkan Perbaikan"]);
@@ -56,7 +58,51 @@ class ManagemenKendaraan extends Seeder
         DB::table("a_jenis_pajak")->insert(["nama"=>"tahunan",    "keterangan" => "Pajak Tahunan"]);
         DB::table("a_jenis_pajak")->insert(["nama"=>"lima tahun",    "keterangan" => "Pajak Lima Tahun"]);
         
-        //ServicePerbaikan::create();
-        //a_jenis_pajak
+        AServicePerbaikan::create([
+            'driver_id' => '1',
+            'a_kendaraan_id' => '1',
+            'a_jenis_service_id' => '1',
+            'a_status_perbaikan_id' => '1',
+            'nama_bengkel' => 'Bengkel Barokah',
+            'keterangan' => 'Service Rutin',
+            'tanggal_booking' => date("Y-m-d"),
+            'tanggal_masuk' => date("Y-m-d"),
+            'tanggal_keluar' => date("Y-m-d"),
+            'estimasi' => '1200000',
+            'biaya' => '12000000',
+        ]);
+
+        AServicePerbaikan::create([
+            'driver_id' => '1',
+            'a_kendaraan_id' => '2',
+            'a_jenis_service_id' => '2',
+            'a_status_perbaikan_id' => '2',
+            'nama_bengkel' => 'Barokah Sejahtera',
+            'keterangan' => 'Cat Ulang',
+            'tanggal_booking' => date("Y-m-d"),
+            'tanggal_masuk' => date("Y-m-d"),
+            'tanggal_keluar' => date("Y-m-d"),
+            'estimasi' => '440000',
+            'biaya' => '322000',
+        ]);
+
+        AServicePerbaikan::create([
+            'driver_id' => '1',
+            'a_kendaraan_id' => '3',
+            'a_jenis_service_id' => '4',
+            'a_status_perbaikan_id' => '3',
+            'nama_bengkel' => 'Sumber Sejahtera',
+            'keterangan' => 'Penggantian Aki Mobil',
+            'tanggal_booking' => date("Y-m-d"),
+            'tanggal_masuk' => date("Y-m-d"),
+            'tanggal_keluar' => date("Y-m-d"),
+            'estimasi' => '3430000',
+            'biaya' => '34340000',
+        ]);
+
+        // AAsuransi::create([
+        //     'a_kendaraan_id'
+        // ]);
+        
     }
 }

@@ -26,8 +26,8 @@
                             <div class="card-body">
                                 <div>
                                     <strong>
-                                        <a href="/kendaraan/list/{{ Str::slug($i->nama) }}">
-                                            <h1 align="center" style="font-size: 100px">{{ $i->kendaraan->count() }}</h1>
+                                        <a href="/kendaraan/mobil?jenis={{ Str::slug($i->nama) }}">
+                                            <h1 align="center" style="font-size: 100px">{{ $i->akendaraan->count() }}</h1>
                                         </a>
                                     </strong>
                                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ManagemenKendaraan\AKendaraan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -11,9 +12,13 @@ class Pegawai extends Model
     use HasFactory;
     protected $table = 'pegawai';
     protected $guarded = ['id'];
+    // protected $primaryKey = 'user_id';
 
+        // public function a_kendaraan(){
+        //     return $this->hasOne(AKendaraan::class);
+        // }
 
-    static function pegawai_validasi($data){
+        static function pegawai_validasi($data){
         $valid =  DB::table('pegawai')
                     ->where("pegawai.nik","=", $data['nik'])
                     ->count();
