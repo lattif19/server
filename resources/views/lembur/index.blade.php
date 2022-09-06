@@ -31,8 +31,8 @@
                         </div>
                         <div class="box-body table-respon">
                             <table class="table table-bordered table-striped">
-                                <thead>
-                                    <tr class="bg-dark text-light">
+                                <thead class="bg-dark text-light">
+                                    <tr>
                                         <td>Periode</td>
                                         <td>Total Hari Biasa </td>
                                         <td>Total Hari Libur </td>
@@ -64,16 +64,16 @@
                                                 </td>
                                                 <td align="center"> 
                                                     @if ($i->status == "Belum Diajukan" or $i->status == "Dikembalikan")
-                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}" class="btn btn-warning btn-xs">
-                                                            <i class="fa fa-info-circle" data-toogle="tooltip" data-placement="top" title="info"></i>
+                                                        <a href="/lembur/{{  Str::slug($i->periode) }}/{{ $i->id }}" class="btn btn-info btn-xs">
+                                                            <i class="fa fa-info" aria-hidden="true" data-toogle="tooltip" data-placement="top" title="Detail"></i>
                                                         </a>
                                                         <a href="/lembur/calculating/{{ Str::slug($i->periode) }}/{{ $i->id }}" class="btn btn-info btn-xs">
                                                             <i class="fa fa-list-alt" data-toogle="tooltip" data-placement="top" title="summarize"></i>
                                                         </a>
                                                                                                               
                                                     @else
-                                                        <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}" class="btn btn-warning btn-xs">
-                                                            <i class="fa fa-info-circle" data-toogle="tooltip" data-placement="top" title="info"></i>
+                                                        <a href="/lembur/calculated/{{ $i->id }}/{{  Str::slug($i->periode) }}" class="btn btn-info btn-xs">
+                                                            <i class="fa fa-info" aria-hidden="true" data-toogle="tooltip" data-placement="top" title="Detail"></i>
                                                         </a>
                                                     @endif
                                                     <a href="/lembur/print/{{ $i->id }}/{{  Str::slug($i->periode) }}" class="btn btn-primary btn-xs">

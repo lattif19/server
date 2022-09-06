@@ -27,7 +27,7 @@
                         <div class="box-body">
                             
                                 <table class="table table-bordered table-striped">
-                                    <thead class="table-light">
+                                    <thead class="bg-dark text-light">
                                         <tr>
                                             <td align="center" width="80px">No</td>
                                             <td>Nama</td>
@@ -78,46 +78,43 @@
                                                         <i class="fa fa-print" data-toogle="tooltip" data-placement="top" title="print"></i>
                                                     </a>
 
-                                                    @if ($d->status == "Disetujui")
+                                                        @if ($d->status == "Disetujui")
 
-                                                        <button class="btn btn-success btn-xs" 
-                                                                data-toggle="modal" 
-                                                                data-target="#tambahData{{ $d->id }}">
-                                                                <i class="fa fa-check-circle" data-toogle="tooltip" data-placement="top" title="Terima Pengajuan "></i>
-                                                        </button>
+                                                            <button class="btn btn-success btn-xs" 
+                                                                    data-toggle="modal" 
+                                                                    data-target="#tambahData{{ $d->id }}">
+                                                                    <i class="fa fa-check-circle" data-toogle="tooltip" data-placement="top" title="Terima Pengajuan "></i>
+                                                            </button>
 
 
-                                                        <div class="modal fade" id="tambahData{{ $d->id }}" tabindex="-1" role="dialog"
-                                                        aria-labelledby="tambahData{{ $d->id }}"
-                                                        aria-hidden="true">
+                                                            <div class="modal fade" id="tambahData{{ $d->id }}" tabindex="-1" role="dialog"
+                                                            aria-labelledby="tambahData{{ $d->id }}"
+                                                            aria-hidden="true">
 
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="tambahData{{ $d->id }}">Terima Pengajuan</h5>
-                                                                            <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form action="/lembur/terima_pengajuan_lembur" method="POST">
-                                                                            @csrf
-                                                                            <h4>Apakah Anda Yakin Ingin Menerima Pengeajuan Lembur ?</h4>
-                                                                            <h5>Pengjaun dari : <strong>{{ $d->nama }}</strong></h5>
-                                                                            <h5>Periode  : <strong>{{ $d->periode }}</strong></h5>
-                                                                            <input type="hidden" name="lembur_pengajuan_id" value="{{ $d->id }}">
-                                                                            <div class="form-group mt-5">
-                                                                                <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Terima </button>
-                                                                            </div>
-                                                                        </form>
+                                                                <div class="modal-dialog modal-lg" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="tambahData{{ $d->id }}">Terima Pengajuan</h5>
+                                                                                <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form action="/lembur/terima_pengajuan_lembur" method="POST">
+                                                                                @csrf
+                                                                                <h4>Apakah Anda Yakin Ingin Menerima Pengeajuan Lembur ?</h4>
+                                                                                <h5>Pengjaun dari : <strong>{{ $d->nama }}</strong></h5>
+                                                                                <h5>Periode  : <strong>{{ $d->periode }}</strong></h5>
+                                                                                <input type="hidden" name="lembur_pengajuan_id" value="{{ $d->id }}">
+                                                                                <div class="form-group mt-5">
+                                                                                    <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Terima </button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    @endif
-
-
-
+                                                        @endif
 
                                                 </td>
                                             </tr>
