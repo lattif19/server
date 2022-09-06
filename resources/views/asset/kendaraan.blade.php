@@ -41,7 +41,7 @@
                                             <td>{{ $mobil->firstItem() + $loop->index }}</td>
                                             <td>{{ $i->nama }}</td>
                                             <td>{{ $i->no_polisi }}</td>
-                                            <td>{{ DB::table("pegawai")->where("user_id", $i->driver_id)->get()[0]->nama }}</td>
+                                            <td>{{ $i->user->pegawai->nama }}</td>
                                             <td>{{ $i->a_jenis_kendaraan->nama }}</td>
                                         </tr>
                                     @endforeach

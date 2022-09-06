@@ -14,9 +14,9 @@ class Pegawai extends Model
     protected $guarded = ['id'];
     // protected $primaryKey = 'user_id';
 
-        // public function a_kendaraan(){
-        //     return $this->hasOne(AKendaraan::class);
-        // }
+        public function user(){
+            return $this->belongsTo(User::class);
+        }
 
         static function pegawai_validasi($data){
         $valid =  DB::table('pegawai')
