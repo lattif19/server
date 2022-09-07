@@ -27,7 +27,7 @@
                         <div class="box-body">
                             
                                 <table class="table table-bordered table-striped">
-                                    <thead class="bg-dark text-light">
+                                    <thead>
                                         <tr>
                                             <td align="center" width="80px">No</td>
                                             <td>Nama</td>

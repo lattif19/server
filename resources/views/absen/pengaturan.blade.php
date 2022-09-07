@@ -9,15 +9,15 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <button class="btn btn-primary"
                             data-toggle="modal" data-target="#tambahData">Tambah Data Mapper</button>
                         </div>
-                        <div class="card-body">
-                            <table class="table">
+                        <div class="box-body table-respon">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td>Nama Pegawai</td>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
 
         <div class="modal fade" id="tambahData" tabindex="-1" role="dialog" 

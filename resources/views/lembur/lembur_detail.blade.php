@@ -85,7 +85,7 @@
                         </div>
                         <div class="box-body table-respon">
                             <table class="table table-bordered table-striped">
-                                <thead class="bg-dark text-light">
+                                <thead>
                                     <tr>
                                         <td width="50px">Nomor</td>
                                         <td width="150px">Tanggal </td>

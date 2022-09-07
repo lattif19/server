@@ -23,7 +23,7 @@
             " id="organisasi" aria-labelledby="headingOne" 
                 data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link {{ Request::is('divisi*') ? 'active' : ''}}" href="/divisi">Devisi</a>
+                    <a class="nav-link {{ Request::is('divisi*') ? 'active' : ''}}" href="/divisi">Divisi</a>
                     <a class="nav-link {{ Request::is('jabatan*') ? 'active' : ''}}" href="/jabatan">Jabatan</a>
                 </nav>
             </div>

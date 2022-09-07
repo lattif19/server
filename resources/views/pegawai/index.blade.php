@@ -9,10 +9,10 @@
             </ol>
 
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-2">
-                        <div class="navbar card-header">
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="navbar box-header">
                           
                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Tambah Data Pegawai</a>
                             <form method="get" action="/pegawai">
@@ -21,7 +21,8 @@
                             </form>
                             
                         </div>
-                        <table class="table">
+                      <div class="box-body table-respon">
+                        <table class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th scope="col">NIK</th>
@@ -48,7 +49,7 @@
                                     <th scope="col">{{ $p->jabatan }}</th>
                                     <th scope="col">
                                         <a href="#" data-toggle="modal" data-target="#reset{{ $p->id }}">
-                                            Reset
+                                            Edit
                                         </a>
                                     </th>
 
@@ -77,7 +78,7 @@
                                                   <div class="modal-footer">
                                                     <input type="hidden" name="id" value="{{ $p->user_id }}">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary">Reset</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                   </div>
                                                 </form>
                                           </div>
@@ -96,10 +97,11 @@
                                 </td>
                               </tr>
                             </tfoot>
-                          </table>
+                        </table>
+                      </div>   
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
   
   <!-- Modal -->
@@ -126,12 +128,12 @@
                 <div class="form-group mb-3">
                   <label for="nama" class='mb-2'>Nama</label>
                   <input type="text" class="form-control" 
-                          name="nama" placeholder="contoh : 'Nur Ardhiansyah' " value="{{ old('nama') }}" required>
+                          name="nama" placeholder="contoh : 'Example' " value="{{ old('nama') }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="email" class='mb-2'>Email</label>
-                    <input type="text" class="form-control" name="email" placeholder="contoh : 'nur_a@ssprimadaya.co.id' " value="{{ old('email') }}" required>
+                    <input type="text" class="form-control" name="email" placeholder="contoh : 'example@ssprimadaya.co.id' " value="{{ old('email') }}" required>
                 </div>
 
                 <div class="form-group mb-3">

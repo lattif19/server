@@ -8,24 +8,26 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
             
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <form action="/absen" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="test" value="test">
-                                <input type="file" 
-                                        name="absensi" 
-                                        class="btn btn-lg btn-default">
-                                <button class="btn btn-primary" type="submit">Upload</button>
-                            </form>
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="form-control">
+                                <form action="/absen" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="test" value="test">
+                                    <input type="file" 
+                                            name="absensi" 
+                                            class="btn btn-lg btn-default">
+                                    <button class="btn btn-primary" type="submit">Upload</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <table class="table">
+                        <div class="box-body table-respon mt-4">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <td>Person ID</td>
+                                        <td>ID</td>
                                         <td>Nama</td>
                                         <td>Tanggal</td>
                                         <td>Jam Masuk</td>
@@ -36,7 +38,7 @@
                                 <tbody>
                                     @foreach ($absensi as $absen)
                                     <tr>
-                                        <td>{{ $absen->absen_id }}</td>
+                                        <td width="50px">{{ $absen->absen_id }}</td>
                                         <td>{{ $absen->nama }}</td>
                                         <td>{{ $absen->tanggal }}</td>
                                         <td>{{ $absen->jam_masuk }}</td>
@@ -50,6 +52,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
 @endsection
