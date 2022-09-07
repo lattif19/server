@@ -7,27 +7,49 @@
     <title>Verivikasi QR</title>
 </head>
 <body>
-    <h1> {{ $status }}</h1>
+    {{-- <h1 align="center"> {{ $status }} <img src="/img/verif.png" width="30"> </h1>  --}}
+    <h1 align="center"> Lembur Terverifikasi <img src="/img/verif.png" width="30"> </h1> 
+</td>
 
     <hr>
-    <h2>Data Lembur</h2>
+    {{-- <h2>Data Lembur</h2>
     <ul>
         <li>Nama : {{ DB::table("pegawai")->where("user_id", $data_lembur[0]->user_id)->get()[0]->nama }}</li>
         <li>Periode : {{ $data_lembur[0]->periode }}</li>
         <li>Lembur Hari Biasa : {{ $data_lembur[0]->total_biasa }}</li>
         <li>Total Hari Libur : {{ $data_lembur[0]->total_libur }}</li>
-    </ul>
+    </ul> --}}
 
-    <hr>
-    <h2>Data Yang Tandatangan</h2>
+
+<h2>Data Lembur</h2>
+    <table border="1">
+        <thead>
+            <tr>   
+                <td>Nama</td>
+                <td>Periode</td>
+                <td>Lembur Hari Biasa</td>
+                <td>Lembur Hari Libur</td>
+            </tr>
+        </thead>
+        <tr>
+            <td width="250px">{{ DB::table("pegawai")->where("user_id", $data_lembur[0]->user_id)->get()[0]->nama }}</td>
+            <td width="250px">{{ $data_lembur[0]->periode }}</td>
+            <td width="250px">{{ $data_lembur[0]->total_biasa }}</td>
+            <td width="250px">{{ $data_lembur[0]->total_libur }}</td>
+        </tr>
+    </table>
+<hr>
+    
+
+    {{-- <h2>Mengetahui</h2>
     <ul>
         <li>Nama : {{ $data_creator[0]->nama }}</li>
     </ul>
 
-    <hr>
+    <hr> --}}
     <h2>Riwayat Lembur</h2>
 
-    @for ($data=0; $data<count($riwayat); $data++)
+    {{-- @for ($data=0; $data<count($riwayat); $data++)
         <ul>
             <li>Status :    {{ $riwayat[$data]->status_pengajuan }}</li>
             <li>Komentar :  {{ $riwayat[$data]->komentar }}</li>
@@ -35,13 +57,48 @@
         </ul>
     
             @if($status == "Lembur-Disetujui" && $riwayat[$data]->status_pengajuan == "Disetujui")
-                <?php break; ?>
+                
             @elseif($status == "Lembur-Diajukan" && $riwayat[$data]->status_pengajuan == "Diajukan")
-                <?php break; ?>
+                
             @endif
 
 
-        @endfor
+        @endfor --}}
+
+        <table border="1">
+            
+                    <tr>
+                        <td width="300px">Tanggal</td>
+                        <td width="300px">Status</td>
+                        <td width="300px">Keterangan</td>
+                    </tr>
+                
+            @for ($data=0; $data<count($riwayat); $data++)
+                    <tr>
+                        <td>{{ $riwayat[$data]->created_at }}</td>
+                        <td>{{ $riwayat[$data]->status_pengajuan }}</td>
+                        <td>{{ $riwayat[$data]->komentar }}</td>
+                    </tr>
+                    @if($status == "Lembur-Disetujui" && $riwayat[$data]->status_pengajuan == "Disetujui")
+                        <?php break; ?>
+                    @elseif($status == "Lembur-Diajukan" && $riwayat[$data]->status_pengajuan == "Diajukan")
+                        <?php break; ?>
+                    @endif
+            @endfor
+        </table>
+    <hr>
+
+
+<h2 align="center">Mengetahui</h2>
+<br>
+<br>
+<br>
+<br>
+
+
+        <h3 align="center">{{ $data_creator[0]->nama }}</h3>
+
+<hr>
     
 
 

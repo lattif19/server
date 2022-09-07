@@ -9,13 +9,15 @@
             </ol>
 
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-2">
-                        <div class="card-header">
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Tambah Divisi</a>
                         </div>
-                        <table class="table">
+
+                      <div class="box-body table-respon mt-4"> 
+                        <table class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th scope="col">ID</th>
@@ -29,12 +31,12 @@
                             
                             @foreach ($divisi as $p)    
                                 <tr>
-                                    <th scope="row">{{ $p->id }}</th>
+                                    <th scope="row" width="50px">{{ $p->id }}</th>
                                     <th scope="col">{{ $p->nama }}</th>
                                     <th scope="col">{{ $p->keterangan }}</th>
-                                    <th scope="col" width="150px">
+                                    <th scope="col" width="100px">
                                         <a href="#" data-toggle="modal" 
-                                                    data-target="#rubah{{ $p->id }}">Rubah</a>
+                                                    data-target="#rubah{{ $p->id }}">Edit</a>
                                     </th>
 
                                     <div class="modal fade" id="rubah{{ $p->id }}" tabindex="-1" role="dialog" 
@@ -42,7 +44,7 @@
                                         <div class="modal-dialog modal-lg" role="document">
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h5 class="modal-title" id="rubah{{ $p->id }}">Merubah Divisi</h5>
+                                              <h5 class="modal-title" id="rubah{{ $p->id }}">Edit Divisi</h5>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                               </button>
@@ -68,7 +70,7 @@
                                                   <div class="modal-footer">
                                                     <input type="hidden" value="{{ $p->id }}" name="id">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary">Rubah</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                   </div>
                                                 </form>
                                           </div>
@@ -80,9 +82,10 @@
 
                             </tbody>
                           </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
 
         <!-- Modal -->
@@ -90,7 +93,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Menambah Divisi</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Divisi</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -114,7 +117,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary">Tambah</button>
+              <button type="submit" class="btn btn-primary">Save</button>
             </div>
           </form>
       </div>

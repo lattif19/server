@@ -9,18 +9,18 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="navbar card-header">
-                            Data Mapper
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="navbar box-header">
+                            <h5></h5>
                             <form method="get" action="/absen_pengaturan2">
                                 <input type="search" placeholder="Cari... " name="cari" aria-label="Search" value="{{ request('cari') }}">
                                 <button class="btn btn-primary" type="submit">Search</button>
-                              </form>
+                            </form>
                         </div>
-                        <div class="card-body">
-                            <table class="table">
+                        <div class="box-body table-respon">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td>Nama Pegawai  </td>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
 
 

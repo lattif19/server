@@ -9,10 +9,10 @@
             </ol>
 
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-2">
-                        <div class="navbar card-header">
+            {{-- <div class="container"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="navbar box-header">
                             <a href="#" class="btn btn-primary" data-toggle="modal" 
                             data-target="#exampleModalCenter">Tambah Hak Akses User</a>
 
@@ -23,7 +23,8 @@
                                 </form>
                             
                         </div>
-                        <table class="table">
+                      <div class="box-body table-respon">
+                        <table class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th scope="col">ID</th>
@@ -42,9 +43,9 @@
                                     <th scope="col">{{ $p->nama }}</th>
                                     <th scope="col">{{ $p->modul }}</th>
                                     <th scope="col">{{ $p->level }}</th>
-                                    <th scope="col" width="150px">
+                                    <th scope="col" width="100px">
                                         <a href="#" data-toggle="modal" 
-                                                    data-target="#rubah{{ $p->id }}">Rubah</a>
+                                                    data-target="#rubah{{ $p->id }}">Edit</a>
                                     </th>
 
 
@@ -53,7 +54,7 @@
                                         <div class="modal-dialog modal-lg" role="document">
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h5 class="modal-title" id="rubah{{ $p->id }}">Merubah Hak Akses User : {{ $p->nama }}</h5>
+                                              <h5 class="modal-title" id="rubah{{ $p->id }}">Edit Hak Akses User : {{ $p->nama }}</h5>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                               </button>
@@ -81,7 +82,7 @@
                                                     <div class="modal-footer">
                                                       <input type="hidden" name="id" value="{{ $p->id }}">
                                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                      <button type="submit" class="btn btn-primary">Rubah</button>
+                                                      <button type="submit" class="btn btn-primary">Save</button>
                                                   </form>
                                             </div>
                                           </div>
@@ -100,10 +101,11 @@
                                 <td colspan="5"> {{ $hak_akses->withQueryString()->links() }}</td>
                               </tr>
                             </tfoot>
-                          </table>
+                        </table>
+                      </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
 
 
@@ -123,7 +125,7 @@
                           <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                           <div class="col-sm-10">
                             <select class="form-control custom-select" name="user_id">
-                                <option selected>--Pilih Satu--</option>
+                                <option selected>-- Pilih --</option>
                                 @foreach ($pegawai as $p)
                                     <option value="{{ $p->user_id }}">
                                       {{ $p->nama }}
@@ -137,7 +139,7 @@
                             <label for="nama" class="col-sm-2 col-form-label">Modul</label>
                             <div class="col-sm-10">
                                 <select class="form-control custom-select" name="modul_id">
-                                    <option selected>--Pilih Satu--</option>
+                                    <option selected>-- Pilih --</option>
                                     @foreach ($modul as $p)
                                         <option value="{{ $p->id }}">
                                           {{ $p->nama }}
@@ -151,7 +153,7 @@
                             <label for="nama" class="col-sm-2 col-form-label">Level</label>
                             <div class="col-sm-10">
                                 <select class="form-control custom-select" name="level_id">
-                                    <option selected>--Pilih Satu--</option>
+                                    <option selected>-- Pilih --</option>
                                     @foreach ($level as $p)
                                         <option value="{{ $p->id }}">
                                           {{ $p->nama }}
@@ -163,7 +165,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                          <button type="submit" class="btn btn-primary">Tambah</button>
+                          <button type="submit" class="btn btn-primary">Save</button>
                         </form>
                 </div>
               </div>

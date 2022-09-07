@@ -23,19 +23,19 @@
         </ol>
     </div>
     
-    <div class="row">
-        <div class="col-lg-12 ">
-            <div class="col">
-                <a href="#" class="btn btn-primary" data-toggle="collapse" id="hide_filter" aria-expanded="true">
+    <div class="content">
+        <div class="box">
+            <div class="box-header">
+                <a href="#" class="btn btn-primary btn-sm" data-toggle="collapse" id="hide_filter" aria-expanded="true">
                     <i class="fa fa-filter"></i>
-                    <span class="hidden-xs" >Show Filter</span>
+                    <span class="hidden-xs" >Filter</span>
                 </a>
                 <div class="card" id="show">
                     <div class="card-header">
                         <div class="card-body">
                             <form action="/lembur_report" method="get" >
                                 <div class="form-group">
-                                    <label for="periode" class="mb-2"> <strong>Periode Lembur</strong></label>
+                                    <label for="periode"><strong>Periode Lembur</strong></label>
                                     <select name="periode" class="form-control">
                                         @foreach ($periode as $p)
                                             <option value="{{ $p->periode }}" @if($periode_hari_ini == $p->periode) selected @endif id="periode_lembur"> {{ $p->periode }}</option>
@@ -134,7 +134,7 @@
                 <div class="card-body">
                     @if(request()->jenis_report == null || request()->jenis_report== "general")
                         <table class="table table-bordered" id="tbl_exporttable_to_xls">
-                            <tr class="bg-dark text-light">
+                            <tr>
                                 <td width="50px">No</td>
                                 <td>Nama</td>
                                 <td>Lembur Biasa</td>
@@ -153,7 +153,7 @@
                         </table>
                     @else
                     <table class="table table-bordered" id="tbl_exporttable_to_xls">
-                        <tr class="bg-dark text-light">
+                        <tr>
                             <td width="50px">No</td>
                             <td>Nama</td>
                             <td>Tanggal Lembur</td>
@@ -220,9 +220,9 @@ function ExportToExcel(type, fn, dl) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-$("#show").hide();
+// $("#show").hide();
   $("#hide_filter").click(function(){
-    $("#show").show();
+    $("#show").toggle();
   });
 });
 </script>

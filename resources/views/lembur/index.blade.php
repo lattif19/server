@@ -31,7 +31,7 @@
                         </div>
                         <div class="box-body table-respon">
                             <table class="table table-bordered table-striped">
-                                <thead class="bg-dark text-light">
+                                <thead>
                                     <tr>
                                         <td>Periode</td>
                                         <td>Total Hari Biasa </td>

@@ -20,7 +20,7 @@
                             <h5> Pengajuan Lembur Hari Biasa </h5>
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr class="bg-dark text-light">
+                                    <tr>
                                         <td width="10px">No</td>
                                         <td width="200px">Tanggal</td>
                                         <td>Keterangan / Deskripsi</td>

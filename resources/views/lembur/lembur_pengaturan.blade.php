@@ -3,16 +3,28 @@
 @include('lembur.sidebar.menu')
 
 @section('container')
+
+@if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+@endif
+@if(session()->has('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+@endif
+
         <div class="container-fluid px-4">
             <h1 class="mt-4">{{ $title }}</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="card mb-4">
-                        <div class="card-header">
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             
                             <nav class="navbar navbar-light bg-light justify-content-between">
                                 <h5 class="mb-2"> Pengaturan Approver Lembur </h5> 
@@ -22,11 +34,11 @@
                                 </form>
                               </nav>
                         </div>
-                        <div class="card-body">
-                           <table class="table">
+                        <div class="box-body table-respon">
+                           <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <td>Nomor</td>
+                                        <td>No</td>
                                         <td>Nama Pegawai</td>
                                         <td>Nama Manager / Approver</td>
                                         <td width="100px" align="center">Aksi</td>
@@ -35,8 +47,8 @@
                                 <tbody>
                                     @foreach ($user as $i)
                                         <tr>
-                                            <td>{{ $user->firstItem() + $loop->index }}</td>
-                                            <td>{{ $i->nama }}</td>
+                                            <td width="50px">{{ $user->firstItem() + $loop->index }}</td>
+                                            <td width="250px">{{ $i->nama }}</td>
                                             <td>
                                                 @foreach ($users as $p)
                                                     @if($i->lembur_approve_id == $p->user_id) {{ $p->nama }} @endif
@@ -44,8 +56,8 @@
                                             </td>
                                             <td width="100px" align="center">
                                                 <a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">
-                                                    <span class="material-icons">
-                                                        edit
+                                                    <span class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit" >
+                                                        
                                                     </span>
                                                 </a>
                                             </td>
@@ -59,7 +71,7 @@
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="rubahData{{ $i->id }}">Rubah Data Approver</h5>
+                                                        <h5 class="modal-title" id="rubahData{{ $i->id }}">Edit Data Approver</h5>
                                                             <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -71,7 +83,7 @@
                                                             
                                                                 <div class="form-group mt-3">
                                                                     <select name="lembur_approve_id" class="form-control" required>
-                                                                        <option value="">--Pilih Satu---</option>
+                                                                        <option value="">-- Pilih ---</option>
                                                                         @foreach ($users as $p)
                                                                             <option value="{{ $p->user_id }}" 
                                                                                 @if($i->lembur_approve_id == $p->user_id) selected @endif> {{ $p->nama }}
@@ -83,7 +95,7 @@
                                                             <div class="form-group mt-5">
                                                                 <input type="hidden" name="user_id" value="{{ $i->user_id }}">
                                                                 <button class="btn col-lg-2 btn-success" type="submit">
-                                                                    Rubah
+                                                                    Save
                                                                 </button>
                                                             </div>
                                                         </form>
@@ -106,13 +118,13 @@
 
 
 
-                <div class="col-xl-6">
-                    <div class="card mb-4">
-                        <div class="card-header">
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <h5> Pengaturan Waktu Kerja </h5>
                         </div>
-                        <div class="card-body">
-                           <table class="table">
+                        <div class="box-body table-respon">
+                           <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td>#</td>
@@ -199,7 +211,7 @@
                                     <tfoot>
                                         <tr>
                                             <td colspan="3">
-                                                <input type="submit" value="Submit" class="btn btn-dark form-control">
+                                                <input type="submit" value="Submit" class="btn btn-dark">
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -246,27 +258,17 @@
                                     </select>
                                 </div>
 
-                                <div class="form-control">
+                                <div>
                                     <button class="btn btn-dark text-light" type="submit">Submit</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
 
             
         </div>
 
-@if(session()->has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-@endif
-@if(session()->has('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-        </div>
-@endif
 @endsection
 

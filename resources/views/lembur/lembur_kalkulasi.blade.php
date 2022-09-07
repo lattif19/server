@@ -33,7 +33,7 @@
                         <div class="box-body table-respon">
                            <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr class="bg-dark text-light">
+                                    <tr>
                                         <td width="10px">No</td>
                                         <td width="90px">Tanggal</td>
                                         <td width="200px">Keterangan / Deskripsi</td>

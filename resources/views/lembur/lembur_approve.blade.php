@@ -21,7 +21,7 @@
                             
         
                                 <table class="table table-bordered table-striped">
-                                    <thead class="bg-dark text-light">
+                                    <thead>
                                         <tr>
                                             <td width="100px" align="center">No</td>
                                             <td width="300px" >Nama</td>
