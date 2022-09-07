@@ -66,7 +66,12 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/kendaraan/service', [KendaraanController::class, 'service']);
     Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
     Route::get('/kendaraan/setting', [KendaraanController::class, 'setting']);
-    ///kendaraan/list
+    Route::post('/kendaraan/setting/premi_asuransi', [KendaraanController::class, 'setting_premi']);
+    Route::post('/kendaraan/setting/jenis_asuransi', [KendaraanController::class, 'setting_jenis_asuransi']);
+    Route::post('/kendaraan/setting/jenis_kendaraan', [KendaraanController::class, 'setting_jenis_kendaraan']);
+    Route::post('/kendaraan/setting/jenis_service', [KendaraanController::class, 'setting_jenis_service']);
+    Route::post('/kendaraan/setting/status_perbaikan', [KendaraanController::class, 'setting_status_perbaikan']);
+    //jenis_service
     
 
 

@@ -32,7 +32,7 @@
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ Auth::user()->email }}
             </button>
-            cek user has login : {{ Cache::has() }}
+            
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
