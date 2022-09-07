@@ -35,7 +35,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- {{ dd($mobil) }} --}}
                                     @foreach ($mobil as $i)
                                         <tr>
                                             <td>{{ $mobil->firstItem() + $loop->index }}</td>

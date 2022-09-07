@@ -30,10 +30,10 @@
                     <i class="fa fa-filter"></i>
                     <span class="hidden-xs" >Show Filter</span>
                 </a>
-                <div class="card">
+                <div class="card" id="show">
                     <div class="card-header">
                         <div class="card-body">
-                            <form action="/lembur_report" method="get" id="show">
+                            <form action="/lembur_report" method="get" >
                                 <div class="form-group">
                                     <label for="periode" class="mb-2"> <strong>Periode Lembur</strong></label>
                                     <select name="periode" class="form-control">
