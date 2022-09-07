@@ -38,7 +38,11 @@
                                     @foreach ($mobil as $i)
                                         <tr>
                                             <td>{{ $mobil->firstItem() + $loop->index }}</td>
-                                            <td>{{ $i->nama }}</td>
+                                            <td>
+                                                <a href="/kendaraan/{{ $i->no_polisi }}/detail">
+                                                    {{ $i->nama }}
+                                                </a>
+                                            </td>
                                             <td>{{ $i->no_polisi }}</td>
                                             <td>{{ $i->user->pegawai->nama }}</td>
                                             <td>{{ $i->a_jenis_kendaraan->nama }}</td>

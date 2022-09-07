@@ -214,7 +214,7 @@
                 <div class="col-lg-6">
                     <div class="nav card">
                         <div class="card-header bg-info d-flex justify-content-between">
-                            <span class="text-light">
+                            <span class="text-dark">
                                 Jenis Service / Perbaikan
                             </span>
                             <span class="float-right text-dark">
@@ -277,8 +277,8 @@
                 <div class="col-lg-6">
                     <div class="nav card">
                         <div class="card-header bg-info d-flex justify-content-between">
-                            <span class="text-light">
-                                Jenis Service / Perbaikan
+                            <span class="text-dark">
+                                Jenis Status Perbaikan
                             </span>
                             <span class="float-right text-dark">
                                 <button class="btn btn-light btn-sm" data-toggle="modal" data-target="#tambahStatusPerbaikan">Tambah</button>

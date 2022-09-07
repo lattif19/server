@@ -11,9 +11,31 @@ use App\Models\ManagemenKendaraan\AJenisPremi;
 use App\Models\ManagemenKendaraan\AJenisService;
 use App\Models\ManagemenKendaraan\AStatusPerbaikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KendaraanController extends Controller
 {
+    public function service_tambah_pengajuan(Request $request){
+        $data['user_id'] = auth()->user()->id;
+        $data['a_status_perbaikan_id'] = 1;
+
+        $data['created_at'] = date("Y-m-d H:i:s");
+        $data['updated_at'] = date("Y-m-d H:i:s");
+        $data['a_kendaraan_id'] = $request->a_kendaraan_id;
+        $data['a_jenis_service_id'] = $request->a_jenis_service_id;
+        $data['nama_bengkel'] = $request->nama_bengkel;
+        $data['keterangan'] = $request->keterangan;
+        $data['tanggal_booking'] = $request->tanggal_booking;
+        $data['tanggal_masuk'] = $request->tanggal_masuk;
+        $data['estimasi'] = $request->estimasi;
+
+        if($request->aksi == "tambah"){
+            AServicePerbaikan::create($data); 
+            return back()->with("success", "Proses Berhasil");
+        }
+        return back()->with("error", "Proses Gagal");
+    }
+
     //setting_status_perbaikan
     public function setting_status_perbaikan(Request $request){
         $id['id']   = $request->id;
@@ -128,7 +150,9 @@ class KendaraanController extends Controller
         return view('asset.service',[
             'title' => 'Service',
             'sub_title' => 'service - PT Sumber Segara Primadaya',
-            'service' => AServicePerbaikan::join("pegawai", "a_service_perbaikan.driver_id","=","pegawai.user_id")->paginate(10),
+            'service' => AServicePerbaikan::paginate(10),
+            'kendaraan' => AKendaraan::get(),
+            'jenis_service' => AJenisService::get(),
         ]);
     }
 
@@ -150,6 +174,17 @@ class KendaraanController extends Controller
             'jenis_kendaraan' => AJenisKendaraan::get(),
             'jenis_service' => AJenisService::get(),
             'status_perbaikan' => AStatusPerbaikan::get(),
+        ]);
+    }
+
+    public function detail_kendaraan(Request $request){
+        $data = AKendaraan::where('no_polisi', $request->no_polisi)->get();
+        if($data->count() == 0 || $request->aksi != "detail" && $request->aksi != "edit"){ return abort(404); }
+
+        return view("asset.kendaraan_detail",[
+            'title' => "Detail Kendaraan",
+            'sub_title' => "Kendaraan - PT Sumber Segara Primadaya",
+            'mobil' => $data,
         ]);
     }
 
