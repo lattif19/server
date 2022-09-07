@@ -23,19 +23,21 @@ class ManagemenKendaraan extends Seeder
         AJenisKendaraan::create(["nama"=>"Operasional",      "keterangan"=>"Asset Kendaran untuk Operasional Kantor" ]);
         AJenisKendaraan::create(["nama"=>"Non-Aktif",        "keterangan"=>"Asset Kendaran yang telah non-aktif" ]);
 
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DA',  'nama'=> 'Lexsus AL 300']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DB',  'nama'=> 'Lexsus BL 400']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DC',  'nama'=> 'Mazda AB 700 ']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DE',  'nama'=> 'Mazda AB 700']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DF',  'nama'=> 'Mazda AC 700']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'driver_id'=> "1",  'no_polisi'=>'B 8338 DG',  'nama'=> 'Avanza']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OA',  'nama'=> 'Senia']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OB',  'nama'=> 'Freed']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OC',  'nama'=> 'Fenturer']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'driver_id'=> "1",  'no_polisi'=>'B 8338 OD',  'nama'=> 'Jimny']);
-        AKendaraan::create(['a_jenis_kendaraan_id'=>'3',  'driver_id'=> "1",  'no_polisi'=>'B 8338 NA',  'nama'=> 'Karimun']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'user_id'=> "1",  'no_polisi'=>'B 8338 DA',  'nama'=> 'Lexsus AL 300']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'user_id'=> "1",  'no_polisi'=>'B 8338 DB',  'nama'=> 'Lexsus BL 400']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'user_id'=> "1",  'no_polisi'=>'B 8338 DC',  'nama'=> 'Mazda AB 700 ']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'user_id'=> "1",  'no_polisi'=>'B 8338 DE',  'nama'=> 'Mazda AB 700']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'user_id'=> "1",  'no_polisi'=>'B 8338 DF',  'nama'=> 'Mazda AC 700']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'1',  'user_id'=> "1",  'no_polisi'=>'B 8338 DG',  'nama'=> 'Avanza']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'user_id'=> "1",  'no_polisi'=>'B 8338 OA',  'nama'=> 'Senia']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'user_id'=> "1",  'no_polisi'=>'B 8338 OB',  'nama'=> 'Freed']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'user_id'=> "1",  'no_polisi'=>'B 8338 OC',  'nama'=> 'Fenturer']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'2',  'user_id'=> "1",  'no_polisi'=>'B 8338 OD',  'nama'=> 'Jimny']);
+        AKendaraan::create(['a_jenis_kendaraan_id'=>'3',  'user_id'=> "1",  'no_polisi'=>'B 8338 NA',  'nama'=> 'Karimun']);
 
         DB::table("a_status_perbaikan")->insert(["nama"=>"Pengajuan",           "keterangan" => "Pengajuan perbaikan oleh Driver"]);
+        DB::table("a_status_perbaikan")->insert(["nama"=>"Pengajuan Diterima",  "keterangan" => "Pengajuan perbaikan disetujui"]);
+        DB::table("a_status_perbaikan")->insert(["nama"=>"Pengajuan Ditolak",   "keterangan" => "Pengajuan perbaikan ditolak"]);
         DB::table("a_status_perbaikan")->insert(["nama"=>"Booking",             "keterangan" => "Menjadwalkan Perbaikan"]);
         DB::table("a_status_perbaikan")->insert(["nama"=>"Proses Perbaikan",    "keterangan" => "Perbaikan Dalam Proses"]);
         DB::table("a_status_perbaikan")->insert(["nama"=>"Selesai",             "keterangan" => "Perbaikan Selesai"]);
@@ -59,7 +61,7 @@ class ManagemenKendaraan extends Seeder
         DB::table("a_jenis_pajak")->insert(["nama"=>"lima tahun",    "keterangan" => "Pajak Lima Tahun"]);
         
         AServicePerbaikan::create([
-            'driver_id' => '1',
+            'user_id' => '1',
             'a_kendaraan_id' => '1',
             'a_jenis_service_id' => '1',
             'a_status_perbaikan_id' => '1',
@@ -73,7 +75,7 @@ class ManagemenKendaraan extends Seeder
         ]);
 
         AServicePerbaikan::create([
-            'driver_id' => '1',
+            'user_id' => '1',
             'a_kendaraan_id' => '2',
             'a_jenis_service_id' => '2',
             'a_status_perbaikan_id' => '2',
@@ -87,7 +89,7 @@ class ManagemenKendaraan extends Seeder
         ]);
 
         AServicePerbaikan::create([
-            'driver_id' => '1',
+            'user_id' => '1',
             'a_kendaraan_id' => '3',
             'a_jenis_service_id' => '4',
             'a_status_perbaikan_id' => '3',

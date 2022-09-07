@@ -30,8 +30,9 @@
         <!-- Example single danger button -->
           <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ Auth::user()->email }} 
+              {{ Auth::user()->email }}
             </button>
+            
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>

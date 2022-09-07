@@ -15,7 +15,7 @@ class AServicePerbaikan extends Migration
     {
         Schema::create('a_service_perbaikan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('a_kendaraan_id')->nullable();        
             $table->foreignId('a_jenis_service_id')->nullable();    
             $table->foreignId('a_status_perbaikan_id')->nullable(); 

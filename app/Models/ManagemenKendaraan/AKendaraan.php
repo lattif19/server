@@ -2,6 +2,7 @@
 
 namespace App\Models\ManagemenKendaraan;
 
+use App\Models\Pegawai;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,9 @@ class AKendaraan extends Model
     protected $guarded = ['id'];
     protected $table = 'a_kendaraan';
 
+    public function pegawai(){
+        return $this->belongsTo(Pegawai::class);
+    }
     public function user(){
         return $this->belongsTo(User::class);
     }
