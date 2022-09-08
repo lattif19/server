@@ -9,25 +9,25 @@
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
+            {{-- <div class="row"> --}}
+                <div class="content">
+                    <div class="box">
+                        <div class="box-header">
                             <h5> Pengajuan Lembur Hari Biasa </h5>
                         </div>
                         
-                        <div class="card-body">
+                        <div class="box-body table-respom">
                             
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td width="10px">No</td>
-                                        <td width="200px">Tanggal</td>
-                                        <td>Keterangan / Deskripsi</td>
-                                        <td width="90px">Jam Masuk</td>
-                                        <td width="100px">Jam Pulang <br> Standar</td>
-                                        <td width="100px">Jam Pulang <br> Sebenarnya</td>
-                                        <td width="100px">Waktu <br> Lembur</td>
+                                        <td width="90px">Tanggal</td>
+                                        <td width="200px">Keterangan / Deskripsi</td>
+                                        <td width="60px">Jam Masuk</td>
+                                        <td width="60px">Jam Pulang <br> Standar</td>
+                                        <td width="60px">Jam Pulang <br> Sebenarnya</td>
+                                        <td width="60px">Waktu <br> Lembur</td>
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -58,20 +58,20 @@
                             
 
                             <hr class="mt-5 mb-5">
-                            <div class="card-header">
+                            <div class="box-header">
                                 <h5> Pengajuan Lembur Libur </h5>
                             </div>
                             
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td width="10px">No</td>
-                                        <td width="200px">Tanggal</td>
-                                        <td>Keterangan</td>
-                                        <td>Jam Masuk</td>
+                                        <td width="90">Tanggal</td>
+                                        <td width="200px">Keterangan</td>
+                                        <td width="60">Jam Masuk</td>
                                         {{-- <td>Jam Pulang Standar</td> --}}
-                                        <td>Jam Pulang Sebenarnya</td>
-                                        <td>Jumlah Lembur</td>
+                                        <td width="60">Jam Pulang Sebenarnya</td>
+                                        <td width="60">Jumlah <br> Lembur</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                </div>
-            </div>
+            {{-- </div> --}}
         </div>
 
 
