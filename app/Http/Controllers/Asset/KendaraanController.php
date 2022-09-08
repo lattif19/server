@@ -10,6 +10,7 @@ use App\Models\ManagemenKendaraan\AServicePerbaikan;
 use App\Models\ManagemenKendaraan\AJenisPremi;
 use App\Models\ManagemenKendaraan\AJenisService;
 use App\Models\ManagemenKendaraan\AStatusPerbaikan;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -185,6 +186,7 @@ class KendaraanController extends Controller
             'title' => "Detail Kendaraan",
             'sub_title' => "Kendaraan - PT Sumber Segara Primadaya",
             'mobil' => $data,
+            'pegawai' => Pegawai::get(),
         ]);
     }
 
