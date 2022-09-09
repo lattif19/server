@@ -12,7 +12,7 @@
             <!-- <div class="row"> -->
                 <div class="content">
                     <div class="box">
-                        <div class="box-header">
+                        <div class="navbar box-header">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#persetujuan">Persetujuan</button>
                         </div>
                         
@@ -22,12 +22,12 @@
                                 <thead>
                                     <tr>
                                         <td width="10px">No</td>
-                                        <td width="200px">Tanggal</td>
-                                        <td>Keterangan / Deskripsi</td>
-                                        <td width="90px">Jam Masuk</td>
-                                        <td width="100px">Jam Pulang <br> Standar</td>
-                                        <td width="100px">Jam Pulang <br> Sebenarnya</td>
-                                        <td width="100px">Waktu <br> Lembur</td>
+                                        <td width="90px">Tanggal</td>
+                                        <td width="200">Keterangan / Deskripsi</td>
+                                        <td width="60px">Jam Masuk</td>
+                                        <td width="60x">Jam Pulang <br> Standar</td>
+                                        <td width="60x">Jam Pulang <br> Sebenarnya</td>
+                                        <td width="60x">Waktu <br> Lembur</td>
                                     </tr>
                                 </thead>
                                     <tbody>
@@ -62,14 +62,14 @@
                             <h5> Pengajuan Lembur Libur </h5>
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <tr class="bg-dark text-light">
+                                    <tr >
                                         <td width="10px">No</td>
-                                        <td width="200px">Tanggal</td>
-                                        <td>Keterangan</td>
-                                        <td>Jam Masuk</td>
+                                        <td width="90px">Tanggal</td>
+                                        <td width="200">Keterangan</td>
+                                        <td width="60">Jam Masuk</td>
                                         {{-- <td>Jam Pulang Standar</td> --}}
-                                        <td>Jam Pulang Sebenarnya</td>
-                                        <td>Jumlah Lembur</td>
+                                        <td width="60">Jam Pulang Sebenarnya</td>
+                                        <td width="60">Jumlah Lembur</td>
                                     </tr>
                                 </thead>
                                 <tbody>

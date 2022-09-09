@@ -165,7 +165,7 @@
                         </div>
                         <div class="box-body table-respon">
                            <table class="table table-bordered table-striped">
-                                <thead align="center" class="table-dark">
+                                <thead align="center">
                                     <tr>
                                         <td width="10px">No</td>
                                         <td width="90px">Tanggal</td>

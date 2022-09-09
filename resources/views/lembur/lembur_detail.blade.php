@@ -145,7 +145,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="rubahData{{ $i->id }}">Rubah Data Lembur</h5>
+                                                            <h5 class="modal-title" id="rubahData{{ $i->id }}">Edit Data Lembur</h5>
                                                                 <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -227,7 +227,7 @@
                                                 <td align="center">{{ $loop->index+1 }}</td>
                                                 <td>{{ tanggl_id($i->tanggal) }} </td>
                                                 <td>{{ $i->keterangan }} </td>
-                                                <td><a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">Rubah</a>&nbsp;|&nbsp;
+                                                <td><a href="#" data-toggle="modal" data-target="#rubahData{{ $i->id }}">Edit</a>&nbsp;|&nbsp;
                                                     <a href="#" data-toggle="modal" data-target="#hapusData{{ $i->id }}">Hapus</a></td>
                                             </tr>
 
@@ -268,7 +268,7 @@
                                                 <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="rubahData{{ $i->id }}">Rubah Data Lembur</h5>
+                                                            <h5 class="modal-title" id="rubahData{{ $i->id }}">Edit Data Lembur</h5>
                                                                 <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -300,7 +300,7 @@
 
                                                                 <div class="form-group mt-5">
                                                                     <input type="hidden" name="lembur_catatan" value="{{ $i->id }}">
-                                                                    <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Rubah </button>
+                                                                    <button class="btn col-lg-2 btn-primary btn-lg" type="submit"> Edit </button>
                                                                 </div>
                                                             </form>
                                                         </div>
