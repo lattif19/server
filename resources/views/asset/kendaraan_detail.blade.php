@@ -228,41 +228,51 @@
             </div>
         </div>
 
-        <script>
-            function changeAtribute(){
-                if(document.getElementById("tombol").innerHTML == "Rubah"){
-                    document.getElementById("tombol").innerHTML="Batal";
-                    for(var i=0; i<document.getElementsByClassName("form-control").length; i++){
-                        document.getElementsByClassName("form-control")[i].disabled = false;
-                    }
-                    
-                    for(var y=0; y<document.querySelectorAll("#file1").length; y++){
-                        document.querySelectorAll("#file1")[y].hidden = false;
-                    }
-                    for(var z=0; z<document.querySelectorAll("#link1").length; z++){
-                        document.querySelectorAll("#link1")[z].hidden = true;
-                    }
-
-                    document.getElementById("tombol-save").hidden = false;
+@if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+@endif
+@if(session()->has('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+@endif
 
 
-                }else{
-                    document.getElementById("tombol").innerHTML="Rubah";
-                    for(var i=0; i<document.getElementsByClassName("form-control").length; i++){
-                        document.getElementsByClassName("form-control")[i].disabled = true;
-                    }
-                    for(var y=0; y<document.querySelectorAll("#file1").length; y++){
-                        document.querySelectorAll("#file1")[y].hidden = true;
-                    }
-                    for(var z=0; z<document.querySelectorAll("#link1").length; z++){
-                        document.querySelectorAll("#link1")[z].hidden = false;
-                    }
-
-                    document.getElementById("tombol-save").hidden = true;
-                    
-                }
-
+<script>
+    function changeAtribute(){
+        if(document.getElementById("tombol").innerHTML == "Rubah"){
+            document.getElementById("tombol").innerHTML="Batal";
+            for(var i=0; i<document.getElementsByClassName("form-control").length; i++){
+                document.getElementsByClassName("form-control")[i].disabled = false;
             }
-        </script>
+            
+            for(var y=0; y<document.querySelectorAll("#file1").length; y++){
+                document.querySelectorAll("#file1")[y].hidden = false;
+            }
+            for(var z=0; z<document.querySelectorAll("#link1").length; z++){
+                document.querySelectorAll("#link1")[z].hidden = true;
+            }
+
+            document.getElementById("tombol-save").hidden = false;
+
+
+        }else{
+            document.getElementById("tombol").innerHTML="Rubah";
+            for(var i=0; i<document.getElementsByClassName("form-control").length; i++){
+                document.getElementsByClassName("form-control")[i].disabled = true;
+            }
+            for(var y=0; y<document.querySelectorAll("#file1").length; y++){
+                document.querySelectorAll("#file1")[y].hidden = true;
+            }
+            for(var z=0; z<document.querySelectorAll("#link1").length; z++){
+                document.querySelectorAll("#link1")[z].hidden = false;
+            }
+
+            document.getElementById("tombol-save").hidden = true;            
+        }
+    }
+</script>
 @endsection
 

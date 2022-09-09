@@ -25,7 +25,8 @@
                             <span><h5>Detail Mobil</h5></span>
                         </div>
                         <div class="card-body">
-                            <form action="" id="form-mobil-atas">
+                            <form action="/kendaraan/mobil/update" id="form-mobil-atas" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <table class="table">
                                     <tr>
                                         <td style="width:300px">Nama</td>
@@ -47,8 +48,7 @@
                                         <td>Tipe Kendaraan</td>
                                         <td>:</td>
                                         <td>
-                                            <select name="a_jenis_kendaraan_id" class="form-control" >
-                                                <option value="" selected>-- Pilih Satu --</option> 
+                                            <select name="a_jenis_kendaraan_id" class="form-control">
                                                 @foreach ($a_jenis_kendaraan as $i)
                                                 <option value="{{ $i->id }}"> {{ $i->nama }}</option>
                                                 @endforeach
@@ -84,8 +84,7 @@
                                         <td>Driver PIC</td>
                                         <td>:</td>
                                         <td>
-                                            <select name="user_id" class="form-control" >
-                                                <option value="" selected>-- Pilih Satu --</option> 
+                                            <select name="user_id" class="form-control">
                                                 @foreach ($pegawai as $p)
                                                     <option value="{{ $p->user_id }}">{{ $p->nama }}</option>
                                                 @endforeach
@@ -110,6 +109,15 @@
                                     </tr>
 
                                     <tr>
+                                        <td>File BPKB</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="file" name="mobil_foto" class="form-control" id="file1">
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
                                         <td>Keterangan</td>
                                         <td>:</td>
                                         <td>
@@ -122,6 +130,7 @@
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                             <td>
+                                                <input type="hidden" name="kendaraan_id" value="tambah">
                                                 <button type="submit" class="btn btn-info btn-lg">Simpan</button>
                                             </td>
                                         </tr>

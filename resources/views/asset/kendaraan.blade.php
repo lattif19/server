@@ -39,6 +39,7 @@
                                         <td>No Polisi</td>
                                         <td>PIC Driver</td>
                                         <td>Kategori Kendaraan</td>
+                                        <td width="500px">Keterangan</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,6 +54,7 @@
                                             <td>{{ $i->no_polisi }}</td>
                                             <td>{{ $i->user->pegawai->nama }}</td>
                                             <td>{{ $i->a_jenis_kendaraan->nama }}</td>
+                                            <td>{{ $i->keterangan }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -70,5 +72,15 @@
                 
             </div>
         </div>
+@if(session()->has('success'))
+<div class="alert alert-success" role="alert">
+    {{ session('success') }}
+</div>
+@endif
+@if(session()->has('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+@endif
 @endsection
 

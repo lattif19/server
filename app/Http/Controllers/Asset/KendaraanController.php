@@ -18,6 +18,14 @@ use App\Models\ManagemenKendaraan\AServicePerbaikan;
 
 class KendaraanController extends Controller
 {
+    public function validasi_no_polisi($data){
+        $ada = AKendaraan::where("no_polisi", "like", "%".$data."%")->count();
+        if($ada > 0){
+            return $data." (".$ada.")";
+        }else{
+            return $data;
+        }
+    }
 
     public function simpan_detail_mobil(Request $request){
         $data['nama'] = $request->nama;
@@ -28,16 +36,25 @@ class KendaraanController extends Controller
         $data['tanggal_pembelian'] = $request->tanggal_pembelian;
         $data['user_id'] = $request->user_id;
         $data['keterangan'] = $request->keterangan;
-        $data['updated_at'] = $request->updated_at;
+        $data['updated_at'] = date("Y-m-d H:i:s");
 
         $datafile['mobil_stnk'] = $request->mobil_stnk;
         $datafile['mobil_bpkb'] = $request->mobil_bpkb;
         $datafile['mobil_foto'] = $request->mobil_foto;
         
         $id = $request->kendaraan_id;
-        
+
+        if($id == "tambah"){
+            $data['no_polisi'] = $this->validasi_no_polisi($request->no_polisi);
+            $id = AKendaraan::create($data)->id;
+            if($id > 0) {$validate = true; }else{$validate = false;}
+        }else{
+            $validate = AKendaraan::where("id", $id)->update($data) == 1;
+        }
+
         $res['success'] = "";
         $res['error']="";
+
         if($datafile['mobil_stnk'] != null){
             if($this->simpan_dokumen($datafile['mobil_stnk'], $id, "mobil_stnk", "kendaraan"))
             { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_stnk gagal"; }
@@ -54,9 +71,9 @@ class KendaraanController extends Controller
              
         }
 
-        if(AKendaraan::where("id", $id)->update($data) == 1)
-           { return back()->with("success", "Proses Berhasil"); }
-             return back()->with("error", $res);
+         if($validate)
+            { return redirect('/kendaraan/mobil')->with("success", "Proses Berhasil"); }
+              return redirect('/kendaraan/mobil')->with("error", $res);
         
     }
 
