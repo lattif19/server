@@ -64,6 +64,8 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/kendaraan', [KendaraanController::class, 'index']);
     Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
     Route::get('/kendaraan/mobil', [KendaraanController::class, 'daftar_kendaraan']);
+    Route::get('/kendaraan/mobil_tambah', [KendaraanController::class, 'test']);
+
     Route::get('/kendaraan/service', [KendaraanController::class, 'service']);
     Route::post('/kendaraan/service/tambah_pengajuan', [KendaraanController::class, 'service_tambah_pengajuan']);
     Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);

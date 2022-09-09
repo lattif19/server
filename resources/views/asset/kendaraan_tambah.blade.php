@@ -19,42 +19,6 @@
             </ol>
 
             <div class="row">
-                <div class="col-lg-3">
-
-                    <div class="col-md-12">
-                        <div class="card">
-                            <img class="card-img-top" src="/img/mobil/direksi/mobil.png" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text"><center> <strong>{{ $mobil[0]->nama }}</strong></center></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 mt-3 bg-info">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Informasi Asuransi</h5>
-                            </div>
-                            <div class="card-body">
-                                Tampil data disini
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 mt-3 bg-info">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Informasi Pajak</h5>
-                            </div>
-                            <div class="card-body">
-                                Tampil data disini
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
                 <div class="col-lg-9">
                     <div class="nav card">
                         <div class="nav card-header d-flex justify-content-between">

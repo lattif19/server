@@ -18,7 +18,6 @@
 
             <div class="col-lg-6 bg-info">
                 <div class="container">
-
                     <h3 align="center">Detal Lembur</h3>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum vitae minus excepturi velit laboriosam tempora? Odio pariatur, distinctio perferendis provident suscipit, praesentium cum harum, saepe libero asperiores consectetur blanditiis doloribus aut adipisci quaerat! Eligendi eaque, eos sapiente ipsum facere dignissimos natus? Iste temporibus hic voluptate doloribus laborum eveniet officia, quae vero maiores pariatur assumenda aspernatur similique quas exercitationem? Assumenda consequuntur obcaecati velit suscipit. Quod tempora quisquam pariatur eligendi esse, provident porro repellendus in incidunt. Reprehenderit repudiandae, facilis, eum vel provident necessitatibus hic in soluta recusandae repellat perferendis voluptatem animi quaerat! Saepe sapiente facere officiis voluptates non quisquam accusamus dolorem doloremque!</p>
                 </div>

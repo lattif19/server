@@ -16,6 +16,20 @@ use Illuminate\Support\Facades\Auth;
 
 class KendaraanController extends Controller
 {
+
+    public function test(){
+        dd("ini test");
+    }
+    public function tambah_data_mobil(){
+        dd("disini");
+        
+        // return view('asset.kendaraan_tambah',[
+        //         'title' => 'Mobil',
+        //         'sub_title' => 'PT Sumber Segara Primadaya',
+        // ]);
+    }
+
+
     public function service_tambah_pengajuan(Request $request){
         $data['user_id'] = auth()->user()->id;
         $data['a_status_perbaikan_id'] = 1;
@@ -187,6 +201,7 @@ class KendaraanController extends Controller
             'sub_title' => "Kendaraan - PT Sumber Segara Primadaya",
             'mobil' => $data,
             'pegawai' => Pegawai::get(),
+            'a_jenis_kendaraan' => AJenisKendaraan::get(),
         ]);
     }
 
