@@ -17,16 +17,11 @@ use Illuminate\Support\Facades\Auth;
 class KendaraanController extends Controller
 {
 
-    public function test(){
-        dd("ini test");
-    }
     public function tambah_data_mobil(){
-        dd("disini");
-        
-        // return view('asset.kendaraan_tambah',[
-        //         'title' => 'Mobil',
-        //         'sub_title' => 'PT Sumber Segara Primadaya',
-        // ]);
+        return view('asset.kendaraan_tambah',[
+                'title' => 'Mobil',
+                'sub_title' => 'PT Sumber Segara Primadaya',
+        ]);
     }
 
 

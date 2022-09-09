@@ -62,14 +62,14 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/main', [DashboardController::class, 'index'])->name('home')->middleware("auth");
     
     Route::get('/kendaraan', [KendaraanController::class, 'index']);
-    Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
     Route::get('/kendaraan/mobil', [KendaraanController::class, 'daftar_kendaraan']);
-    Route::get('/kendaraan/mobil_tambah', [KendaraanController::class, 'test']);
-
+    Route::get('/kendaraan/mobil/tambah', [KendaraanController::class, 'tambah_data_mobil']);
     Route::get('/kendaraan/service', [KendaraanController::class, 'service']);
-    Route::post('/kendaraan/service/tambah_pengajuan', [KendaraanController::class, 'service_tambah_pengajuan']);
     Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
     Route::get('/kendaraan/setting', [KendaraanController::class, 'setting']);
+    Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
+    
+    Route::post('/kendaraan/service/tambah_pengajuan', [KendaraanController::class, 'service_tambah_pengajuan']);
     Route::post('/kendaraan/setting/premi_asuransi', [KendaraanController::class, 'setting_premi']);
     Route::post('/kendaraan/setting/jenis_asuransi', [KendaraanController::class, 'setting_jenis_asuransi']);
     Route::post('/kendaraan/setting/jenis_kendaraan', [KendaraanController::class, 'setting_jenis_kendaraan']);
