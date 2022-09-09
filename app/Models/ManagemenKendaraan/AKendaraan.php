@@ -12,6 +12,10 @@ class AKendaraan extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $table = 'a_kendaraan';
+    
+    public function a_kendaraan_dokumen(){
+        return $this->hasMany(AKendaraanDokumen::class);
+    }
 
     public function pegawai(){
         return $this->belongsTo(Pegawai::class);

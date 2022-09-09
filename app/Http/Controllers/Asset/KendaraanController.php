@@ -1,26 +1,84 @@
 <?php
 namespace App\Http\Controllers\Asset;
 
+use App\Models\Pegawai;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\ManagemenKendaraan\AJenisKendaraan;
-use App\Models\ManagemenKendaraan\AKendaraan;
+use Illuminate\Support\Facades\Auth;
+use App\Models\ManagemenKendaraan\AKendaraanDokumen;
 use App\Models\ManagemenKendaraan\AAsuransi;
-use App\Models\ManagemenKendaraan\AJenisAsuransi;
-use App\Models\ManagemenKendaraan\AServicePerbaikan;
+use App\Models\ManagemenKendaraan\AKendaraan;
 use App\Models\ManagemenKendaraan\AJenisPremi;
 use App\Models\ManagemenKendaraan\AJenisService;
+use App\Models\ManagemenKendaraan\AJenisAsuransi;
+use App\Models\ManagemenKendaraan\AJenisKendaraan;
 use App\Models\ManagemenKendaraan\AStatusPerbaikan;
-use App\Models\Pegawai;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ManagemenKendaraan\AServicePerbaikan;
 
 class KendaraanController extends Controller
 {
 
+    public function simpan_detail_mobil(Request $request){
+        $data['nama'] = $request->nama;
+        $data['no_polisi'] = $request->no_polisi;
+        $data['a_jenis_kendaraan_id'] = $request->a_jenis_kendaraan_id;
+        $data['no_rangka'] = $request->no_rangka;
+        $data['no_mesin'] = $request->no_mesin;
+        $data['tanggal_pembelian'] = $request->tanggal_pembelian;
+        $data['user_id'] = $request->user_id;
+        $data['keterangan'] = $request->keterangan;
+        $data['updated_at'] = $request->updated_at;
+
+        $datafile['mobil_stnk'] = $request->mobil_stnk;
+        $datafile['mobil_bpkb'] = $request->mobil_bpkb;
+        $datafile['mobil_foto'] = $request->mobil_foto;
+        
+        $id = $request->kendaraan_id;
+        
+        $res['success'] = "";
+        $res['error']="";
+        if($datafile['mobil_stnk'] != null){
+            if($this->simpan_dokumen($datafile['mobil_stnk'], $id, "mobil_stnk", "kendaraan"))
+            { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_stnk gagal"; }
+             
+        }
+        if($datafile['mobil_bpkb'] != null){
+            if($this->simpan_dokumen($datafile['mobil_bpkb'], $id, "mobil_bpkb", "kendaraan"))
+            { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_bpkb gagal"; }
+             
+        }
+        if($datafile['mobil_foto'] != null){
+            if($this->simpan_dokumen($datafile['mobil_foto'], $id, "mobil_foto", "kendaraan"))
+            { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_foto gagal"; }
+             
+        }
+
+        if(AKendaraan::where("id", $id)->update($data) == 1)
+           { return back()->with("success", "Proses Berhasil"); }
+             return back()->with("error", $res);
+        
+    }
+
+    public function simpan_dokumen($file, $a_kendaraan_id="", $jenis="", $sub_folder){      
+        //move file
+        $filename = $a_kendaraan_id."_".str_replace(" ", "_", date("YmdHis")."_".$file->getClientOriginalName());
+        $file-> move(public_path("/dokumen/".$sub_folder."/".$a_kendaraan_id.'/'), $filename);
+
+        $data['a_kendaraan_id'] = $a_kendaraan_id;
+        $data['created_at'] = date('Y-m-d H:i:s');
+        $data['nama'] = $jenis;
+        $data['path'] = "/dokumen/".$sub_folder."/".$a_kendaraan_id."/".$filename;
+
+        return AKendaraanDokumen::create($data);
+    }
+
     public function tambah_data_mobil(){
         return view('asset.kendaraan_tambah',[
-                'title' => 'Mobil',
-                'sub_title' => 'PT Sumber Segara Primadaya',
+            'title' => 'Mobil',
+            'sub_title' => 'PT Sumber Segara Primadaya',
+            'pegawai' => Pegawai::get(),
+            'a_jenis_kendaraan' => AJenisKendaraan::get(),
         ]);
     }
 
@@ -196,6 +254,9 @@ class KendaraanController extends Controller
             'sub_title' => "Kendaraan - PT Sumber Segara Primadaya",
             'mobil' => $data,
             'pegawai' => Pegawai::get(),
+            'dokumen_stnk' => AKendaraan::find($data[0]->id)->a_kendaraan_dokumen->where('nama', 'mobil_stnk')->last(),
+            'dokumen_bpkb' => AKendaraan::find($data[0]->id)->a_kendaraan_dokumen->where('nama', 'mobil_bpkb')->last(),
+            'dokumen_foto' => AKendaraan::find($data[0]->id)->a_kendaraan_dokumen->where('nama', 'mobil_foto')->last(),
             'a_jenis_kendaraan' => AJenisKendaraan::get(),
         ]);
     }

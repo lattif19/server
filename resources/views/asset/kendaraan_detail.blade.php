@@ -22,11 +22,12 @@
                 <div class="col-lg-3">
 
                     <div class="col-md-12">
-                        <div class="card">
-                            <img class="card-img-top" src="/img/mobil/direksi/mobil.png" alt="Card image cap">
-                            <div class="card-body">
-                                <p class="card-text"><center> <strong>{{ $mobil[0]->nama }}</strong></center></p>
-                            </div>
+                        <div class="card">                         
+                            @if($dokumen_foto)
+                                <embed src="{{ $dokumen_foto->path }}" type="">
+                            @else
+                            <img class="card-img-top" src="/img/mobil/direksi/mobil.png" alt="Card image car">
+                            @endif
                         </div>
                     </div>
 
@@ -60,11 +61,12 @@
                         <div class="nav card-header d-flex justify-content-between">
                             <span><h5>Informasi</h5></span>
                             <span>
-                                <button onclick="changeAtribute()" id="tombol" class="btn btn-dark text-light" >Rubah</button>
+                                <button onclick="changeAtribute()" id="tombol" class="btn btn-dark text-light">Rubah</button>
                             </span>
                         </div>
                         <div class="card-body">
-                            <form action="" id="form-mobil-atas">
+                            <form action="/kendaraan/mobil/update" id="form-mobil-atas" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <table class="table">
                                     <tr>
                                         <td style="width:300px">Nama</td>
@@ -136,7 +138,13 @@
                                         <td>
                                             <input type="file" name="mobil_stnk" class="form-control" hidden id="file1">
                                             <span id="link1">
-                                                <a href="#"> Link FILE STNK</a>
+                                                @if($dokumen_stnk)
+                                                    <a href="{{ $dokumen_stnk->path }}">
+                                                        {{ $dokumen_stnk->nama }}
+                                                    </a>
+                                                @else
+                                                -- Belum Ada Data --
+                                                @endif
                                             </span>
                                         </td>
                                     </tr>
@@ -147,7 +155,30 @@
                                         <td>
                                             <input type="file" name="mobil_bpkb" class="form-control" hidden id="file1">
                                             <span id="link1">
-                                                <a href="#"> Link FILE BPKB</a>
+                                                @if($dokumen_bpkb)
+                                                    <a href="{{ $dokumen_bpkb->path }}">
+                                                        {{ $dokumen_bpkb->nama }}
+                                                    </a>
+                                                @else
+                                                -- Belum Ada Data --
+                                                @endif
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>File Foto</td>
+                                        <td>:</td>
+                                        <td>
+                                            <input type="file" name="mobil_foto" class="form-control" hidden id="file1">
+                                            <span id="link1">
+                                                @if($dokumen_foto)
+                                                    <a href="{{ $dokumen_foto->path }}">
+                                                        {{ $dokumen_foto->nama }}
+                                                    </a>
+                                                @else
+                                                -- Belum Ada Data --
+                                                @endif
                                             </span>
                                         </td>
                                     </tr>
@@ -165,6 +196,7 @@
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                             <td>
+                                                <input type="hidden" name="kendaraan_id" value="{{ $mobil[0]->id }}">
                                                 <button type="submit" class="btn btn-info btn-lg">Simpan</button>
                                             </td>
                                         </tr>

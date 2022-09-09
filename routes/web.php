@@ -69,13 +69,16 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/kendaraan/setting', [KendaraanController::class, 'setting']);
     Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
     
+
     Route::post('/kendaraan/service/tambah_pengajuan', [KendaraanController::class, 'service_tambah_pengajuan']);
     Route::post('/kendaraan/setting/premi_asuransi', [KendaraanController::class, 'setting_premi']);
     Route::post('/kendaraan/setting/jenis_asuransi', [KendaraanController::class, 'setting_jenis_asuransi']);
     Route::post('/kendaraan/setting/jenis_kendaraan', [KendaraanController::class, 'setting_jenis_kendaraan']);
     Route::post('/kendaraan/setting/jenis_service', [KendaraanController::class, 'setting_jenis_service']);
     Route::post('/kendaraan/setting/status_perbaikan', [KendaraanController::class, 'setting_status_perbaikan']);
-    ///kendaraan/service/tambah_pengajuan
+    Route::post('/kendaraan/mobil/simpan_dokumen', [KendaraanController::class, 'simpan_dokumen']);
+    Route::post('/kendaraan/mobil/update', [KendaraanController::class, 'simpan_detail_mobil']);
+    //
     
 
 

@@ -17,11 +17,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="nav card">
-                        <div class="nav card-header">
-                            <form action="/kendaraan/mobil">
-                                <input type="search" name="jenis" value="{{ request()->jenis }}">
-                                <button type="submit" class="bnt btn-sm btn-dark">Cari</button>
-                            </form>
+                        <div class="nav card-header d-flax justify-content-between">
+                            <span>
+                                <a href="/kendaraan/mobil/tambah">
+                                    <button class="btn btn-sm btn-dark text-light">Tambah</button>
+                                </a>
+                            </span>
+                            <span>
+                                <form action="/kendaraan/mobil">
+                                    <input type="search" name="jenis" value="{{ request()->jenis }}">
+                                    <button type="submit" class="bnt btn-sm btn-dark">Cari</button>
+                                </form>
+                            </span>
                         </div>
                         <div class="card-body">
                             <table class="table">

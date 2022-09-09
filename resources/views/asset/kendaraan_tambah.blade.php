@@ -22,10 +22,7 @@
                 <div class="col-lg-9">
                     <div class="nav card">
                         <div class="nav card-header d-flex justify-content-between">
-                            <span><h5>Informasi</h5></span>
-                            <span>
-                                <button onclick="changeAtribute()" id="tombol" class="btn btn-dark text-light" >Rubah</button>
-                            </span>
+                            <span><h5>Detail Mobil</h5></span>
                         </div>
                         <div class="card-body">
                             <form action="" id="form-mobil-atas">
@@ -34,7 +31,7 @@
                                         <td style="width:300px">Nama</td>
                                         <td style="width:30px">:</td>
                                         <td>
-                                            <input type="text" name="nama" value="{{ $mobil[0]->nama }}" class="form-control" disabled>
+                                            <input type="text" name="nama" class="form-control" >
                                         </td>
                                     </tr>
 
@@ -42,7 +39,7 @@
                                         <td>Nomor Polisi</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="text" name="no_polisi" value="{{ $mobil[0]->no_polisi }}" class="form-control" disabled>
+                                            <input type="text" name="no_polisi" class="form-control" >
                                         </td>
                                     </tr>
 
@@ -50,9 +47,10 @@
                                         <td>Tipe Kendaraan</td>
                                         <td>:</td>
                                         <td>
-                                            <select name="a_jenis_kendaraan_id" class="form-control" disabled>
+                                            <select name="a_jenis_kendaraan_id" class="form-control" >
+                                                <option value="" selected>-- Pilih Satu --</option> 
                                                 @foreach ($a_jenis_kendaraan as $i)
-                                                <option value="{{ $i->id }}" @if($mobil[0]->a_jenis_kendaraan->id == $i->id) selected @endif> {{ $i->nama }}</option>
+                                                <option value="{{ $i->id }}"> {{ $i->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -62,7 +60,7 @@
                                         <td>No Rangka</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="text" name="no_rangka" value="{{ $mobil[0]->no_rangka }}" class="form-control" disabled>
+                                            <input type="text" name="no_rangka" class="form-control" >
                                         </td>
                                     </tr>
 
@@ -70,7 +68,7 @@
                                         <td>No Mesin</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="text" name="no_mesin" value="{{ $mobil[0]->no_mesin }}" class="form-control" disabled>
+                                            <input type="text" name="no_mesin" class="form-control" >
                                         </td>
                                     </tr>
 
@@ -78,7 +76,7 @@
                                         <td>Tanggal Pembelian</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="date" name="tanggal_pembelian" value="{{ $mobil[0]->tanggal_pembelian }}" class="form-control" disabled>
+                                            <input type="date" name="tanggal_pembelian" class="form-control" >
                                         </td>
                                     </tr>
 
@@ -86,9 +84,10 @@
                                         <td>Driver PIC</td>
                                         <td>:</td>
                                         <td>
-                                            <select name="user_id" class="form-control" disabled>
+                                            <select name="user_id" class="form-control" >
+                                                <option value="" selected>-- Pilih Satu --</option> 
                                                 @foreach ($pegawai as $p)
-                                                    <option value="{{ $p->user_id }}" @if($mobil[0]->user->pegawai->user_id == $p->user_id) selected @endif>{{ $p->nama }}</option>
+                                                    <option value="{{ $p->user_id }}">{{ $p->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -98,10 +97,7 @@
                                         <td>File STNK</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="file" name="mobil_stnk" class="form-control" hidden id="file1">
-                                            <span id="link1">
-                                                <a href="#"> Link FILE STNK</a>
-                                            </span>
+                                            <input type="file" name="mobil_stnk" class="form-control" id="file1">
                                         </td>
                                     </tr>
 
@@ -109,10 +105,7 @@
                                         <td>File BPKB</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="file" name="mobil_bpkb" class="form-control" hidden id="file1">
-                                            <span id="link1">
-                                                <a href="#"> Link FILE BPKB</a>
-                                            </span>
+                                            <input type="file" name="mobil_bpkb" class="form-control" id="file1">
                                         </td>
                                     </tr>
 
@@ -120,11 +113,11 @@
                                         <td>Keterangan</td>
                                         <td>:</td>
                                         <td>
-                                            <textarea name="keterangan" rows="5" class="form-control" disabled>{{ $mobil[0]->keterangan }}</textarea>    
+                                            <textarea name="keterangan" rows="5" class="form-control" ></textarea>    
                                         </td>
                                     </tr>
 
-                                    <tfoot id="tombol-save" hidden class="mt-3">
+                                    <tfoot id="tombol-save"  class="mt-3">
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
@@ -140,24 +133,6 @@
                 </div>
             </div>
 
-
-            <div class="row mt-3">
-                <div class="col-lg-3">
-                    &nbsp;
-                </div>
-
-                <div class="col-lg-9">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Riwayat Service</h5>
-                        </div>
-                        <div class="card-body">
-                            Tampil Riwayat Service dari mobil ini
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
 
         <script>
@@ -165,32 +140,32 @@
                 if(document.getElementById("tombol").innerHTML == "Rubah"){
                     document.getElementById("tombol").innerHTML="Batal";
                     for(var i=0; i<document.getElementsByClassName("form-control").length; i++){
-                        document.getElementsByClassName("form-control")[i].disabled = false;
+                        document.getElementsByClassName("form-control")[i]. = false;
                     }
                     
                     for(var y=0; y<document.querySelectorAll("#file1").length; y++){
-                        document.querySelectorAll("#file1")[y].hidden = false;
+                        document.querySelectorAll("#file1")[y]. = false;
                     }
                     for(var z=0; z<document.querySelectorAll("#link1").length; z++){
-                        document.querySelectorAll("#link1")[z].hidden = true;
+                        document.querySelectorAll("#link1")[z]. = true;
                     }
 
-                    document.getElementById("tombol-save").hidden = false;
+                    document.getElementById("tombol-save"). = false;
 
 
                 }else{
                     document.getElementById("tombol").innerHTML="Rubah";
                     for(var i=0; i<document.getElementsByClassName("form-control").length; i++){
-                        document.getElementsByClassName("form-control")[i].disabled = true;
+                        document.getElementsByClassName("form-control")[i]. = true;
                     }
                     for(var y=0; y<document.querySelectorAll("#file1").length; y++){
-                        document.querySelectorAll("#file1")[y].hidden = true;
+                        document.querySelectorAll("#file1")[y]. = true;
                     }
                     for(var z=0; z<document.querySelectorAll("#link1").length; z++){
-                        document.querySelectorAll("#link1")[z].hidden = false;
+                        document.querySelectorAll("#link1")[z]. = false;
                     }
 
-                    document.getElementById("tombol-save").hidden = true;
+                    document.getElementById("tombol-save"). = true;
                     
                 }
 
