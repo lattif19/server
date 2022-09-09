@@ -56,7 +56,7 @@
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="rubahData">Rubah Data Approver</h5>
+                                                        <h5 class="modal-title" id="rubahData">Edit Data Approver</h5>
                                                             <button type="button" class="btn close btn-danger" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -80,7 +80,7 @@
                                                             <div class="form-group mt-5">
                                                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                                                 <button class="btn col-lg-2 btn-success" type="submit">
-                                                                    Rubah
+                                                                    Save
                                                                 </button>
                                                             </div>
                                                         </form>
