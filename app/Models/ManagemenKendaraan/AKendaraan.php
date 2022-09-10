@@ -13,6 +13,9 @@ class AKendaraan extends Model
     protected $guarded = ['id'];
     protected $table = 'a_kendaraan';
     
+    public function a_status_perbaikan(){
+        return $this->hasMany(AStatusPerbaikan::class);
+    }
     public function a_kendaraan_dokumen(){
         return $this->hasMany(AKendaraanDokumen::class);
     }

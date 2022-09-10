@@ -42,9 +42,29 @@
                                     @foreach ($service as $i)
                                     <tr>
                                         <td>{{ $service->firstItem() + $loop->index }}</td>
-                                        <td>{{ $i->a_kendaraan->nama }}</td>
-                                        <td>{{ $i->a_kendaraan->no_polisi }}</td>
-                                        <td>{{ $i->nama_bengkel }}</td>
+                                        <td>
+                                            <a href="/kendaraan/{{ $i->a_kendaraan->no_polisi }}/detail">
+                                            <strong>
+                                                {{ $i->a_kendaraan->nama }}
+                                            </strong>    
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            <a href="/kendaraan/{{ $i->a_kendaraan->no_polisi }}/detail">
+                                                <strong>
+                                                    {{ $i->a_kendaraan->no_polisi }}
+                                                </strong>
+                                            </a>
+                                        </td>
+                                        
+                                        <td>
+                                            <a href="/kendaraan/service/{{ $i->id }}/detail">
+                                                <strong>
+                                                    {{ $i->nama_bengkel }}
+                                                </strong>
+                                            </a>
+                                        </td>
                                         <td>{{ $i->biaya }}</td>
                                         <td>{{ $i->user->pegawai->nama }}</td>
                                         <td>{{ $i->a_jenis_service->nama }}</td>
@@ -78,7 +98,9 @@
                           </button>
                         </div>
         
-                        <form action="/kendaraan/service/tambah_pengajuan" method="POST">
+                        <form   action="/kendaraan/service/tambah_pengajuan" 
+                                method="POST" 
+                                enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <select name="a_kendaraan_id" class="form-control">
@@ -97,6 +119,7 @@
                                 <input class="form-control" type="date" name="tanggal_booking" value="{{ date('Y-m-d') }}">  
                                 <input class="form-control" type="date" name="tanggal_masuk" value="{{ date('Y-m-d') }}"> 
                                 <input class="form-control" type="number" name="estimasi" placeholder="1000000">
+                                <input type="file" name="service_kerusakan[]" multiple class="form-control">
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success" name="aksi" value="tambah">Ajukan</button>

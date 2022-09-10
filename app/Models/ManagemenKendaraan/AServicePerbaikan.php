@@ -12,7 +12,9 @@ class AServicePerbaikan extends Model
     protected $guarded = ['id'];
     protected $table = 'a_service_perbaikan';
 
-
+    public function a_perbaikan_dokumen(){
+        return $this->hasMany(APerbaikanDokumen::class);
+    }    
 
     public function a_status_perbaikan(){
         return $this->belongsTo(AStatusPerbaikan::class);

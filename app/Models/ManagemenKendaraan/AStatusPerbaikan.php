@@ -11,6 +11,8 @@ class AStatusPerbaikan extends Model
     protected $guarded = ['id'];
     protected $table = 'a_status_perbaikan';
 
-
+    public function a_kendaraan(){
+        return $this->belongsTo(AKendaraan::class);
+    }
     
 }

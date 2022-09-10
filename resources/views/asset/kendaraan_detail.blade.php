@@ -220,7 +220,37 @@
                             <h5>Riwayat Service</h5>
                         </div>
                         <div class="card-body">
-                            Tampil Riwayat Service dari mobil ini
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>No</td>
+                                        <td>Nama Bengkel</td>
+                                        <td>Tanggal</td>
+                                        <td>Biaya Service</td>
+                                        <td>Status Perbaikan</td>
+                                        <td>Keterangan</td>
+                                    </tr>
+
+                                    @foreach($riwayat_service as $i)
+                                        <tr>
+                                            <td>{{ $loop->index+1 }}</td>
+                                            <td>
+                                                <a href="/kendaraan/service/{{ $i->id }}/detail">
+                                                    <strong>
+                                                        {{ $i->nama_bengkel }}
+                                                    </strong>
+                                                </a>
+                                            </td>
+                                            <td>{{ $i->tanggal_masuk }}</td>
+                                            <td>{{ $i->biaya }}</td>
+                                            <td>{{ $i->a_status_perbaikan->nama }}</td>
+                                            <td>{{ $i->keterangan }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+
+                                
+                            </table>
                         </div>
                     </div>
                 </div>

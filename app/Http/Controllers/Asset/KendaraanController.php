@@ -15,9 +15,26 @@ use App\Models\ManagemenKendaraan\AJenisAsuransi;
 use App\Models\ManagemenKendaraan\AJenisKendaraan;
 use App\Models\ManagemenKendaraan\AStatusPerbaikan;
 use App\Models\ManagemenKendaraan\AServicePerbaikan;
+use App\Models\ManagemenKendaraan\APerbaikanDokumen;
 
 class KendaraanController extends Controller
 {
+    public function service_edit_pengajuan(Request $request){
+        dd($request);
+    }
+
+    public function detail_service(Request $request){
+        $aksi = $request->aksi;
+        $id = $request->id;
+        //dd($id);
+        return view("asset.service_detail", [
+            'title' => 'Service & Perbaikan',
+            'sub_title' => 'Detail - PT Sumber Segara Primadaya',
+            'service' => AServicePerbaikan::where("id",$id)->get(),
+            'dok_kerusakan' => APerbaikanDokumen::where("a_service_perbaikan_id", $id)->get(),
+        ]);
+    }
+
     public function validasi_no_polisi($data){
         $ada = AKendaraan::where("no_polisi", "like", "%".$data."%")->count();
         if($ada > 0){
@@ -56,17 +73,17 @@ class KendaraanController extends Controller
         $res['error']="";
 
         if($datafile['mobil_stnk'] != null){
-            if($this->simpan_dokumen($datafile['mobil_stnk'], $id, "mobil_stnk", "kendaraan"))
+            if($this->simpan_dokumen($datafile['mobil_stnk'], $id, "mobil_stnk", "kendaraan", "kendaraan"))
             { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_stnk gagal"; }
              
         }
         if($datafile['mobil_bpkb'] != null){
-            if($this->simpan_dokumen($datafile['mobil_bpkb'], $id, "mobil_bpkb", "kendaraan"))
+            if($this->simpan_dokumen($datafile['mobil_bpkb'], $id, "mobil_bpkb", "kendaraan", "kendaraan"))
             { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_bpkb gagal"; }
              
         }
         if($datafile['mobil_foto'] != null){
-            if($this->simpan_dokumen($datafile['mobil_foto'], $id, "mobil_foto", "kendaraan"))
+            if($this->simpan_dokumen($datafile['mobil_foto'], $id, "mobil_foto", "kendaraan", "kendaraan"))
             { $res['success'] = "berhasil"; } else { $res['error'] = "upload data mobil_foto gagal"; }
              
         }
@@ -77,17 +94,25 @@ class KendaraanController extends Controller
         
     }
 
-    public function simpan_dokumen($file, $a_kendaraan_id="", $jenis="", $sub_folder){      
+    public function simpan_dokumen($file, $id="", $jenis="", $sub_folder, $tabel){      
         //move file
-        $filename = $a_kendaraan_id."_".str_replace(" ", "_", date("YmdHis")."_".$file->getClientOriginalName());
-        $file-> move(public_path("/dokumen/".$sub_folder."/".$a_kendaraan_id.'/'), $filename);
+        $filename = $id."_".str_replace(" ", "_", date("YmdHis")."_".$file->getClientOriginalName());
+        $file-> move(public_path("/dokumen/".$sub_folder."/".$id.'/'), $filename);
 
-        $data['a_kendaraan_id'] = $a_kendaraan_id;
+        $data['a_kendaraan_id'] = $id;
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['nama'] = $jenis;
-        $data['path'] = "/dokumen/".$sub_folder."/".$a_kendaraan_id."/".$filename;
+        $data['path'] = "/dokumen/".$sub_folder."/".$id."/".$filename;
 
-        return AKendaraanDokumen::create($data);
+        if($tabel == "kendaraan"){ 
+            $data['a_kendaraan_id'] = $id;
+            return AKendaraanDokumen::create($data); 
+        }
+
+        if($tabel == "service"){
+            $data['a_service_perbaikan_id'] = $id; 
+            return APerbaikanDokumen::create($data); 
+        }
     }
 
     public function tambah_data_mobil(){
@@ -113,9 +138,12 @@ class KendaraanController extends Controller
         $data['tanggal_booking'] = $request->tanggal_booking;
         $data['tanggal_masuk'] = $request->tanggal_masuk;
         $data['estimasi'] = $request->estimasi;
-
+        
         if($request->aksi == "tambah"){
-            AServicePerbaikan::create($data); 
+            $id = AServicePerbaikan::create($data)->id;
+                for($i=0; $i<count($request->service_kerusakan); $i++){
+                    $this->simpan_dokumen($request->service_kerusakan[$i], $id, "doc_kerusakan", "service", "service");
+                }
             return back()->with("success", "Proses Berhasil");
         }
         return back()->with("error", "Proses Gagal");
@@ -275,6 +303,7 @@ class KendaraanController extends Controller
             'dokumen_bpkb' => AKendaraan::find($data[0]->id)->a_kendaraan_dokumen->where('nama', 'mobil_bpkb')->last(),
             'dokumen_foto' => AKendaraan::find($data[0]->id)->a_kendaraan_dokumen->where('nama', 'mobil_foto')->last(),
             'a_jenis_kendaraan' => AJenisKendaraan::get(),
+            'riwayat_service' => AServicePerbaikan::where("a_kendaraan_id", $data[0]->id)->get(),
         ]);
     }
 
