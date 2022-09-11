@@ -93,8 +93,20 @@
                                         <td>Bukti Pembayaran</td>
                                         <td>:</td>
                                         <td>
+                                            <span id="file1">
+                                                <input id="file1" type="file" name="service_pembayaran[]" multiple class="form-control" hidden>
+                                            </span>
                                             <span id="link1">
-                                                -- Belum Ada Data --
+                                                @if($dok_pembayaran->count() > 0)
+                                                @foreach($dok_pembayaran as $i)
+                                                <span class="mt-1 mb-1 bordered">
+                                                    <embed src="{{ $i->path }}" type="">
+                                                </span>
+                                                <br>
+                                                @endforeach
+                                                @else
+                                                -- Tidak Ada Data --
+                                                @endif
                                             </span>
                                         </td>
                                     </tr>
@@ -103,16 +115,22 @@
                                         <td>Foto Kerusakan / Sebelum Service</td>
                                         <td>:</td>
                                         <td>
+                                        <span id="file1">
+                                            <input id="file1" type="file" name="service_kerusakan[]" multiple class="form-control" hidden>
+                                        </span>
+                                        <span id="link1">
+
                                             @if($dok_kerusakan->count() > 0)
-                                                @foreach($dok_kerusakan as $i)
-                                                    <span class="mt-1 mb-1 bordered">
-                                                        <embed src="{{ $i->path }}" type="">
-                                                    </span>
-                                                    <br>
-                                                @endforeach
+                                            @foreach($dok_kerusakan as $i)
+                                            <span class="mt-1 mb-1 bordered">
+                                                <embed src="{{ $i->path }}" type="">
+                                            </span>
+                                            <br>
+                                            @endforeach
                                             @else
-                                                -- Tidak Ada Data --
+                                            -- Tidak Ada Data --
                                             @endif
+                                        </span>
                                         </td>
                                     </tr>
 
@@ -120,9 +138,21 @@
                                         <td>Foto Perbaikan / Setelah Service</td>
                                         <td>:</td>
                                         <td>
-                                            <input type="file" name="mobil_stnk" class="form-control" hidden id="file1">
+                                            <span id="file1">
+                                                <input id="file1" type="file" name="service_perbaikan[]" multiple class="form-control" hidden>
+                                            </span>
                                             <span id="link1">
-                                                -- Belum Ada Data --
+
+                                                @if($dok_perbaikan->count() > 0)
+                                                @foreach($dok_perbaikan as $i)
+                                                <span class="mt-1 mb-1 bordered">
+                                                    <embed src="{{ $i->path }}" type="">
+                                                </span>
+                                                <br>
+                                                @endforeach
+                                                @else
+                                                -- Tidak Ada Data --
+                                                @endif
                                             </span>
                                         </td>
                                     </tr>

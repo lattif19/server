@@ -26,12 +26,16 @@ class KendaraanController extends Controller
     public function detail_service(Request $request){
         $aksi = $request->aksi;
         $id = $request->id;
-        //dd($id);
         return view("asset.service_detail", [
             'title' => 'Service & Perbaikan',
             'sub_title' => 'Detail - PT Sumber Segara Primadaya',
             'service' => AServicePerbaikan::where("id",$id)->get(),
-            'dok_kerusakan' => APerbaikanDokumen::where("a_service_perbaikan_id", $id)->get(),
+            'dok_kerusakan'  => APerbaikanDokumen::where("a_service_perbaikan_id", $id)
+                                                 ->where("nama", "dok_kerusakan")->get(),
+            'dok_perbaikan'  => APerbaikanDokumen::where("a_service_perbaikan_id", $id)
+                                                 ->where("nama", "dok_perbaikan")->get(),
+            'dok_pembayaran' => APerbaikanDokumen::where("a_service_perbaikan_id", $id)
+                                                 ->where("nama", "dok_pembayaran")->get(),
         ]);
     }
 
@@ -142,7 +146,7 @@ class KendaraanController extends Controller
         if($request->aksi == "tambah"){
             $id = AServicePerbaikan::create($data)->id;
                 for($i=0; $i<count($request->service_kerusakan); $i++){
-                    $this->simpan_dokumen($request->service_kerusakan[$i], $id, "doc_kerusakan", "service", "service");
+                    $this->simpan_dokumen($request->service_kerusakan[$i], $id, "dok_kerusakan", "service", "service");
                 }
             return back()->with("success", "Proses Berhasil");
         }
