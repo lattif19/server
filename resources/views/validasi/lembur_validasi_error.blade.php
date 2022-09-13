@@ -11,7 +11,7 @@
             crossorigin="anonymous">
 </head>
 <body>
-        <div class="row bg-primary">
+        {{-- <div class="row bg-primary">
             <div class="col-lg-12">
                 <h1 align="center">Contoh Layoutnya kaya Gini Aja tip</h1>
             </div>
@@ -40,6 +40,20 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quod architecto eos dolor mollitia incidunt laborum veritatis! Similique deserunt laborum necessitatibus, temporibus sequi rem. Beatae nihil qui exercitationem nobis explicabo vitae ipsa, fuga et obcaecati sequi tempore minus, ducimus magni hic. Harum id voluptatibus numquam officiis fuga quam ex quae consectetur beatae dolor tenetur nesciunt, quaerat, autem quidem provident, quod eum minus exercitationem aperiam placeat! Qui itaque architecto quibusdam voluptatem optio quia asperiores maxime at enim fugiat voluptatum id non mollitia ab amet dolor, saepe reprehenderit error facere. Qui totam dolores et fugiat perferendis voluptates sunt, incidunt deleniti ipsam illo labore tempore earum esse odio. Recusandae labore molestias provident explicabo! Qui, provident natus delectus aperiam excepturi nihil voluptatum accusamus fugiat sed tempora, harum deleniti necessitatibus ad sapiente tenetur vel aut tempore similique pariatur atque non iste modi? Officia esse debitis blanditiis culpa saepe numquam cumque quae! Possimus voluptatem temporibus pariatur.
                 </p>
             </div>
-        </div>
+        </div> --}}
+        <style>
+            body {
+  padding: 25px;
+  background-image: url("/img/danger.jpeg");
+  background-repeat: no-repeat;
+  /* background-size:150px 130px; */
+   background-attachment: fixed;
+  background-position: center; 
+  background-origin: content-box;
+}
+    </style>
+        {{-- <img src="/img/danger.jpeg" width="100"> --}}
+
 </body>
+<h2>Data Tidak Ditemukan</h2>
 </html>

@@ -14,10 +14,10 @@
     <style>
             body {
   padding: 25px;
-  background-image: url("/img/tif.png");
+  background-image: url("/img/verif1.png");
   background-repeat: no-repeat;
-  /* background-size:150px 130px; */
-   background-attachment: fixed;
+  background-size:250px 230px;
+    background-attachment: fixed;
   background-position: center; 
   background-origin: content-box;
 }
@@ -92,7 +92,8 @@
         <div class="col-md-12">
             <div class="card"> --}}
                 {{-- <div id="verif"> --}}
-                    @for ($data=0; $data<count($riwayat); $data++)
+                    <div>
+                        @for ($data=0; $data<count($riwayat); $data++)
                         <div id="content">
                             <ul class="timeline">
                                 <li class="event" data-date=" {{ $riwayat[$data]->created_at }} ">
@@ -119,11 +120,16 @@
                             </ul>
                         </div>
                     @endfor
+                    </div>
+                    
                 {{-- </div> --}}
              {{-- </div>
         </div>
     </div>
 </div> --}}
+<hr>
+<h5 align="right">Penanggung Jawab</h5>
+<div align="right"> <i text-aligm="right">{{ $data_creator[0]->nama }}</i> </div>
 
 
 </body>

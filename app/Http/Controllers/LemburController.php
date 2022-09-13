@@ -149,7 +149,7 @@ class LemburController extends Controller
 
         $riwayat['lembur_pengajuan_id'] = $id['id'];
         $riwayat['status_pengajuan'] = $data['status'];
-        $riwayat['komentar'] = $request->keterangan;
+        $riwayat['komentar'] = $request->keterangan."|| Pengajuan Telah Diproses Oleh Atasan yang Bersangkutan";
         $riwayat['created_at'] = date("Y-m-d H:i:s");
 
         if($data['status'] == "Disetujui"){
