@@ -149,9 +149,13 @@ class LemburController extends Controller
 
         $riwayat['lembur_pengajuan_id'] = $id['id'];
         $riwayat['status_pengajuan'] = $data['status'];
-        $riwayat['komentar'] = $request->keterangan."|| Pengajuan Telah Diproses Oleh Atasan yang Bersangkutan";
         $riwayat['created_at'] = date("Y-m-d H:i:s");
-
+        if($data['status'] == "Disetujui"){
+            $riwayat['komentar'] = $request->keterangan."<br> Pengajuan Telah Disetujui Oleh Atasan yang Bersangkutan";
+        }else{
+            $riwayat['komentar'] = $request->keterangan."<br> Pengajuan Anda Dikembalikan";
+        }
+        
         if($data['status'] == "Disetujui"){
             $this->generate_qrlink("Lembur-Disetujui", $riwayat['lembur_pengajuan_id'], "aktif");
         }else{

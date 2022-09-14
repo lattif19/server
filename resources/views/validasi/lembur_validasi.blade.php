@@ -98,7 +98,7 @@
                             <ul class="timeline">
                                 <li class="event" data-date=" {{ $riwayat[$data]->created_at }} ">
                                     <h3> {{ $riwayat[$data]->status_pengajuan }} </h3>
-                                    <i> {{ $riwayat[$data]->komentar }} </i>
+                                    <i> {!! $riwayat[$data]->komentar !!} </i>
                                     @if($status == "Lembur-Disetujui" && $riwayat[$data]->status_pengajuan == "Disetujui")
                                         <?php break; ?>
                                     @elseif($status == "Lembur-Diajukan" && $riwayat[$data]->status_pengajuan == "Diajukan")
