@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="form-group mt-3">
-                                    <button class="btn btn-warning text-light btn-block">
+                                    <button class="btn btn-dark text-light btn-block">
                                         <i class="fa fa-check"></i>
                                         Apply
                                     </button>
