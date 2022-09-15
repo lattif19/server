@@ -216,8 +216,13 @@
 
                 <div class="col-lg-9">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="nav card-header d-flex justify-content-between">
                             <h5>Riwayat Service</h5>
+                            <span>
+                                <a href="/kendaraan/service/s/{{ $mobil[0]->no_polisi }}/tambah">
+                                    <button class="btn btn-dark text-light">Ajukan Service</button>
+                                </a>
+                            </span>
                         </div>
                         <div class="card-body">
                             <table class="table">

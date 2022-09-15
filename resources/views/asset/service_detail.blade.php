@@ -53,7 +53,16 @@
                                         <td>Status Perbaikan</td>
                                         <td>:</td>
                                         <td>
-                                            {{ $service[0]->a_status_perbaikan->nama }}
+                                            <select name="a_status_perbaikan_id" class="form-control" disabled>
+                                                @foreach ($status_perbaikan as $i)
+                                                    <option value="{{ $i->id }}" 
+                                                        @if($service[0]->a_status_perbaikan->id == $i->id)
+                                                         selected
+                                                        @endif>
+                                                        {{ $i->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </td>
                                     </tr>
 
@@ -69,7 +78,7 @@
                                         <td>Tanggal Selesai Perbaikan</td>
                                         <td>:</td>
                                         <td>
-                                            {{ $service[0]->tanggal_keluar }}
+                                            <input type="date" name="tanggal_keluar" value="{{ $service[0]->tanggal_keluar }}" class="form-control" disabled> 
                                         </td>
                                     </tr>
 
@@ -85,7 +94,7 @@
                                         <td>Biaya Service Sebenarnya</td>
                                         <td>:</td>
                                         <td>
-                                            {{ $service[0]->biaya }}
+                                            <input type="text" name="biaya" class="form-control" value="{{ $service[0]->biaya }}" disabled>
                                         </td>
                                     </tr>
 
@@ -100,7 +109,7 @@
                                                 @if($dok_pembayaran->count() > 0)
                                                 @foreach($dok_pembayaran as $i)
                                                 <span class="mt-1 mb-1 bordered">
-                                                    <embed src="{{ $i->path }}" type="">
+                                                    <embed src="{{ $i->path }}" type="" width="100px">
                                                 </span>
                                                 <br>
                                                 @endforeach
@@ -123,7 +132,7 @@
                                             @if($dok_kerusakan->count() > 0)
                                             @foreach($dok_kerusakan as $i)
                                             <span class="mt-1 mb-1 bordered">
-                                                <embed src="{{ $i->path }}" type="">
+                                                <embed src="{{ $i->path }}" type="" width="100px">
                                             </span>
                                             <br>
                                             @endforeach
@@ -142,11 +151,10 @@
                                                 <input id="file1" type="file" name="service_perbaikan[]" multiple class="form-control" hidden>
                                             </span>
                                             <span id="link1">
-
                                                 @if($dok_perbaikan->count() > 0)
                                                 @foreach($dok_perbaikan as $i)
                                                 <span class="mt-1 mb-1 bordered">
-                                                    <embed src="{{ $i->path }}" type="">
+                                                    <embed src="{{ $i->path }}" type="" width="100px">
                                                 </span>
                                                 <br>
                                                 @endforeach
@@ -162,7 +170,7 @@
                                         <td>Keterangan</td>
                                         <td>:</td>
                                         <td>
-                                            <textarea name="keterangan" rows="5" class="form-control" disabled></textarea>    
+                                            <textarea name="keterangan" rows="5" class="form-control" disabled>{{ $service[0]->keterangan }}</textarea>    
                                         </td>
                                     </tr>
 
@@ -171,7 +179,7 @@
                                             <td>&nbsp;</td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <input type="hidden" name="a_service_perbaikan_id" value="">
+                                                <input type="hidden" name="a_service_perbaikan_id" value="{{ $service[0]->id }}">
                                                 <button type="submit" class="btn btn-info btn-lg">Simpan</button>
                                             </td>
                                         </tr>

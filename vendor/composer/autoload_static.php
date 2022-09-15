@@ -655,6 +655,8 @@ class ComposerStaticInitd2adf48ad5b010ef5184a25b2d963754
         'App\\Models\\ManagemenKendaraan\\AJenisPremi' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AJenisPremi.php',
         'App\\Models\\ManagemenKendaraan\\AJenisService' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AJenisService.php',
         'App\\Models\\ManagemenKendaraan\\AKendaraan' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AKendaraan.php',
+        'App\\Models\\ManagemenKendaraan\\AKendaraanDokumen' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AKendaraanDokumen.php',
+        'App\\Models\\ManagemenKendaraan\\APerbaikanDokumen' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/APerbaikanDokumen.php',
         'App\\Models\\ManagemenKendaraan\\AServicePerbaikan' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AServicePerbaikan.php',
         'App\\Models\\ManagemenKendaraan\\AStatusPerbaikan' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AStatusPerbaikan.php',
         'App\\Models\\ManagemenKendaraan\\AsuransiPic' => __DIR__ . '/../..' . '/app/Models/ManagemenKendaraan/AsuransiPic.php',

@@ -39,6 +39,8 @@ return array(
     'App\\Models\\ManagemenKendaraan\\AJenisPremi' => $baseDir . '/app/Models/ManagemenKendaraan/AJenisPremi.php',
     'App\\Models\\ManagemenKendaraan\\AJenisService' => $baseDir . '/app/Models/ManagemenKendaraan/AJenisService.php',
     'App\\Models\\ManagemenKendaraan\\AKendaraan' => $baseDir . '/app/Models/ManagemenKendaraan/AKendaraan.php',
+    'App\\Models\\ManagemenKendaraan\\AKendaraanDokumen' => $baseDir . '/app/Models/ManagemenKendaraan/AKendaraanDokumen.php',
+    'App\\Models\\ManagemenKendaraan\\APerbaikanDokumen' => $baseDir . '/app/Models/ManagemenKendaraan/APerbaikanDokumen.php',
     'App\\Models\\ManagemenKendaraan\\AServicePerbaikan' => $baseDir . '/app/Models/ManagemenKendaraan/AServicePerbaikan.php',
     'App\\Models\\ManagemenKendaraan\\AStatusPerbaikan' => $baseDir . '/app/Models/ManagemenKendaraan/AStatusPerbaikan.php',
     'App\\Models\\ManagemenKendaraan\\AsuransiPic' => $baseDir . '/app/Models/ManagemenKendaraan/AsuransiPic.php',

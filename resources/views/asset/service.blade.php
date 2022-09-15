@@ -18,7 +18,12 @@
                 <div class="col-lg-12">
                     <div class="nav card">
                         <div class="card-header d-flex justify-content-between">
-                            <button class="btn btn-dark text-light" data-toggle="modal" data-target="#tambahPengajuanService" >Pengajuan Perbaikan</button>
+                            {{-- <button class="btn btn-dark text-light" data-toggle="modal" data-target="#tambahPengajuanService" >Pengajuan Perbaikan</button> --}}
+                            <a href="/kendaraan/service/s/service/tambah">
+                                <button class="btn btn-dark text-light">Pengajuan Perbaikan</button>
+                            </a>
+
+
                             <form action="/kendaraan/service">
                                 <input type="search" name="cari" value="{{ request()->cari }}">
                                 <button type="submit" class="bnt btn-sm btn-dark">Cari</button>
