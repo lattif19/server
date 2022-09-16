@@ -65,13 +65,18 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/kendaraan/mobil', [KendaraanController::class, 'daftar_kendaraan']);
     Route::get('/kendaraan/mobil/tambah', [KendaraanController::class, 'tambah_data_mobil']);
     Route::get('/kendaraan/service', [KendaraanController::class, 'service']);
-    Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
     Route::get('/kendaraan/setting', [KendaraanController::class, 'setting']);
-    Route::get('/kendaraan/service/{id}/{aksi}', [KendaraanController::class, 'detail_service']);
-    Route::get('/kendaraan/service/s/{no_polisi}/tambah', [KendaraanController::class, 'tambah_pengajuan_langsung']);
-    Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
-    ///kendaraan/service/s/{{ $mobil[0]->no_polisi }}/tambah
+    Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
+    Route::get('/kendaraan/asuransi/tambah_data_asuransi', [KendaraanController::class, 'tambah_data_asuransi']);
+    ///kendaraan/asuransi/tambah_data_asuransi
 
+    Route::get('/kendaraan/service/s/{no_polisi}/tambah', [KendaraanController::class, 'tambah_pengajuan_langsung']);
+    Route::get('/kendaraan/asuransi/detail/{asuransi_id}',[KendaraanController::class, 'asuransi_detail_data']);
+    Route::get('/kendaraan/service/{id}/{aksi}', [KendaraanController::class, 'detail_service']);
+    Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
+    ////asuransi/tambah_data
+
+    Route::post('/kendaraan/asuransi/tambah_data', [KendaraanController::class, 'asuransi_simpan_data']);
     Route::post('/kendaraan/service/aksi', [KendaraanController::class, 'service_edit_pengajuan']);
     Route::post('/kendaraan/service/tambah_pengajuan', [KendaraanController::class, 'service_tambah_pengajuan']);
     Route::post('/kendaraan/setting/premi_asuransi', [KendaraanController::class, 'setting_premi']);
