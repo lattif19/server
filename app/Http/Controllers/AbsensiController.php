@@ -14,6 +14,25 @@ use Illuminate\Support\Collection;
 class AbsensiController extends Controller
 {
 
+    public function absensi_pegawai(Request $request){
+        $user_id = auth()->user()->id;
+        $absen_id = Pegawai::where("user_id", $user_id)->get()[0]->lembur_absen_id;
+
+        if($request->cari_awal == null || $request->cari_akhir == null){
+            $awal = Absensi::where("absen_id", $absen_id)->orderBy("tanggal", "desc")->get()[0]->tanggal;
+            $akhir = Absensi::where("absen_id", $absen_id)->orderBy("tanggal", "desc")->get()[29]->tanggal;
+        }else{
+            $awal = request()->cari_awal;
+            $akhir = request()->cari_akhir;
+        }
+
+        return view("absen.absensi_pegawai", [
+            "title" => "Absensi Pegawai",
+            "absensi" => Absensi::where("absen_id", $absen_id)->
+                                  whereBetween("tanggal", [$akhir, $awal])->orderBy("tanggal", "desc")->paginate(10),
+        ]);
+    }
+
     public function api_chart_data(){
         $absensi_id = DB::table("pegawai")->where("user_id",auth()->user()->id)->get()[0]->lembur_absen_id;
         $data = DB::table("lembur_absensi")->where("absen_id", $absensi_id)->orderBy("tanggal", "desc")->limit(10)->get(["tanggal", "jam_masuk", "jam_pulang"]);

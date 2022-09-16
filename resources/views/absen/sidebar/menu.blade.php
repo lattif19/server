@@ -10,6 +10,11 @@
                 Statistik Absensi
             </a>
 
+            <a class="nav-link {{ Request::is('absen/data_absensi_pegawai') ? 'active' : ''}}" href="/absen/data_absensi_pegawai">
+                <div class="sb-nav-link-icon"><i class="fa fa-bar-chart"></i></div>
+                Data Absensi
+            </a>
+
 
             @can("absensiAdmin")
             <a class="nav-link {{ Request::is('absen_data*') ? 'active' : ''}}" href="/absen_data">
