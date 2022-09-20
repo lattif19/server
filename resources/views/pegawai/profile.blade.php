@@ -94,9 +94,10 @@
                             <hr class="mt-5 mb-3">
                             <input type="hidden" name="id" value="{{ $pegawai[0]->id }}">
                             <input type="hidden" name="user_id" value="{{ $pegawai[0]->user_id }}">
-                            <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
-                            
-    
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                              <a href="#" data-toggle="modal" data-target="#reset">
+                                <button class="btn btn-warning">Reset Password</button>
+                              </a>
                           </form>
 
 
@@ -123,4 +124,38 @@
           {{ session('error') }}
         </div>
       @endif
+
+
+      <div class="modal fade" id="reset" tabindex="-1" role="dialog" aria-labelledby="reset" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Reset : </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pegawai/reset" method="post">
+                  @method("put")
+                  @csrf
+                    <div class="form-group mb-3">
+                        <label for="password" class='mb-2'>New Password</label>
+                        <input type="password" class="form-control" name="password1">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password" class='mb-2'>Re-Type Password</label>
+                        <input type="password" class="form-control" name="password2">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="hidden" name="id" value="{{ $pegawai[0]->user_id }}">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </form>
+          </div>
+        </div>
+      </div>
+
 @endsection

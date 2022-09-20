@@ -58,7 +58,7 @@
                                                 </td>
                                                 <td>{{ format_jam($i->total_biasa) }} </td>
                                                 <td>{{ format_jam($i->total_libur) }} </td>
-                                                <td>{{ $i->keterangan }} </td>
+                                                <td>{!! $i->keterangan !!} </td>
                                                 <td>
                                                     {{ $i->status }} 
                                                 </td>
