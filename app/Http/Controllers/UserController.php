@@ -32,10 +32,10 @@ class UserController extends Controller
 
         //dd(bcrypt($request->password1));
         if($request->password1 != $request->password2){
-            return redirect('/pegawai')->with('error', "Password yang anda masukan tidak sama");
+            return back()->with('error', "Password yang anda masukan tidak sama");
         } 
         DB::table('users')->where($id)->update($data);
-        return redirect('/pegawai')->with('success', "Data berhasil dirubah");
+        return back()->with('success', "Data berhasil dirubah");
     }
 
     public function pegawai_put(Request $request){

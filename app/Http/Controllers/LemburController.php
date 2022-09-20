@@ -14,6 +14,27 @@ use PDF;
 class LemburController extends Controller
 {
 
+        public function hitung_ulang_hrd(Request $request){
+            //dd($request->all());
+           
+            $pengajuan["total_biasa"] = $request->total_biasa;
+            $pengajuan["total_libur"] = $request->total_libur;
+            DB::table("lembur_pengajuan")->where("id", $request->pengajuan_id)->update($pengajuan);
+
+            for($i=0; $i<count($request->id); $i++){
+                $id['id'] = $request->id[$i];
+                $data['jam_masuk_kantor'] = $request->jam_masuk_kantor[$i];
+                $data['jam_kerja_kantor'] = $request->jam_kerja_kantor[$i];
+                $data['jam_masuk'] = $request->jam_masuk[$i];
+                $data['jam_pulang_standar'] = $request->jam_pulang_standar[$i];
+                $data['jam_pulang'] = $request->jam_pulang[$i];
+                $data['hari_libur'] = $request->hari_libur[$i];
+                $data['jam_lembur'] = $request->jam_lembur[$i];
+                DB::table("lembur_pengajuan_detail")->where($id)->update($data);
+            }
+            return back();
+        }
+
         public function proses_terima_pengajuan(Request $request){
         //dd($request->lembur_pengajuan_id);
         //
@@ -199,6 +220,17 @@ class LemburController extends Controller
         //return view("lembur.lembur_approve_detail",[
         return view("lembur.lembur_preview_detail",[
             "title" => "Detail Pengajuan Lembur",
+            "detail" => Lembur::get_lembur_id($id),
+        ]);
+    }
+
+    public function lembur_approved_detail_hrd(Request $request){
+        $id = $request->id;
+
+        //return view("lembur.lembur_approve_detail",[
+        return view("lembur.lembur_preview_detail_hrd",[
+            "title" => "Detail Pengajuan Lembur",
+            "pengaturan" => DB::table("lembur_settings")->get(),
             "detail" => Lembur::get_lembur_id($id),
         ]);
     }

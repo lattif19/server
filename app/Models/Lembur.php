@@ -91,6 +91,7 @@ class Lembur extends Model
                     "lembur_pengajuan.status",
                     "lembur_pengajuan.total_biasa",
                     "lembur_pengajuan.total_libur",
+                    "lembur_pengajuan_detail.id as id_detail",
                     "lembur_pengajuan_detail.tanggal",
                     "lembur_pengajuan_detail.hari_libur",
                     "lembur_pengajuan_detail.keterangan",

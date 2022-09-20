@@ -9,8 +9,6 @@
                 <div class="sb-nav-link-icon"><i class="fa fa-bar-chart"></i></div>
                 Statistik Absensi
             </a>
-
-		
 	    <a class="nav-link {{ Request::is('absen/data_absensi_pegawai') ? 'active' : ''}}" href="/absen/data_absensi_pegawai">
                 <div class="sb-nav-link-icon"><i class="fa fa-calendar"></i></div>
                 Data Absensi

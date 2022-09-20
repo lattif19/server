@@ -34,6 +34,8 @@
             </button>
             
             <div class="dropdown-menu">
+              <a class="dropdown-item" href="/profile/{{ auth()->user()->id }}">Profile</a>
+              <hr>
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
           </div>

@@ -194,13 +194,6 @@
                                         </tr>
                                     @endif
                                 </tbody>
-                             {{--   <tfoot>
-                                    @if ($biasa)
-                                        @if ($biasa->count()>10)
-                                            {!! $biasa->links() !!}                         
-                                        @endif
-                                    @endif
-                                </tfoot> --}}
                             </table>
                         </div>
                     </div>
@@ -316,13 +309,13 @@
                                         </tr>
                                     @endif
                                 </tbody>
-                                <tfoot>
+                                {{-- <tfoot>
                                     @if ($libur)
                                         @if ($libur->count()>10)
                                             {!! $libur->links() !!}                         
                                         @endif
                                     @endif
-                                </tfoot>
+                                </tfoot> --}}
                             </table>
                         </div>
                     </div>

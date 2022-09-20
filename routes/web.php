@@ -65,13 +65,18 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/kendaraan/mobil', [KendaraanController::class, 'daftar_kendaraan']);
     Route::get('/kendaraan/mobil/tambah', [KendaraanController::class, 'tambah_data_mobil']);
     Route::get('/kendaraan/service', [KendaraanController::class, 'service']);
-    Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
     Route::get('/kendaraan/setting', [KendaraanController::class, 'setting']);
-    Route::get('/kendaraan/service/{id}/{aksi}', [KendaraanController::class, 'detail_service']);
-    Route::get('/kendaraan/service/s/{no_polisi}/tambah', [KendaraanController::class, 'tambah_pengajuan_langsung']);
-    Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
-    ///kendaraan/service/s/{{ $mobil[0]->no_polisi }}/tambah
+    Route::get('/kendaraan/asuransi', [KendaraanController::class, 'asuransi']);
+    Route::get('/kendaraan/asuransi/tambah_data_asuransi', [KendaraanController::class, 'tambah_data_asuransi']);
+    ///kendaraan/asuransi/tambah_data_asuransi
 
+    Route::get('/kendaraan/service/s/{no_polisi}/tambah', [KendaraanController::class, 'tambah_pengajuan_langsung']);
+    Route::get('/kendaraan/asuransi/detail/{asuransi_id}',[KendaraanController::class, 'asuransi_detail_data']);
+    Route::get('/kendaraan/service/{id}/{aksi}', [KendaraanController::class, 'detail_service']);
+    Route::get('/kendaraan/{no_polisi}/{aksi}', [KendaraanController::class, 'detail_kendaraan']);
+    ////asuransi/tambah_data
+
+    Route::post('/kendaraan/asuransi/tambah_data', [KendaraanController::class, 'asuransi_simpan_data']);
     Route::post('/kendaraan/service/aksi', [KendaraanController::class, 'service_edit_pengajuan']);
     Route::post('/kendaraan/service/tambah_pengajuan', [KendaraanController::class, 'service_tambah_pengajuan']);
     Route::post('/kendaraan/setting/premi_asuransi', [KendaraanController::class, 'setting_premi']);
@@ -93,25 +98,27 @@ Route::group(['middleware' => ["auth"]], function(){
 
     Route::get('/lembur', [LemburController::class, 'index']);
     Route::get('/lembur_report', [LemburController::class, 'reporting']);
-    Route::get('/lembur/{detail}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_detail']);
-    Route::post('/lembur/pengajuan_harian', [LemburController::class, 'lembur_pengajuan_harian']);
-    Route::put('/lembur/rubah_pengjuan_lembur', [LemburController::class, 'rubah_pengajuan_lembur']);
-    Route::post('/lembur/hapus_pengjuan_lembur', [LemburController::class, 'hapus_pengajuan_lembur']);
     Route::get('/lembur_settings', [LemburController::class, 'lembur_pengaturan']);
-    Route::post('/lembur_settings/add_user_periode', [LemburController::class, 'lembur_pengaturan_tambah_periode']);
     Route::get('/lembur_settings/approver', [LemburController::class, 'lembur_pengaturan_user']);
-    Route::put('/lembur_settings', [LemburController::class, 'lembur_pengaturan_put']);
-    Route::put('/lembur/pengaturan_jam', [LemburController::class, 'lembur_pengaturan_jam']);
-    Route::get('/lembur/calculating/{periode}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_hitung_total']);
-    Route::get('/lembur/calculated/{id}/{periode}', [LemburController::class, 'lembur_preview_total']);
     Route::get('/lembur/calculated/', [LemburController::class, 'lembur_simpan_total']);
     Route::get('/lembur_approve', [LemburController::class, 'lembur_approve']);
     Route::get('/lembur_approve/detail/{id}', [LemburController::class, 'lembur_approve_detail']);
+    Route::get('/lembur_approved/detail_hrd/{id}', [LemburController::class, 'lembur_approved_detail_hrd']);
     Route::get('/lembur_approved/detail/{id}', [LemburController::class, 'lembur_approved_detail']);
-    Route::put('/lembur_aprove/aksi', [LemburController::class, 'lembur_approve_aksi']);
     Route::get('/lembur_approved', [LemburController::class, 'lembur_approved']);
-    Route::get('/lembur/print/{pengajuan_lembur_id}/{periode}', [LemburController::class, 'print_pdf']);
+    Route::get('/lembur/hitung_ulang/oleh_hrd', [LemburController::class, 'hitung_ulang_hrd']);
     Route::get('/lembur/print_pengajuan/{pengajuan_lembur_id}/{periode}', [LemburController::class, 'print_belum_diajukan']);
+    Route::get('/lembur/print/{pengajuan_lembur_id}/{periode}', [LemburController::class, 'print_pdf']);
+    Route::get('/lembur/calculated/{id}/{periode}', [LemburController::class, 'lembur_preview_total']);
+    Route::get('/lembur/calculating/{periode}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_hitung_total']);
+    Route::get('/lembur/{detail}/{lembur_pengajuan_id}', [LemburController::class, 'lembur_detail']);
+    Route::put('/lembur/pengaturan_jam', [LemburController::class, 'lembur_pengaturan_jam']);
+    Route::put('/lembur_settings', [LemburController::class, 'lembur_pengaturan_put']);
+    Route::put('/lembur_aprove/aksi', [LemburController::class, 'lembur_approve_aksi']);
+    Route::put('/lembur/rubah_pengjuan_lembur', [LemburController::class, 'rubah_pengajuan_lembur']);
+    Route::post('/lembur/pengajuan_harian', [LemburController::class, 'lembur_pengajuan_harian']);
+    Route::post('/lembur/hapus_pengjuan_lembur', [LemburController::class, 'hapus_pengajuan_lembur']);
+    Route::post('/lembur_settings/add_user_periode', [LemburController::class, 'lembur_pengaturan_tambah_periode']);
     Route::post('/lembur/tarik_pengajuan_lembur', [LemburController::class, 'proses_tarik_pengajuan']);
     Route::post('/lembur/terima_pengajuan_lembur', [LemburController::class, 'proses_terima_pengajuan']);
     
@@ -125,8 +132,7 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/absen_pengaturan2', [AbsensiController::class, 'pengaturan2']);
     Route::put('/absen_pengaturan', [AbsensiController::class, 'pengaturan_tambah_mapping']);
     Route::get('/absen/api_chart_data', [AbsensiController::class, 'api_chart_data']);
-// Route absensi user
-   Route::get('/absen/data_absensi_pegawai', [AbsensiController::class, 'absensi_pegawai']);
+    Route::get('/absen/data_absensi_pegawai', [AbsensiController::class, 'absensi_pegawai']);
 
 
     //Route::group(['middleware' => ["pegawai"]], function(){

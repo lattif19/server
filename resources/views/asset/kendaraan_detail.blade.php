@@ -33,8 +33,11 @@
 
                     <div class="col-md-12 mt-3 bg-info">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between">
                                 <h5>Informasi Asuransi</h5>
+                                <a href="/kendaraan/asuransi/tambah_data_asuransi?mobil={{ $mobil[0]->id }}">
+                                    <button class="btn btn-sm btn-dark text-light">Tambah</button>
+                                </a>
                             </div>
                             <div class="card-body">
                                 Tampil data disini

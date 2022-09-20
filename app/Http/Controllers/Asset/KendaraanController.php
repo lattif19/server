@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Asset;
 
+
 use App\Models\Pegawai;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -17,9 +18,125 @@ use App\Models\ManagemenKendaraan\AStatusPerbaikan;
 use App\Models\ManagemenKendaraan\AServicePerbaikan;
 use App\Models\ManagemenKendaraan\AServicePerbaikanRiwayat;
 use App\Models\ManagemenKendaraan\APerbaikanDokumen;
+use App\Models\ManagemenKendaraan\AAsuransiPic;
+use App\Models\ManagemenKendaraan\AAsuransiDokumen;
 
 class KendaraanController extends Controller
 {
+
+    public function asuransi_detail_data(){
+        $data = AAsuransi::find(request()->asuransi_id);
+        if($data == null){
+            return abort(404);
+        }
+
+        return view("asset.asuransi_detail_data",[
+            'title' => 'Asuransi',
+            'sub_title' => 'Detail - PT Sumber Segara Primadaya',
+            'asuransi' => $data,
+            'kendaraan' => AKendaraan::get(),
+            'asuransi_pic' => AAsuransiPic::get(),
+            'jenis_asuransi' => AJenisAsuransi::get(),
+            'jenis_premi' => AJenisPremi::get(),
+        ]);
+    }
+
+    public function asuransi_simpan_data(Request $request){
+        $data['a_kendaraan_id'] = $request->a_kendaraan_id;
+        $data['no_polis'] = $request->no_polis;
+        $data['nama_asuransi'] = $request->nama_asuransi;
+        $data['keterangan'] = $request->keterangan;
+        $data['biaya_premi'] = $request->biaya_premi;
+        $data['tanggal_mulai'] = $request->tanggal_mulai;
+        $data['tanggal_selesai'] = $request->tanggal_selesai;
+        $data['a_jenis_asuransi_id'] = $request->a_jenis_asuransi_id;
+        $data['a_jenis_premi_id'] = $request->a_jenis_premi_id;
+        $data['created_at'] = date("Y-m-d");
+        $data['updated_at'] = date("Y-m-d");
+
+        $pic['nama'] = $request->pic_asuransi_nama;
+        
+        $pic['alamat_perusahaan'] = $request->pic_asuransi_alamat;
+        $pic['telepon_perusahaan'] = $request->pic_asuransi_telepon_perusahaan;
+        $pic['telepon_pribadi'] = $request->pic_asuransi_telepon_pribadi;
+        $pic['email_perusahaan'] = $request->pic_asuransi_email_perusahaan;
+        $pic['email_pic'] = $request->pic_asuransi_email_pribadi;
+        $pic['alamat_perusahaan'] = $request->pic_asuransi_alamat_perusahaan;
+        $pic['created_at'] = date("Y-m-d");
+        $pic['updated_at'] = date("Y-m-d");
+
+        if($request->aksi == "Rubah"){
+            $asuransi_id = $request->a_asuransi_id;
+            $asuransi_pic_id = $request->a_asuransi_pic_id;
+
+            // //Proses Update AAsuransi
+            // AAsuransi::where("id", $asuransi_id)->update($data);
+
+            // //Proses Update AAsuransiPid
+            // AAsuransiPic::where("id", $asuransi_pic_id)->update($pic);
+
+            dd($pic);
+            $id =  $asuransi_id;
+            
+        }
+        
+        if($request->aksi == "Simpan"){
+            $pic['perusahaan'] = $request->a_asuransi_pic_id;
+
+            
+            if(is_numeric($request->a_asuransi_pic_id)){
+                $data['a_asuransi_pic_id'] = $request->a_asuransi_pic_id;
+                $id = AAsuransi::create($data)->id;     
+            }else{
+                $data['a_asuransi_pic_id'] = AAsuransiPic::create($pic)->id;
+                $id = AAsuransi::create($data)->id;
+            }
+        }
+
+        if($request->dok_asuransi != null){
+            for($i=0; $i<count($request->dok_asuransi); $i++){
+                $this->simpan_dokumen($request->dok_asuransi[$i], $id, "dok_asuransi", "asuransi");
+            }
+        }
+
+        if($request->dok_asuransi_pic != null){
+            for($i=0; $i<count($request->dok_asuransi_pic); $i++){
+                $this->simpan_dokumen($request->dok_asuransi_pic[$i], $id, "dok_asuransi_pic", "asuransi");
+            }
+        }
+
+        return back()->with("success", "Proses Berhasil");
+
+    }
+
+    public function tambah_data_asuransi(){
+        return view('asset.asuransi_tambah_data',[
+            'title' => 'Asuransi',
+            'sub_title' => 'Tambah Data - PT Sumber Segara Primadaya',
+            'kendaraan' => AKendaraan::get(),
+            'asuransi_pic' => AAsuransiPic::get(),
+            'jenis_asuransi' => AJenisAsuransi::get(),
+            'jenis_premi' => AJenisPremi::get(),
+        ]);
+    }
+
+    public function asuransi(){
+        return view('asset.asuransi',[
+            'title' => 'Asuransi',
+            'sub_title' => 'asuransi - PT Sumber Segara Primadaya',
+            'asuransi' => AAsuransi::where("nama_asuransi", "like", "%".request()->cari."%")->
+                                     orwhere("no_polis", "like", "%".request()->cari."%")->
+                                     orWhereHas("a_kendaraan", function($q){ $q->where("no_polisi", "like", "%".request()->cari."%");})->
+                                     orWhereHas("a_kendaraan", function($q){ $q->where("nama", "like", "%".request()->cari."%");})->
+                                     orWhereHas("a_jenis_asuransi", function($q){ $q->where("nama", "like", "%".request()->cari."%");})->
+                                     orWhereHas("a_jenis_premi", function($q){ $q->where("nama", "like", "%".request()->cari."%");})->
+                                     orWhereHas("a_asuransi_pic", function($q){ $q->where("nama", "like", "%".request()->cari."%");})->
+                                     orWhereHas("a_asuransi_pic", function($q){ $q->where("perusahaan", "like", "%".request()->cari."%");})->
+                                     paginate(10),
+        ]);
+    }
+
+
     public function tambah_pengajuan_langsung(Request $request){
         return view("asset.service_tambah_langsung",[
             'title' => "Tambah Pengajuan Service",
@@ -162,6 +279,11 @@ class KendaraanController extends Controller
         if($sub_folder == "service"){
             $data['a_service_perbaikan_id'] = $id; 
             return APerbaikanDokumen::create($data); 
+        }
+
+        if($sub_folder == "asuransi"){
+            $data['a_asuransi_id'] = $id; 
+            return AAsuransiDokumen::create($data); 
         }
     }
 
@@ -330,14 +452,7 @@ class KendaraanController extends Controller
         ]);
     }
 
-    public function asuransi(){
 
-        return view('asset.asuransi',[
-            'title' => 'Asuransi',
-            'sub_title' => 'asuransi - PT Sumber Segara Primadaya',
-            'asuransi' => AAsuransi::get(),
-        ]);
-    }
 
     public function setting(Request $request){
         return view('asset.pengaturan',[

@@ -33,7 +33,6 @@ class AbsensiController extends Controller
         ]);
     }
 
-
     public function api_chart_data(){
         $absensi_id = DB::table("pegawai")->where("user_id",auth()->user()->id)->get()[0]->lembur_absen_id;
         $data = DB::table("lembur_absensi")->where("absen_id", $absensi_id)->orderBy("tanggal", "desc")->limit(10)->get(["tanggal", "jam_masuk", "jam_pulang"]);
