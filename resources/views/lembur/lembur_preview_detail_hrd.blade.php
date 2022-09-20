@@ -218,7 +218,7 @@ function recalculateLibur(id){
     var total_lembur_libur      = toMinutes(document.getElementById("total_lembur_libur").textContent.trim());  
 
 
-    var n_jam_lembur = jam_pulang-jam_masuk;
+    var n_jam_lembur = jam_lembur_libur(jam_pulang, jam_masuk);
     var n_total_lembur = total_baru(total_lembur_libur, n_jam_lembur, jam_lembur);
 
     document.getElementById("jam_lembur"+id).innerHTML                  = toHourse(n_jam_lembur).substr(0,5);
@@ -229,9 +229,16 @@ function recalculateLibur(id){
         document.getElementById("total_lembur_libur").innerHTML         = toHourse(n_total_lembur).substr(0,5);
         document.getElementById("i_total_libur").value                  = toHourse(n_total_lembur).substr(0,5);
     }
-
-
 }
+
+
+function jam_lembur_libur(jam_pulang, jam_masuk){
+    if(jam_pulang < jam_masuk) { 
+        return (1440-jam_masuk)+jam_pulang;
+    }
+    return jam_pulang - jam_masuk;
+}
+
 
  function recalculate(id){
  var jam_masuk               = toMinutes(document.getElementById("jam_masuk"+id).value);
@@ -273,9 +280,16 @@ function recalculateLibur(id){
     }
 
 function jam_lembur_baru(a,b){
-    if(b > a) { return b-a; }
-    if(b < a) { return 0; }
-}
+        if(b > a) { return b-a; }
+        if(b < a) { 
+            if(b > 479 ){
+                return 0;
+            }else{
+                return (1440-a)+b;
+            }
+        }
+    }
+
 
 function jam_pulang_standar_baru(a,b,c){
     if(a <= b)  { return b+c; }

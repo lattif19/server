@@ -33,8 +33,19 @@
     }
 
     function jumlah_lembur($jam_pulang, $jam_standar){
+        //Cek dulu apakah jam pulang standar lebih kecil dari pada jam pulang sebenarnya
+        //Batas Lembur Malam Sampai Jam 7:59 Pagi Atau = 479;
         if(to_menit($jam_standar) > to_menit($jam_pulang) ){
-            return "00:00";
+            //Cek : Apakah pulang terlalu awal atau lembur melewati tengah malam;
+            if(to_menit($jam_pulang) > 479){
+               //Hasil jika pulangnya terlalu awal
+               return "00:00";
+            }else{
+                //Hasil jika pulangnya melebihi tengah malam;
+                //(24:00 - Jam Pulang Standar) + Jam Lembur Malam
+                $jam1 = (1440 - to_menit($jam_standar))+to_menit($jam_pulang);
+                return menit_to_jam($jam1);
+            }
         }
 
         $total  = to_menit($jam_pulang) - to_menit($jam_standar);

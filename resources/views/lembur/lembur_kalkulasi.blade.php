@@ -273,13 +273,27 @@
         var jam_lembur          = toMinutes(document.getElementById("jum_jam_libur_"+id).textContent.trim());
         var total_lembur        = toMinutes(document.getElementById("total_libur").textContent.trim());
 
-        var n_jam_lembur = jam_pulang-jam_masuk;
+        var n_jam_lembur = jam_lembur_libur(jam_pulang, jam_masuk);
         var n_total_lembur = total_baru(total_lembur, n_jam_lembur, jam_lembur);
 
         document.getElementById("jum_jam_libur_"+id).innerHTML  = toHourse(n_jam_lembur).substr(0,5);
         document.getElementById("i_jum_jam_libur_"+id).value    = toHourse(n_jam_lembur);
         document.getElementById("total_libur").innerHTML        = toHourse(n_total_lembur).substr(0,5);
         document.getElementById("i_total_libur").value       = toHourse(n_total_lembur);
+    }
+
+    function jam_lembur_libur(jam_pulang, jam_masuk){
+        //Batas lembur melewati tengah malam adalah jam 7:59 atau dalam menit 479
+        if(jam_pulang < jam_masuk) { 
+            if(jam_masuk > 479 ){
+                return jam_pulang - jam_masuk;
+            }else{
+                return (1440-jam_masuk)+jam_pulang;
+            }
+        }
+
+        return jam_pulang - jam_masuk;
+        
     }
 
 
@@ -316,7 +330,13 @@
 
     function jam_lembur_baru(a,b){
         if(b > a) { return b-a; }
-        if(b < a) { return 0; }
+        if(b < a) { 
+            if(b > 479 ){
+                return 0;
+            }else{
+                return (1440-a)+b;
+            }
+        }
     }
 
     function jam_pulang_standar_baru(a,b,c){
