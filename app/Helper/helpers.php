@@ -33,16 +33,22 @@
     }
 
     function jumlah_lembur($jam_pulang, $jam_standar){
+        if(to_menit($jam_standar) > to_menit($jam_pulang) ){
+            return "00:00";
+        }
+
         $total  = to_menit($jam_pulang) - to_menit($jam_standar);
         $jam    = floor($total/60);
                 if($jam < 1){ $jam2 = "00"; }elseif($jam<10){ $jam2= "0".$jam; }else{ $jam2 = $jam; }
         $m      = $total-($jam*60);
                 if($m < 10){ $menit = "0".$m; }else{ $menit = $m; }
+
         return $jam2.":".$menit;
     }
 
     function jam_pulang_standar($data, $jam_masuk, $jam_kerja){
         //normal
+        // masih ada masalah > ini harusnya jam ambil dari pengaturan jam masuk
         if(to_menit($data) <= 480){
             $data = (to_menit($jam_masuk)+to_menit($jam_kerja))/60; 
             return $data.":00";

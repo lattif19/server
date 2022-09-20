@@ -150,7 +150,10 @@
         </td>
     </tr>
     <tr align="center">
-        <td>{{ DB::table('pegawai')->where("user_id", auth()->user()->id)->get()[0]->nama }}</td>
+
+        <td>
+            {{ DB::table("pegawai")->where("user_id", DB::table("lembur_pengajuan")->where("id", request()->pengajuan_lembur_id)->get()[0]->user_id)->get()[0]->nama }}
+        </td>
         <td>
             {{-- {{ dd($nama_approver) }} --}}
             @if($nama_approver != null)

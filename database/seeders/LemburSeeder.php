@@ -56,8 +56,8 @@ class LemburSeeder extends Seeder
          User::create([ 'username' => "gadis_anindiya",     'email' => "gadis@ssprimadaya.co.id",           'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "peggy_rosa",         'email' => "peggy@ssprimadaya.co.id",           'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "nova_kunfianto",     'email' => "novakunfianto@ssprimadaya.co.id",   'password' => bcrypt("s2pjakarta"), ]);
-         User::create([ 'username' => "enjang",             'email' => "enjang@ssprimadaya.co.id",          'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "priyanto",           'email' => "priyanto@ssprimadaya.co.id",        'password' => bcrypt("s2pjakarta"), ]);
+         User::create([ 'username' => "enjang",             'email' => "enjang@ssprimadaya.co.id",          'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "zaini_abdulloh",     'email' => "zaini@ssprimadaya.co.id",           'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "mohamad_rizki",      'email' => "mrizki@ssprimadaya.co.id",          'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "belly_budiyanto",    'email' => "belly@ssprimadaya.co.id",           'password' => bcrypt("s2pjakarta"), ]);
