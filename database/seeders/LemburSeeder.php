@@ -24,8 +24,8 @@ class LemburSeeder extends Seeder
         //  User::factory(1)->create();
          DB::table("lembur_settings")->insert(["jam_masuk"=>"08:00:00", "jam_kerja" => "09:00:00"]);
 
-         User::create([ 'username' => "administrator",      'email' => "admin@test.com",                    'password' => bcrypt("s2pjakarta"), ]);
-         User::create([ 'username' => "Administrator HRD",  'email' => "hrd@test.co.id",                    'password' => bcrypt("s2pjakarta"), ]);
+         User::create([ 'username' => "administrator",      'email' => "admin@ssprimadaya.co.id",                    'password' => bcrypt("s2pjakarta"), ]);
+         User::create([ 'username' => "Administrator HRD",  'email' => "hrd@ssprimadaya.co.id",                    'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "approver",           'email' => "approver@test.com",                 'password' => bcrypt("s2pjakarta"), ]);
          User::create([ 'username' => "user",               'email' => "user@test.com",                     'password' => bcrypt("s2pjakarta"), ]);
 

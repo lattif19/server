@@ -56,7 +56,7 @@
                                                         </a>
                                                     </td>
                                                 @elseif($d->status == "Selesai")
-                                                    <td align="center" class="bg-primary">
+                                                    <td align="center" class="bg-success">
                                                         <a href="/lembur_approved/detail/{{ $d->id }}">
                                                         <div class="text-light">
                                                             {{ $d->status }}
@@ -64,7 +64,7 @@
                                                         </a>
                                                     </td>
                                                 @else
-                                                    <td align="center" class="bg-primary">
+                                                    <td align="center" class="bg-secondary">
                                                         <a href="/lembur_approved/detail/{{ $d->id }}">
                                                         <div class="text-light">
                                                             {{ $d->status }}

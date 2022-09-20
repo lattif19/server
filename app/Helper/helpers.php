@@ -38,6 +38,11 @@
                 if($jam < 1){ $jam2 = "00"; }elseif($jam<10){ $jam2= "0".$jam; }else{ $jam2 = $jam; }
         $m      = $total-($jam*60);
                 if($m < 10){ $menit = "0".$m; }else{ $menit = $m; }
+
+	if ( to_menit($jam_standar) > to_menit($jam_pulang)){
+            return "00:00";
+        }
+
         return $jam2.":".$menit;
     }
 

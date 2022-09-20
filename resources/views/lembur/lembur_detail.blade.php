@@ -194,13 +194,13 @@
                                         </tr>
                                     @endif
                                 </tbody>
-                                <tfoot>
+                             {{--   <tfoot>
                                     @if ($biasa)
                                         @if ($biasa->count()>10)
                                             {!! $biasa->links() !!}                         
                                         @endif
                                     @endif
-                                </tfoot>
+                                </tfoot> --}}
                             </table>
                         </div>
                     </div>

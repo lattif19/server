@@ -4,7 +4,8 @@
 
 @section('container')
         <div class="container-fluid px-4">
-            <h1 class="mt-4">{{ $title }}</h1>
+         {{--   <h1 class="mt-4">{{ $title }}</h1> --}}
+            <h1 class="mt-4">Approver Lembur</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">PT Sumber Segara Primadaya</li>
             </ol>
@@ -23,7 +24,7 @@
                                         <td>Nomor</td>
                                         <td>Nama Pegawai</td>
                                         <td>Nama Manager / Approver</td>
-                                        <td width="100px" align="center">Aksi</td>
+                                       {{-- <td width="100px" align="center">Aksi</td> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,17 +40,17 @@
                                                 {{ $data_user->find($id_lembur)->nama }}
                                                 @endif
                                             </td>
-                                            <td align="center">
+                                           {{-- <td align="center">
                                                 <a href="#" data-toggle="modal" data-target="#rubahData">
                                                     <span class="material-icons">
                                                         edit
                                                     </span>
                                                 </a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
 
 
-                                        <div class="modal fade" id="rubahData" tabindex="-1" role="dialog"
+                                        {{-- <div class="modal fade" id="rubahData" tabindex="-1" role="dialog"
                                             aria-labelledby="rubahData"
                                             aria-hidden="true">
 
@@ -87,7 +88,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                     
                                 </tbody>

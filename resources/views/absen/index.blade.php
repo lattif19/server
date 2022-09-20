@@ -18,7 +18,7 @@
                                     <input type="hidden" name="test" value="test">
                                     <input type="file" 
                                             name="absensi" 
-                                            class="btn btn-lg btn-default">
+                                            class="btn btn-lg btn-default" required>
                                     <button class="btn btn-primary" type="submit">Upload</button>
                                 </form>
                             </div>

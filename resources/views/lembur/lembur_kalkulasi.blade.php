@@ -37,9 +37,9 @@
                                         <td width="10px">No</td>
                                         <td width="90px">Tanggal</td>
                                         <td width="200px">Keterangan / Deskripsi</td>
-                                        @if($pengaturan_jam->edit_jam_masuk == 1) <td width="90px">Jam Masuk <br> Kerja</td> @endif
-                                        @if($pengaturan_jam->edit_jam_kerja == 1) <td width="90px">Jam Waktu <br> Kerja </td> @endif
-                                        <td width="60px">Jam Masuk</td>
+                                        @if($pengaturan_jam->edit_jam_masuk == 1) <td width="90px">Standar Jam <br> Masuk</td> @endif
+                                        @if($pengaturan_jam->edit_jam_kerja == 1) <td width="90px">Durasi <br> Kerja </td> @endif
+                                        <td width="60px">Jam Masuk <br> Sebenarnya</td>
                                         <td width="60px">Jam Pulang <br> Standar</td>
                                         <td width="60px">Jam Pulang <br> Sebenarnya</td>
                                         <td width="60px">Waktu <br> Lembur</td>

@@ -31,8 +31,8 @@
                     Lembur
                 </a>
                 <a class="nav-link" href="/lembur_approve">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Pengajuan Lembur
+                    <div class="sb-nav-link-icon"><i class="fa fa-balance-scale"></i></div>
+                    Persetujuan Lembur
                 </a>
                 <a class="nav-link" href="/lembur_settings/approver">
                     <div class="sb-nav-link-icon"><i class="fas fas fa-cogs"></i></div>
@@ -50,15 +50,15 @@
                     Lembur
                 </a>
                 <a class="nav-link" href="/lembur_approve">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Pengajuan Lembur
+                    <div class="sb-nav-link-icon"><i class="fa fa-balance-scale"></i></div>
+                    Persetujuan Lembur
                 </a>
                 <a class="nav-link" href="/lembur_approved">
                     <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>
                     Data Lembur
                 </a>
                 <a class="nav-link" href="/lembur_report">
-                    <div class="sb-nav-link-icon"><i class="fas fa-newspaper-o"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa fa-book"></i></div>
                     Laporan
                 </a>
                 <a class="nav-link" href="/lembur_settings">
@@ -79,7 +79,7 @@
                 </a>
                 <a class="nav-link" href="/lembur_approve">
                     <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                    Pengajuan Lembur
+                    Persetujuan Lembur
                 </a>
                 <a class="nav-link" href="/lembur_approved">
                     <div class="sb-nav-link-icon"><i class="fas fa-folder-open"></i></div>

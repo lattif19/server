@@ -125,7 +125,8 @@ Route::group(['middleware' => ["auth"]], function(){
     Route::get('/absen_pengaturan2', [AbsensiController::class, 'pengaturan2']);
     Route::put('/absen_pengaturan', [AbsensiController::class, 'pengaturan_tambah_mapping']);
     Route::get('/absen/api_chart_data', [AbsensiController::class, 'api_chart_data']);
-
+// Route absensi user
+   Route::get('/absen/data_absensi_pegawai', [AbsensiController::class, 'absensi_pegawai']);
 
 
     //Route::group(['middleware' => ["pegawai"]], function(){

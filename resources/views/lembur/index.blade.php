@@ -58,7 +58,7 @@
                                                 </td>
                                                 <td>{{ format_jam($i->total_biasa) }} </td>
                                                 <td>{{ format_jam($i->total_libur) }} </td>
-                                                <td>{{ $i->keterangan }} </td>
+                                                <td>{!! ucwords( $i->keterangan ) !!} </td>
                                                 <td>
                                                     {{ $i->status }} 
                                                 </td>
@@ -81,7 +81,7 @@
                                                     </a>
                                                     @if ($i->status == "Diajukan")
                                                     
-                                                    <button class="btn btn-success btn-xs" 
+                                                    <button class="btn btn-danger btn-xs" 
                                                             data-toggle="modal" 
                                                             data-target="#tambahData{{ $i->id }}">
                                                             <i class="fa fa-arrow-circle-left" data-toogle="tooltip" data-placement="top" title="Batalkan Pengajuan"></i>
